@@ -26,6 +26,7 @@ import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./Pages/Main";
 import NoMatch from "./Pages/NoMatch";
+import Detail from "./Pages/Detail";
 // import Nav from "./components/Nav";
 
 function App() {
@@ -35,9 +36,8 @@ function App() {
         {/* <Nav /> */}
         <Switch>
           <Route exact path="/" component={Main} />
-          {/* <Route exact path="/books" component={Books} />
-          <Route exact path="/books/:id" component={Detail} /> */}
-          <Route component={NoMatch} />
+          <Route exact path="/details" component={Detail} />
+           <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>
