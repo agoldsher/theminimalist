@@ -1,23 +1,25 @@
 import React, { Component } from "react";
-import SmallCard from "../Components/SmallCard"
+import SmallCard from "../Components/SmallCard";
+import API from "../utils/API";
 
   class CardRender extends Component {
     // Setting this.state.friends to the friends json array
     state = {
-      cards:[
-          {
-              title:"bike",
-              image:"https://dks.scene7.com/is/image/dkscdn/17GTXWLGNPRXXXXXXPRF_Green?wid=425",
-              price:"3.99"
-          },
-          {
-            title:"vacuum",
-            image:"https://target.scene7.com/is/image/Target/GUEST_a8109913-a31a-4510-a730-2829d8e841c9?wid=488&hei=488&fmt=pjpeg",
-            price:"10.55"
-        }
-      ]
+      cards:[]
     };
- 
+    componentDidMount() {
+      this.loadPosts();
+    }
+  
+    loadPosts = () => {
+     API.getPopPosts()
+        .then(res =>{
+          this.setState({ cards: res.data });
+          console.log(res.data)
+        }
+        )
+        .catch(err => console.log(err));
+    };
     // Map over this.state.friends and render a FriendCard component for each friend object
     render() {
       return (
