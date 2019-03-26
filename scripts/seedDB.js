@@ -17,6 +17,7 @@ title: "bike",
 image: ["https://dks.scene7.com/is/image/dkscdn/17GTXWLGNPRXXXXXXPRF_Green?wid=425"],
 description: "just had new tires put it",
 price: "5.00",
+viewCount:"6",
 category: "vehicle"
 },
 {user: "kevin",
@@ -24,6 +25,7 @@ title: "vacuum",
 image: ["https://target.scene7.com/is/image/Target/GUEST_a8109913-a31a-4510-a730-v?wid=488&hei=488&fmt=pjpeg"],
 description: "works great, has great suction",
 price: "3.00",
+viewCount:"5",
 category: "appliances"
 }
 ];

@@ -2,7 +2,7 @@ import React from "react";
 
 function SmallCard(props) {
     return (
-      <div className="card">
+      <div className="card" >
         <div className="img-container">
           <img alt={props.title} src={props.image} />
         </div>
