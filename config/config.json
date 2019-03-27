@@ -1,0 +1,14 @@
+{
+    "development": {
+        "use_env_variable": "LOCALDB_URL",
+        "dialect": "mongodb"
+    },
+    "test": {
+        "use_env_variable": "MONGODB_URL",
+        "dialect": "mongodb"
+    },
+    "production": {
+        "use_env_variable": "MONGODB_URL",
+        "dialect": "mongodb"
+    }
+}
