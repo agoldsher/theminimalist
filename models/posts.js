@@ -1,13 +1,43 @@
-// const mongoose = require("mongoose");
-// const Schema = mongoose.Schema;
+const mongoose = require("mongoose");
+const Schema = mongoose.Schema;
 
-// const bookSchema = new Schema({
-//   title: { type: String, required: true },
-//   author: { type: String, required: true },
-//   synopsis: String,
-//   date: { type: Date, default: Date.now }
-// });
+const postSchema = new Schema({
+    user: {
+        type: String,
+        required: true
+    },
+    title: {
+        type: String,
+        required: true
+    },
+    image: {
+        type: Array,
+        required: true
+    },
+    description: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: Date,
+        required: true,
+        default: Date.now
+    },
+    viewCount: {
+        type: Number,
+        required: true,
+        default: 0
+    },
+    price: {
+        type: Number,
+        required: true
+    },
+    category: {
+        type: String,
+        required: true,
+    }
+});
 
-// const Book = mongoose.model("Book", bookSchema);
+const Post = mongoose.model("Post", postSchema);
 
-// module.exports = Book;
+module.exports = Post;

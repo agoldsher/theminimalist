@@ -1,30 +1,47 @@
-import React, { Component } from "react";
-import logo from "./logo.svg";
-import "./App.css";
-import Axios from "axios";
+// import React, { Component } from "react";
 
-class App extends Component {
-state={
-  success:false
-}
-componentDidMount(){
-  Axios.get("/api").then(({data})=>{
-    this.setState({success:data.success})
-  })
-}
-  render() {
-    return (
-      <div className="App">
-        <div className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h2>Welcome to React</h2>
-        </div>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+// import "./App.css";
+// import Axios from "axios";
+// import CardRender from "./Components/CardRender"
+
+// class App extends Component {
+// state={
+//   success:false
+// }
+// componentDidMount(){
+//   Axios.get("/api").then(({data})=>{
+//     this.setState({success:data.success})
+//   })
+// }
+//   render() {
+//     return (
+//     <CardRender></CardRender>
+//     );
+//   }
+// }
+
+// export default App;
+
+import React from "react";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import Main from "./Pages/Main";
+import NoMatch from "./Pages/NoMatch";
+import Detail from "./Pages/Detail";
+// import Nav from "./components/Nav";
+
+function App() {
+  return (
+    <Router>
+      <div>
+        {/* <Nav /> */}
+        <Switch>
+          <Route exact path="/" component={Main} />
+          <Route exact path="/details" component={Detail} />
+           <Route component={NoMatch} />
+        </Switch>
       </div>
-    );
-  }
+    </Router>
+  );
 }
 
 export default App;

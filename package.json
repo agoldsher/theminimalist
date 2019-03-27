@@ -9,6 +9,7 @@
     "start:dev": "concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
+    "seed": "node scripts/seedDB.js",
     "build": "cd client && npm run build",
     "heroku-postbuild": "npm run build"
   },
@@ -24,6 +25,8 @@
     "if-env": "^1.0.4",
     "mongoose": "^5.4.19",
     "passport": "^0.4.0",
-    "passport-local": "^1.0.0"
+    "passport-local": "^1.0.0",
+    "react": "^16.8.5",
+    "react-router-dom": "^5.0.0"
   }
 }
