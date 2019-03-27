@@ -23,7 +23,7 @@ import API from "../utils/API";
     // Map over this.state.friends and render a FriendCard component for each friend object
     render() {
       return (
-          <div>
+        <div className="row">
         {this.state.cards.map(card => (
             <SmallCard
               key={card._id}

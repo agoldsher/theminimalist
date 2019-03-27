@@ -22,12 +22,29 @@ category: "vehicle"
 },
 {user: "kevin",
 title: "vacuum",
-image: ["https://target.scene7.com/is/image/Target/GUEST_a8109913-a31a-4510-a730-v?wid=488&hei=488&fmt=pjpeg"],
+image: ["https://target.scene7.com/is/image/Target/GUEST_a8109913-a31a-4510-a730-2829d8e841c9?wid=488&hei=488&fmt=pjpeg"],
 description: "works great, has great suction",
 price: "3.00",
 viewCount:"5",
 category: "appliances"
-}
+},
+{user: "timmy",
+title: "circular saw",
+image: ["https://www.harborfreight.com/media/catalog/product/6/3/63634_I.jpg"],
+description: "easy to use",
+price: "10.00",
+viewCount:"3",
+category: "machinery"
+},
+{user: "cindy",
+title: "blender",
+image: ["https://target.scene7.com/is/image/Target/GUEST_5fb314ab-8c46-4d52-987d-999367a72d27?wid=488&hei=488&fmt=webp"],
+description: "got it for christmas, never used it",
+price: "2.50",
+viewCount:"8",
+category: "appliances"
+},
+
 ];
 
 db.Post
