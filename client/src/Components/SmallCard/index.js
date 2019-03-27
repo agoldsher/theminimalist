@@ -5,7 +5,7 @@ function SmallCard(props) {
         <div className="col-md-2">
           <div className="thumbnail">
            {/* eslint-disable-next-line */}
-            <a href="#">
+            <a href={'/' + props.id}>
               <img src={props.image} alt={props.title} style={{width:"100%"}}/>
               <div className="caption text-center">
                 <h5 className="card-title">{props.title}</h5>

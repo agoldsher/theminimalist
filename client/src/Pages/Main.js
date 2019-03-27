@@ -27,6 +27,7 @@ import API from "../utils/API";
         {this.state.cards.map(card => (
             <SmallCard
               key={card._id}
+              id={card._id}
               title={card.title}
               image={card.image}
               price={card.price}

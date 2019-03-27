@@ -36,7 +36,7 @@ function App() {
         {/* <Nav /> */}
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route exact path="/details" component={Detail} />
+          <Route exact path="/:id" component={Detail} />
            <Route component={NoMatch} />
         </Switch>
       </div>
