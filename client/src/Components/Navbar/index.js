@@ -13,18 +13,16 @@ class Navbar extends Component {
     render() {
         return (
             <nav className="navbar navbar-light bg-light">
-                <div className="container" onclick={this.change}>
-                    <div className="bar1"></div>
-                    <div className="bar2"></div>
-                    <div className="bar3"></div>
-                </div>
-                <Input 
-                placeholder="Search..."
+                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span></button>
+                <Input
+                    placeholder="Search..."
                 />
                 <FormBtn>Search</FormBtn>
                 <Link to="/newpost">
-                <FormBtn >+</FormBtn>
+                    <FormBtn >+</FormBtn>
                 </Link>
+
             </nav>
         )
     };
