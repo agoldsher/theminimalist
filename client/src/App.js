@@ -37,7 +37,8 @@ function App() {
         {/* <Nav /> */}
         <Switch>
           <Route exact path="/" component={Main} />
-          <Route exact path="/details" component={Detail} />
+          <Route exact path="/:id" component={Detail} />
+    
           <Route exact path="/newpost" component={NewPost} />
           <Route component={NoMatch} />
         </Switch>
