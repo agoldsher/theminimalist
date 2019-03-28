@@ -24,10 +24,6 @@ app.use(routes);
 // Connecting to Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist");
 
-// Add routes, both API and view
-app.use(routes);
-
-
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
