@@ -1,11 +1,3 @@
-<<<<<<< HEAD
-const router = require("express").Router();
-const bookRoutes = require("./api");
-
-// Book routes
-router.use("/api", bookRoutes);
-
-=======
 const path = require("path");
 const router = require("express").Router();
 const apiRoutes = require("./api");
@@ -18,5 +10,4 @@ router.use(function(req, res) {
   res.sendFile(path.join(__dirname, "../client/build/index.html"));
 });
 
->>>>>>> master
 module.exports = router;

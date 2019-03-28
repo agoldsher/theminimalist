@@ -1,15 +1,10 @@
 const express = require("express");
-
+const path = require("path");
+const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
 const routes = require("./routes");
 const app = express();
-<<<<<<< HEAD
-const PORT = process.env.PORT || 3001;
-=======
-const mongoose = require("mongoose");
-const routes = require("./routes");
 
->>>>>>> master
 
 // Define middleware here
 app.use(express.urlencoded({ extended: true }));
@@ -21,10 +16,6 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
-<<<<<<< HEAD
-// Connect to the Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist");
-=======
 // Define API routes here
 // app.get("/api",(res,req)=>{
 //   res.json({success:true})
@@ -42,7 +33,6 @@ app.use(routes);
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
->>>>>>> master
 
 // Start the API server
 app.listen(PORT, function() {
