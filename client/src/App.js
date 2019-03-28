@@ -25,6 +25,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./Pages/Main";
+import NewPost from "./Pages/NewPost";
 import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
 // import Nav from "./components/Nav";
@@ -37,7 +38,8 @@ function App() {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/details" component={Detail} />
-           <Route component={NoMatch} />
+          <Route exact path="/newpost" component={NewPost} />
+          <Route component={NoMatch} />
         </Switch>
       </div>
     </Router>
