@@ -29,12 +29,14 @@ import NewPost from "./Pages/NewPost";
 import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
 // import Nav from "./components/Nav";
+import Navbar from "./Components/Navbar";
+
 
 function App() {
   return (
     <Router>
       <div>
-        {/* <Nav /> */}
+        <Navbar />
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/newpost" component={NewPost} />
