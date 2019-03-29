@@ -1,8 +1,9 @@
 import React from "react";
+import "./style.css";
 
 function SmallCard(props) {
     return (
-        <div className="col-md-2">
+        <div>  
           <div className="thumbnail">
            {/* eslint-disable-next-line */}
             <a href={'/' + props.id}>
