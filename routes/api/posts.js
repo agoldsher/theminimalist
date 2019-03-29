@@ -6,12 +6,6 @@ router.route("/")
     .get(postsController.findAll)
     .post(postsController.create);
 
-// Matches with "/api/posts/:id"
-router.route("/:id")
-    .get(postsController.findById)
-    .put(postsController.update)
-    .delete(postsController.remove);
-
 // Matches with "api/posts/category"
 router.route("/category")
     .get(postsController.findByCategory);
@@ -19,5 +13,16 @@ router.route("/category")
 // Matches with "api/posts/popularity"
 router.route("/popularity")
     .get(postsController.findByPopularity);
+
+router.route("/view/:id")
+.put(postsController.updateViews);
+
+// Matches with "/api/posts/:id"
+router.route("/:id")
+.get(postsController.findById)
+.put(postsController.update)
+.delete(postsController.remove);
+
+
 
 module.exports = router;

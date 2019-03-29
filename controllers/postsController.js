@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
     findAll: function (req, res) {
         db.Post
-            .find(req.query)
+            .find({})
             .sort({ date: -1 })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
@@ -24,9 +24,18 @@ module.exports = {
     },
     findByPopularity: function (req, res) {
         db.Post
-            .find()
+            .find({})
             .sort({ viewCount: -1 })
             .limit(10)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => {
+                console.log(err)
+                res.status(422).json(err)
+            });
+    },
+    updateViews:function (req,res){
+            db.Post
+            .findOneAndUpdate({ _id: req.params.id }, {$inc:{viewCount:1}})
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
