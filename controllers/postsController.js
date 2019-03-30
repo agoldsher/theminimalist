@@ -19,7 +19,7 @@ module.exports = {
         db.Post
             .find({ category: req.params.category })
             .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
+            .then(dbModel => {res.json(dbModel)})
             .catch(err => res.status(422).json(err));
     },
     findByPopularity: function (req, res) {
@@ -37,6 +37,13 @@ module.exports = {
             db.Post
             .findOneAndUpdate({ _id: req.params.id }, {$inc:{viewCount:1}})
             .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    search: function (req, res){
+        console.log(req);
+        db.Post
+            .find({title:req.params.searchValue})
+            .then(dbModel=>res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {

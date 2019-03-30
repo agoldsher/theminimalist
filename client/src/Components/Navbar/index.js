@@ -3,9 +3,11 @@ import "./style.css";
 import { Input, FormBtn } from "../AddForm";
 import CategoryWrapper from "../CategoryWrapper";
 import { Link } from "react-router-dom";
+import API from "../../utils/API";
 
 class Navbar extends Component {
  state = {
+    search:"",
     categories:[
     "Electronics",
     "Appliances",
@@ -20,7 +22,21 @@ class Navbar extends Component {
     change = (x) => {
         x.classList.toggle("change");
     }
-   
+    searchBtn=(input)=>{
+        API.search(input)
+        .then(res =>{
+          this.setState({ cards: res.data });
+          console.log(res.data)
+        }
+        )
+        .catch(err => console.log(err));
+    }
+    handleInputChange = event => {
+        const { name, value } = event.target;
+        this.setState({
+            [name]: value
+        });
+    };
  
     render() {
         return (
@@ -33,6 +49,7 @@ class Navbar extends Component {
                         <ul className="text-dark h5">
                         {this.state.categories.map(category => (
                             <CategoryWrapper
+                            key = {category}
                             category={category}
                             />
                         ))}
@@ -41,9 +58,11 @@ class Navbar extends Component {
                 </div>
             </div>
                 <Input
+                    name="search"
                     placeholder="Search..."
+                    onChange={this.handleInputChange}
                 />
-                <FormBtn>Search</FormBtn>
+                <FormBtn onClick={() => this.searchBtn(this.state.search)} >Search</FormBtn>
                 <Link to="/newpost">
                     <FormBtn >+</FormBtn>
                 </Link>

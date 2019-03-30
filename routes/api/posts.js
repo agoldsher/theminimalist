@@ -3,19 +3,22 @@ const postsController = require("../../controllers/postsController");
 
 // Matches with "/api/posts"
 router.route("/")
-    .get(postsController.findAll)
-    .post(postsController.create);
+.get(postsController.findAll)
+.post(postsController.create);
 
 // Matches with "api/posts/category"
 router.route("/category/:category")
-    .get(postsController.findByCategory);
+.get(postsController.findByCategory);
 
 // Matches with "api/posts/popularity"
 router.route("/popularity")
-    .get(postsController.findByPopularity);
+.get(postsController.findByPopularity);
 
 router.route("/view/:id")
 .put(postsController.updateViews);
+
+router.route("/search/:searchValue")
+.get(postsController.search)
 
 // Matches with "/api/posts/:id"
 router.route("/:id")

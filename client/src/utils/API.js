@@ -13,15 +13,11 @@ export default {
     axios.put("/api/posts/view/"+id)
     return axios.get("/api/posts/" + id);
   },
-  
-  // // Deletes the book with the given id
-  // deleteBook: function(id) {
-  //   return axios.delete("/api/books/" + id);
-  // },
-  // // Saves a book to the database
-  // saveBook: function(bookData) {
-  //   return axios.post("/api/books", bookData);
-  // }
+
+  search: function(search){
+    return axios.get("/api/posts/search/"+search);
+  },
+ 
     savePost: function(data) {
         return axios.post("/api/posts", data)
     }
