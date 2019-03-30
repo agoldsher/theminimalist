@@ -73,6 +73,7 @@ app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave
 // Send every other request to the React app
 // Define any API routes before this runs
 app.get("*", (req, res) => {
+  //test password, and if not then redirect to login
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
 

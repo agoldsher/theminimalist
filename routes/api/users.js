@@ -34,9 +34,10 @@ router.post('/', auth.optional, (req, res, next) => {
 
 //POST login route (optional, everyone has access)
 router.post('/login', auth.optional, (req, res, next) => {
-  const { body: { user } } = req;
-
-  if(!user.email) {
+  const body = req.body;
+  console.log("in correct function")
+  console.log(body)
+  if(!body.email) {
     return res.status(422).json({
       errors: {
         email: 'is required',
@@ -44,7 +45,7 @@ router.post('/login', auth.optional, (req, res, next) => {
     });
   }
 
-  if(!user.password) {
+  if(!body.password) {
     return res.status(422).json({
       errors: {
         password: 'is required',
@@ -69,7 +70,8 @@ router.post('/login', auth.optional, (req, res, next) => {
 });
 
 //GET current route (required, only authenticated users have access)
-router.get('/', auth.required, (req, res, next) => {
+router.get('/current', auth.required, (req, res, next) => {
+  // console.log("/current")
   const { payload: { id } } = req;
 
   return Users.findById(id)

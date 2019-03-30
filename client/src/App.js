@@ -28,6 +28,7 @@ import Main from "./Pages/Main";
 import NewPost from "./Pages/NewPost";
 import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
+import Login from "./Pages/Login";
 // import Nav from "./components/Nav";
 import Navbar from "./Components/Navbar";
 
@@ -39,6 +40,7 @@ function App() {
         <Navbar />
         <Switch>
           <Route exact path="/" component={Main} />
+          <Route exact path="/login" component={Login} />
           <Route exact path="/newpost" component={NewPost} />
           <Route exact path="/:id" component={Detail} />
           <Route component={NoMatch} />
