@@ -42,7 +42,7 @@ function App() {
           <Route exact path="/" component={Main} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/newpost" component={NewPost} />
-          <Route exact path="/:id" component={Detail} />
+          <Route exact path="/product/:id" component={Detail} />
           <Route component={NoMatch} />
         </Switch>
       </div>

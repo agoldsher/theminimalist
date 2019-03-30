@@ -7,8 +7,8 @@ const Users = mongoose.model('Users');
 //POST new user route (optional, everyone has access)
 router.post('/', auth.optional, (req, res, next) => {
   // const { body: { user } } = req;
-  const user={email:req.email,password:req.password}
-
+  const user={email:req.body.email,password:req.body.password}
+  console.log(user)
   if(!user.email) {
     return res.status(422).json({
       errors: {
@@ -60,13 +60,14 @@ router.post('/login', auth.optional, (req, res, next) => {
     }
 
     if(passportUser) {
+      console.log("Found user")
       const user = passportUser;
       user.token = passportUser.generateJWT();
 
       return res.json({ user: user.toAuthJSON() });
     }
 
-    return res.status(400);
+    return status(400).info;
   })(req, res, next);
 });
 

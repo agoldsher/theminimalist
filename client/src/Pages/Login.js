@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 // import { Input, DropDown, TextArea, ImgUpload, FormBtn } from "../Components/AddForm";
 import API from "../utils/API";
+import Axios from "axios";
 
 class Login extends Component {
 
@@ -18,19 +19,12 @@ class Login extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if (this.state.title && this.state.category && this.state.price && this.state.description) {
-            API.savePost({
-                title: this.state.title,
-                category: this.state.category,
-                price: this.state.price,
-                description: this.state.description,
-                image: "this.state.image"
-            })
-                .then(data => console.log(data))
-                .catch(err => console.log(err));
-        } else {
-            alert("Please complete all elements before posting")
-        };
+        Axios.post('/api/users/login',{
+            username:this.state.username,
+            passoword: this.state.password
+        }).then(response => {
+            //TODO finish once router is working correctly
+        })
     };
 
     render() {
