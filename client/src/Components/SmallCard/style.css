@@ -1,4 +1,25 @@
-.img {
-    width: 200px;
-    height: 200px;
-}
+.card-container{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-column-gap: 7px;
+    margin: 50px;
+  }
+  
+  .card-title, .card-text {
+      color: black;
+  }
+
+  /* Image on details Page */
+  .img-container {
+      display: grid;
+      grid-template-columns: 4fr;
+      margin: 50px;
+  }
+
+/* Details page */
+  .details {
+      display: grid;
+      grid-template-columns: 1fr;
+      margin: 50px;
+      align-content: left;
+  }

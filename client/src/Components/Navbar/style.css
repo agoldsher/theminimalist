@@ -11,12 +11,12 @@
 }
 
 
-.card-container{
+/* .card-container{
   display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 7px;
   margin-top: 50px;
-}
+} */
 
 img{
   width: 100%;

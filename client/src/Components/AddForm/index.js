@@ -5,8 +5,8 @@ import FormLabel from "react-bootstrap/FormLabel";
 
 export function Input(props) {
     return (
-        <div className="">
-            {/* <label>{props.label}</label> */}
+        <div className="form-input">
+            {/* <label>{props.label}</label> -Don't know if this section of code was needed for something else, commented it out as it was interfering with navbar layout */}
             <input className="form-control" {...props} />
         </div>
     );
