@@ -17,7 +17,7 @@ router.route("/popularity")
 router.route("/view/:id")
 .put(postsController.updateViews);
 
-router.route("/search/:searchValue")
+router.route("/search/:search")
 .get(postsController.search)
 
 // Matches with "/api/posts/:id"
