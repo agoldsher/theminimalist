@@ -37,8 +37,8 @@ In case you want to see where all the screens are and how they fit together, we 
 ## Anetta Goldsher
 The team leader, AKA professional nag. She kept us on schedule and worked on the main interface components.
 ## Felicia
-Our UX guru. She did our wireframing and design, and then hoped on other parts as necessary
+Our UX guru. She did our wireframing and design, and then helped on other parts as necessary
 ## Gregory Mash
-King-of-all-trades, also known as the "Mash-ter", Gred worked on the databases, server, and React frontend.
+King-of-all-trades, also known as the "Mash-ter", Gred worked on the database, server, and React frontend.
 ## John
 If you liked this guide, then John is the man to thank, and if you didn't like it then just say "%#&*@#!" in his general direction. Also, submit a bug request so that John can help reduce the cursing and increase your happiness. John is also responsible for app security and created Login Page and the authentication protocols on the server.

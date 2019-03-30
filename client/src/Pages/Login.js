@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import { Input, DropDown, TextArea, ImgUpload, FormBtn } from "../Components/AddForm";
+// import { Input, DropDown, TextArea, ImgUpload, FormBtn } from "../Components/AddForm";
 import API from "../utils/API";
 
-class NewPost extends Component {
+class Login extends Component {
 
     state = {
         email:"",
@@ -35,7 +35,7 @@ class NewPost extends Component {
 
     render() {
         return (
-            <form action="/login" method="post">
+            <form action="/api/users/login" method="post">
                 <input
                     value={this.state.email}
                     onChange={this.handleInputChange}
@@ -58,4 +58,4 @@ class NewPost extends Component {
     };
 };
 
-export default NewPost;
+export default Login;
