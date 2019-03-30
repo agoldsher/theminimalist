@@ -16,13 +16,14 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
+
 // Define API routes here
 // app.get("/api",(res,req)=>{
 //   res.json({success:true})
 // })
 
 // Connecting to Mongo DB
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist");
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist", {useNewUrlParser: true});
 
 // Send every other request to the React app
 // Define any API routes before this runs

@@ -24,6 +24,7 @@
     "if-env": "^1.0.4",
     "mongoose": "^5.4.20",
     "react": "^16.8.5",
+    "react-burger-menu": "^2.6.5",
     "react-router-dom": "^5.0.0"
   }
 }

@@ -4,7 +4,7 @@ const db = require("../models");
 module.exports = {
     findAll: function (req, res) {
         db.Post
-            .find(req.query)
+            .find({})
             .sort({ date: -1 })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
@@ -17,17 +17,33 @@ module.exports = {
     },
     findByCategory: function (req, res) {
         db.Post
-            .find({ category: req.query })
+            .find({ category: req.params.category })
             .sort({ date: -1 })
-            .then(dbModel => res.json(dbModel))
+            .then(dbModel => {res.json(dbModel)})
             .catch(err => res.status(422).json(err));
     },
     findByPopularity: function (req, res) {
         db.Post
-            .find()
+            .find({})
             .sort({ viewCount: -1 })
             .limit(10)
             .then(dbModel => res.json(dbModel))
+            .catch(err => {
+                console.log(err)
+                res.status(422).json(err)
+            });
+    },
+    updateViews:function (req,res){
+            db.Post
+            .findOneAndUpdate({ _id: req.params.id }, {$inc:{viewCount:1}})
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    search: function (req, res){
+        console.log(req);
+        db.Post
+            .find({title:req.params.searchValue})
+            .then(dbModel=>res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {

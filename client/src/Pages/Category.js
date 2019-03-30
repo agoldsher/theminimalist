@@ -8,11 +8,11 @@ import API from "../utils/API";
       cards:[]
     };
     componentDidMount() {
-      this.loadPopPosts();
+      this.loadCategoryPosts();
     }
   
-    loadPopPosts = () => {
-     API.getPopPosts()
+    loadCategoryPosts = () => {
+     API.getCategoryPosts(this.props.match.params.category)
         .then(res =>{
           this.setState({ cards: res.data });
           console.log(res.data)
@@ -24,7 +24,7 @@ import API from "../utils/API";
     // Map over this.state.friends and render a FriendCard component for each friend object
     render() {
       return (
-        <div className="card-container">
+        <div className="row">
         {this.state.cards.map(card => (
             <SmallCard
               key={card._id}
