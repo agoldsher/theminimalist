@@ -12,7 +12,7 @@ import API from "../utils/API";
     }
   
     loadCategoryPosts = () => {
-     API.getCategoryPosts("Sports")
+     API.getCategoryPosts(this.props.match.params.category)
         .then(res =>{
           this.setState({ cards: res.data });
           console.log(res.data)
