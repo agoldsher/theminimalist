@@ -10,13 +10,9 @@
   margin-top: 20px;
 }
 
-
-/* .card-container{
-  display: grid;
-  grid-template-columns: 1fr 1fr 1fr 1fr;
-  grid-column-gap: 7px;
-  margin-top: 50px;
-} */
+.dropdown {
+  position: fixed;
+}
 
 img{
   width: 100%;
