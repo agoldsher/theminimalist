@@ -3,7 +3,11 @@ import "./style.css";
 import { Input, FormBtn } from "../AddForm";
 import CategoryWrapper from "../CategoryWrapper";
 import { Link } from "react-router-dom";
+<<<<<<< HEAD
 import API from "../../utils/API";
+=======
+import Button from "react-bootstrap/Button";
+>>>>>>> master
 
 class Navbar extends Component {
  state = {

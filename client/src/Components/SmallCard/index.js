@@ -1,9 +1,13 @@
 import React from "react";
+<<<<<<< HEAD
 import {Link} from "react-router-dom";
+=======
+import "./style.css";
+>>>>>>> master
 
 function SmallCard(props) {
     return (
-        <div className="col-md-2">
+        <div>  
           <div className="thumbnail">
            {/* eslint-disable-next-line */}
             <Link to ={'/' + props.id}>

@@ -45,43 +45,45 @@ class NewPost extends Component {
 
     render() {
         return (
-            <form>
-                <Input
-                    value={this.state.title}
-                    onChange={this.handleInputChange}
-                    name="title"
-                    placeholder="Enter Title (required)"
-                    label="Title: "
-                />
-                <DropDown
-                    value={this.state.category}
-                    onChange={this.handleSelectChange}
-                    name="category"
-                    categories={["", "Electronics", "Sports", "Space"]}
-                    label="Category: "
-                />
-                <Input
-                    value={this.state.price}
-                    onChange={this.handleInputChange}
-                    name="price"
-                    placeholder="Enter Price (required)"
-                    label="Price: $"
-                />
-                <TextArea
-                    value={this.state.Description}
-                    onChange={this.handleInputChange}
-                    name="description"
-                    placeholder="Enter Description (required)"
-                    label="Description: "
-                />
-                <ImgUpload
-                    value={this.state.Image}
-                    onChange={this.handleSelectChange}
-                    name="image"
-                    label="Image: "
-                />
-                <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
-            </form>
+            <div className="form-container">
+                <form>
+                    <Input
+                        value={this.state.title}
+                        onChange={this.handleInputChange}
+                        name="title"
+                        placeholder="Enter Title (required)"
+                        label="Title: "
+                    />
+                    <DropDown
+                        value={this.state.category}
+                        onChange={this.handleSelectChange}
+                        name="category"
+                        categories={["", "Electronics", "Sports", "Space"]}
+                        label="Category: "
+                    />
+                    <Input
+                        value={this.state.price}
+                        onChange={this.handleInputChange}
+                        name="price"
+                        placeholder="Enter Price (required)"
+                        label="Price: $"
+                    />
+                    <TextArea
+                        value={this.state.Description}
+                        onChange={this.handleInputChange}
+                        name="description"
+                        placeholder="Enter Description (required)"
+                        label="Description: "
+                    />
+                    <ImgUpload
+                        value={this.state.Image}
+                        onChange={this.handleSelectChange}
+                        name="image"
+                        label="Image: "
+                    />
+                    <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
+                </form>
+            </div>
         );
     };
 };
