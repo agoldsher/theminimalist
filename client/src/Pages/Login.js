@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 // import { Input, DropDown, TextArea, ImgUpload, FormBtn } from "../Components/AddForm";
-import API from "../utils/API";
+// import API from "../utils/API";
 import Axios from "axios";
 
 class Login extends Component {
@@ -20,16 +20,21 @@ class Login extends Component {
     handleFormSubmit = (e) => {
         e.preventDefault();
         Axios.post('/api/users/login',{
-            username:this.state.username,
-            passoword: this.state.password
+            user: {
+                email:this.state.email,
+                password: this.state.password
+            }
+            
         }).then(response => {
+            console.log("received response")
+            console.log(response)
             //TODO finish once router is working correctly
         })
     };
 
     render() {
         return (
-            <form action="/api/users/login" method="post">
+            <form>
                 <input
                     value={this.state.email}
                     onChange={this.handleInputChange}
@@ -46,7 +51,7 @@ class Login extends Component {
                     placeholder="Password"
                     label="Price: $"
                 />
-                <button type="submit" value="Submit">Login</button>
+                <button type="submit" value="Submit" onClick={this.handleFormSubmit}>Login</button>
             </form>
         );
     };
