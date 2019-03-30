@@ -3,11 +3,8 @@ import "./style.css";
 import { Input, FormBtn } from "../AddForm";
 import CategoryWrapper from "../CategoryWrapper";
 import { Link } from "react-router-dom";
-<<<<<<< HEAD
 import API from "../../utils/API";
-=======
 import Button from "react-bootstrap/Button";
->>>>>>> master
 
 class Navbar extends Component {
  state = {
@@ -45,9 +42,10 @@ class Navbar extends Component {
     render() {
         return (
             <nav className="navbar navbar-light bg-light">
+            <div className= "nav-container">
             <div className="pos-f-t">
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
-                <span className="navbar-toggler-icon"></span></button>
+                <Button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span className="navbar-toggler-icon"></span></Button>
                 <div className="collapse" id="navbarToggleExternalContent">
                     <div className="bg-light p-4">
                         <ul className="text-dark h5">
@@ -70,7 +68,7 @@ class Navbar extends Component {
                 <Link to="/newpost">
                     <FormBtn >+</FormBtn>
                 </Link>
-
+                </div>
             </nav>
         )
     };

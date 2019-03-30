@@ -1,9 +1,6 @@
 import React from "react";
-<<<<<<< HEAD
 import {Link} from "react-router-dom";
-=======
 import "./style.css";
->>>>>>> master
 
 function SmallCard(props) {
     return (
