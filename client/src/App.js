@@ -32,10 +32,12 @@ import Detail from "./Pages/Detail";
 import Navbar from "./Components/Navbar";
 
 
+
 function App() {
   return (
     <Router>
       <div>
+      
         <Navbar />
         <Switch>
           <Route exact path="/" component={Main} />

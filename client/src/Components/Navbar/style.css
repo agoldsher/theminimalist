@@ -2,6 +2,26 @@
   display: block;
 } 
 
+.nav-container{
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-column-gap: 7px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+
+/* .card-container{
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 7px;
+  margin-top: 50px;
+} */
+
+img{
+  width: 100%;
+}
+
 .container {
     display: inline-block;
     cursor: pointer;
