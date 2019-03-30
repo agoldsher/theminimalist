@@ -1,19 +1,21 @@
 import React, { Component } from "react";
 import "./style.css";
 import { Input, FormBtn } from "../AddForm";
+import CategoryWrapper from "../CategoryWrapper";
 import { Link } from "react-router-dom";
 
 class Navbar extends Component {
  state = {
-    categories:["electronics",
-    "appliances",
-    "clothing",
-    "household",
-    "sports/outdoors",
-    "movies and games",
-    "space",
-    "machinary",
-    "tools"]
+    categories:[
+    "Electronics",
+    "Appliances",
+    "Clothing",
+    "Household",
+    "Sports",
+    "Movies and Games",
+    "Machinary",
+    "Tools",
+    "Space"]
     };
     change = (x) => {
         x.classList.toggle("change");
@@ -29,14 +31,12 @@ class Navbar extends Component {
                 <div className="collapse" id="navbarToggleExternalContent">
                     <div className="bg-light p-4">
                         <ul className="text-dark h5">
-                        {/* {this.state.categories.forEach(category => {
-                           return category;
-                        })} */}
-                        <li>electronics</li>
-                        <li>appliances</li>
-                        <li>clothing</li>
+                        {this.state.categories.map(category => (
+                            <CategoryWrapper
+                            category={category}
+                            />
+                        ))}
                         </ul>
-                     
                     </div>
                 </div>
             </div>

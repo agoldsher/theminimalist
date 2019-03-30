@@ -5,6 +5,9 @@ export default {
   getPopPosts: function() {
     return axios.get("/api/posts/popularity");
   },
+  getCategoryPosts: function(category) {
+    return axios.get("/api/posts/category/"+category);
+  },
   // Gets the book with the given id
   getPost: function(id) {
     axios.put("/api/posts/view/"+id)

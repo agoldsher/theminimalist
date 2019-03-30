@@ -7,7 +7,7 @@ router.route("/")
     .post(postsController.create);
 
 // Matches with "api/posts/category"
-router.route("/category")
+router.route("/category/:category")
     .get(postsController.findByCategory);
 
 // Matches with "api/posts/popularity"

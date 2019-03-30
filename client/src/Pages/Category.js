@@ -8,11 +8,11 @@ import API from "../utils/API";
       cards:[]
     };
     componentDidMount() {
-      this.loadPopPosts();
+      this.loadCategoryPosts();
     }
   
-    loadPopPosts = () => {
-     API.getPopPosts()
+    loadCategoryPosts = () => {
+     API.getCategoryPosts("Sports")
         .then(res =>{
           this.setState({ cards: res.data });
           console.log(res.data)

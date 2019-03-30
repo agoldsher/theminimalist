@@ -25,6 +25,7 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./Pages/Main";
+import Category from "./Pages/Category";
 import NewPost from "./Pages/NewPost";
 import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
@@ -40,6 +41,7 @@ function App() {
         <Switch>
           <Route exact path="/" component={Main} />
           <Route exact path="/newpost" component={NewPost} />
+          <Route exact path="/category/:category" component={Category} />
           <Route exact path="/:id" component={Detail} />
           <Route component={NoMatch} />
         </Switch>
