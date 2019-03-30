@@ -46,7 +46,7 @@ class Navbar extends Component {
             <div className="pos-f-t">
                 <Button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarToggleExternalContent" aria-controls="navbarToggleExternalContent" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span></Button>
-                <div className="collapse" id="navbarToggleExternalContent">
+                <div className="collapse dropdown" id="navbarToggleExternalContent">
                     <div className="bg-light p-4">
                         <ul className="text-dark h5">
                         {this.state.categories.map(category => (
