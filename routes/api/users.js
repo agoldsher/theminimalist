@@ -55,7 +55,7 @@ router.post('/login', auth.optional, (req, res, next) => {
     });
   }
 
-  return passport.authenticate('local', { session: false }, (err, passportUser, info) => {
+  return passport.authenticate('local', { failureRedirect:'/login',session: false }, (err, passportUser, info) => {
     if(err) {
       return next(err);
     }
@@ -65,10 +65,10 @@ router.post('/login', auth.optional, (req, res, next) => {
       const user = passportUser;
       user.token = passportUser.generateJWT();
 
-      return res.json({ user: user.toAuthJSON() });
+      return res.status(200).json({ user: user.toAuthJSON() });
     }
-
-    return status(400).info;
+    // return res.json
+    return res.sendStatus(400);
   })(req, res, next);
 });
 
