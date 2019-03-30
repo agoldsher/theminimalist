@@ -6,6 +6,7 @@ import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import Button from "react-bootstrap/Button";
 
+
 class Navbar extends Component {
  state = {
     search:"",
@@ -20,9 +21,6 @@ class Navbar extends Component {
     "Tools",
     "Space"]
     };
-    change = (x) => {
-        x.classList.toggle("change");
-    }
     searchBtn=(input)=>{
         API.search(input)
         .then(res =>{
@@ -50,10 +48,26 @@ class Navbar extends Component {
                     <div className="bg-light p-4">
                         <ul className="text-dark h5">
                         {this.state.categories.map(category => (
-                            <CategoryWrapper
-                            key = {category}
-                            category={category}
-                            />
+                            // <CategoryWrapper
+                            // key = {category}
+                            // category={category}
+                            // onClick={
+                            //     (e)=>{
+                            //         e.preventDefault()
+                            //         this.props.handleCategoryChange(category)
+                            //     }
+                            // }
+                            // />
+                            <li>
+                                <button onClick={
+                                    (e)=>{
+                                        e.preventDefault()
+                                        this.props.handleCategoryChange(category)
+                                    }
+                                }> 
+                                    {category}
+                                </button>
+                            </li>
                         ))}
                         </ul>
                     </div>
@@ -64,7 +78,13 @@ class Navbar extends Component {
                     placeholder="Search..."
                     onChange={this.handleInputChange}
                 />
-                <FormBtn onClick={() => this.searchBtn(this.state.search)} >Search</FormBtn>
+                <FormBtn 
+                onClick={
+                    (e)=>{
+                        e.preventDefault()
+                        this.props.handleSearch(this.state.search)
+                    }
+                }>Search</FormBtn>
                 <Link to="/newpost">
                     <FormBtn >+</FormBtn>
                 </Link>
