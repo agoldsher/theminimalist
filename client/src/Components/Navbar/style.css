@@ -2,6 +2,22 @@
   display: block;
 } 
 
+.nav-container{
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr 1fr;
+  grid-column-gap: 7px;
+  text-align: center;
+  margin-top: 20px;
+}
+
+.dropdown {
+  position: fixed;
+}
+
+img{
+  width: 100%;
+}
+
 .container {
     display: inline-block;
     cursor: pointer;

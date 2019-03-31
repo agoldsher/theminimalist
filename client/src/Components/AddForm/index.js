@@ -1,10 +1,12 @@
 import React from "react";
 import "./style.css";
+import Button from "react-bootstrap/Button";
+import FormLabel from "react-bootstrap/FormLabel";
 
 export function Input(props) {
     return (
-        <div className="form-group">
-            <label>{props.label}</label>
+        <div className="form-input">
+            {/* <label>{props.label}</label> -Don't know if this section of code was needed for something else, commented it out as it was interfering with navbar layout */}
             <input className="form-control" {...props} />
         </div>
     );
@@ -26,7 +28,7 @@ export function DropDown(props) {
 export function TextArea(props) {
     return (
         <div className="form-group">
-            <label>{props.label}</label>
+            <FormLabel>{props.label}</FormLabel>
             <textarea className="form-control" rows="20" {...props} />
         </div>
     );
@@ -43,6 +45,6 @@ export function ImgUpload(props) {
 
 export function FormBtn(props) {
     return (
-        <button {...props} className="form-control"></button>
+        <Button {...props} className="form-button"></Button>
     );
 };

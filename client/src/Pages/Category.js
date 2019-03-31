@@ -1,31 +1,31 @@
 import React, { Component } from "react";
 import SmallCard from "../Components/SmallCard";
-// import API from "../utils/API";
+import API from "../utils/API";
 
   class CardRender extends Component {
     // Setting this.state.friends to the friends json array
-    // state = {
-    //   cards:[]
-    // };
-    // componentDidMount() {
-    //   this.loadPopPosts();
-    // }
+    state = {
+      cards:[]
+    };
+    componentDidMount() {
+      this.loadCategoryPosts();
+    }
   
-    // loadPopPosts = () => {
-    //  API.getPopPosts()
-    //     .then(res =>{
-    //       this.setState({ cards: res.data });
-    //       console.log(res.data)
-    //     }
-    //     )
-    //     .catch(err => console.log(err));
-    // };
+    loadCategoryPosts = () => {
+     API.getCategoryPosts(this.props.match.params.category)
+        .then(res =>{
+          this.setState({ cards: res.data });
+          console.log(res.data)
+        }
+        )
+        .catch(err => console.log(err));
+    };
 
     // Map over this.state.friends and render a FriendCard component for each friend object
     render() {
       return (
-        <div className="card-container">
-        {this.props.cards.map(card => (
+        <div className="row">
+        {this.state.cards.map(card => (
             <SmallCard
               key={card._id}
               id={card._id}
