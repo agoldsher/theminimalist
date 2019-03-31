@@ -45,9 +45,24 @@ module.exports = {
             .then(dbModel=>res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
+    findByState: function (req, res) {
+        db.Post
+            .find({ state: req.query })
+            .sort({ date: -1 })
+            .limit(10)
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
     create: function (req, res) {
         db.Post
-            .create(req.body)
+            .create({
+                title: req.body.title,
+                category: req.body.category,
+                price: req.body.price,
+                description: req.body.description,
+                state: req.body.state,
+                image:req.file.filename
+            })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
