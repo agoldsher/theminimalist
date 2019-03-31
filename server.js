@@ -6,6 +6,8 @@ const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
 const errorHandler = require('errorhandler');
+var hbs = require( 'express-handlebars');
+
 
 //Configure mongoose's promise to global promise
 mongoose.promise = global.Promise;
@@ -14,6 +16,16 @@ mongoose.promise = global.Promise;
 const isProduction = process.env.NODE_ENV === 'production';
 
 const app = express();
+
+
+app.set('view engine', 'hbs');
+
+app.engine( 'hbs', hbs( {
+  extname: 'hbs',
+  defaultView: 'index',
+  layoutsDir: __dirname + '/views/layouts/',
+  partialsDir: __dirname + '/views/partials/'
+}));
 
 // Define middleware here
 app.use(cors());
@@ -68,7 +80,6 @@ require('./models/Users');
 require('./config/passport');
 const routes = require("./routes");
 app.use(routes);
-app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 
 // Send every other request to the React app
 // Define any API routes before this runs

@@ -25,6 +25,8 @@ router.post('/', auth.optional, (req, res, next) => {
     });
   }
 
+  //TODO check if user in db already
+
   const finalUser = new Users(user);
 
   finalUser.setPassword(user.password);
@@ -37,8 +39,8 @@ router.post('/', auth.optional, (req, res, next) => {
 router.post('/login', auth.optional, (req, res, next) => {
   const { body: { user } } = req;
   // const body = req.body;
-  console.log("in correct function")
-  console.log(user)
+  // console.log("in correct function")
+  // console.log(user)
   if(!user.email) {
     return res.status(422).json({
       errors: {
@@ -61,7 +63,7 @@ router.post('/login', auth.optional, (req, res, next) => {
     }
 
     if(passportUser) {
-      console.log("Found user")
+      // console.log("Found user")
       const user = passportUser;
       user.token = passportUser.generateJWT();
 
