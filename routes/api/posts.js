@@ -34,11 +34,6 @@ router.route("/")
     .get(postsController.findAll)
     .post(upload.single('image'), uploadCDNY, postsController.create);
 
-// Matches with "/api/posts/:id"
-router.route("/:id")
-    .get(postsController.findById)
-    .put(postsController.update)
-    .delete(postsController.remove);
 
 // Matches with "api/posts/category"
 router.route("/category/:category")
@@ -59,7 +54,6 @@ router.route("/:id")
 .get(postsController.findById)
 .put(postsController.update)
 .delete(postsController.remove);
-
 
 
 module.exports = router;

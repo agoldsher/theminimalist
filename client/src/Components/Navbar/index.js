@@ -11,6 +11,7 @@ class Navbar extends Component {
  state = {
     search:"",
     categories:[
+    "All",
     "Electronics",
     "Appliances",
     "Clothing",
@@ -51,22 +52,14 @@ class Navbar extends Component {
                             // <CategoryWrapper
                             // key = {category}
                             // category={category}
-                            // onClick={
-                            //     (e)=>{
-                            //         e.preventDefault()
-                            //         this.props.handleCategoryChange(category)
-                            //     }
-                            // }
+                            // handleCategoryChange= {this.props.handleCategoryChange(category)}
                             // />
-                            <li>
-                                <button onClick={
+                            <li onClick={
                                     (e)=>{
                                         e.preventDefault()
                                         this.props.handleCategoryChange(category)
-                                    }
-                                }> 
+                                    }}> 
                                     {category}
-                                </button>
                             </li>
                         ))}
                         </ul>

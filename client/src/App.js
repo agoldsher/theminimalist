@@ -50,6 +50,9 @@ class App extends React.Component {
        .catch(err => console.log(err));
    };
   handleCategoryChange = (category)=>{
+    if (category==="All"){
+      this.loadPopPosts();
+    }else{
     API.getCategoryPosts(category)
         .then(res =>{
           this.setState({ cards: res.data, category });
@@ -57,7 +60,7 @@ class App extends React.Component {
         }
         )
         .catch(err => console.log(err));
-  }
+  }}
   handleSearch = (search)=>{
     API.search(search)
         .then(res =>{
