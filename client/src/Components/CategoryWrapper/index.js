@@ -4,7 +4,7 @@ import React from "react";
 
 function CategoryWrapper(props) {
     return (
-         <li>{props.category} </li>
+         <li >{props.category} </li>
     );
   }
   

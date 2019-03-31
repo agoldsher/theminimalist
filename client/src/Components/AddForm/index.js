@@ -27,9 +27,9 @@ export function DropDown(props) {
 
 export function TextArea(props) {
     return (
-        <div className="form-group">
+        <div className="form-group description-area">
             <FormLabel>{props.label}</FormLabel>
-            <textarea className="form-control" rows="20" {...props} />
+            <textarea className="form-control" rows="7" {...props} />
         </div>
     );
 };
@@ -45,6 +45,6 @@ export function ImgUpload(props) {
 
 export function FormBtn(props) {
     return (
-        <Button {...props} className="form-button"></Button>
+        <Button {...props} className="form-button mr-3"></Button>
     );
 };
