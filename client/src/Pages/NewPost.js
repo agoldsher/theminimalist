@@ -75,14 +75,24 @@ class NewPost extends Component {
                         value={this.state.category}
                         onChange={this.handleSelectChange}
                         name="category"
-                        categories={["", "Electronics", "Sports", "Space"]}
+                        categories={[ 
+                        "",   
+                        "Electronics",
+                        "Appliances",
+                        "Clothing",
+                        "Household",
+                        "Sports",
+                        "Movies and Games",
+                        "Machinary",
+                        "Tools",
+                        "Space"]}
                         label="Category: "
                     />
                     <Input
                         value={this.state.price}
                         onChange={this.handleInputChange}
                         name="price"
-                        placeholder="Enter Price (required)"
+                        placeholder="Enter Price per day (required)"
                         label="Price: $"
                     />
                     <TextArea
