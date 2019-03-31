@@ -12,7 +12,8 @@ const postSchema = new Schema({
     },
     image: {
         type: Array,
-        required: true
+        required: true,
+        //data: Buffer
     },
     description: {
         type: String,
@@ -35,6 +36,10 @@ const postSchema = new Schema({
     category: {
         type: String,
         required: true,
+    },
+    state: {
+        type: String,
+        required: true
     }
 });
 

@@ -8,7 +8,7 @@ export function Input(props) {
             <input className="form-control" {...props} />
         </div>
     );
-}
+};
 
 export function DropDown(props) {
     return (
@@ -21,7 +21,7 @@ export function DropDown(props) {
             </select>
         </div>
     );
-}
+};
 
 export function TextArea(props) {
     return (
@@ -30,19 +30,19 @@ export function TextArea(props) {
             <textarea className="form-control" rows="20" {...props} />
         </div>
     );
-}
+};
 
 export function ImgUpload(props) {
     return (
         <div className="form-group">
             <label>{props.label}</label>
-            <input type="file" className="form-control-file" name={props.name}></input>
+            <input type="file" id="upload" name={props.name} ref={props.fileRef}></input>
         </div>
     );
-}
+};
 
 export function FormBtn(props) {
     return (
         <button {...props} className="form-control"></button>
     );
-}
+};

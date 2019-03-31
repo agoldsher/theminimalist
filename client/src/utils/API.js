@@ -18,6 +18,10 @@ export default {
   //   return axios.post("/api/books", bookData);
   // }
     savePost: function(data) {
-        return axios.post("/api/posts", data)
+        return axios.post("/api/posts", data, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
     }
 };
