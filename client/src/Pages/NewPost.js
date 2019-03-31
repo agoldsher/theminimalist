@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Input, DropDown, TextArea, ImgUpload, FormBtn } from "../Components/AddForm";
 import API from "../utils/API";
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 
 class NewPost extends Component {
@@ -16,6 +18,8 @@ class NewPost extends Component {
     constructor(props) {
         super(props)
         this.fileInput = React.createRef();
+        this.handleFormSubmit = this.handleFormSubmit.bind(this);
+
     }
 
     handleInputChange = event => {
@@ -33,6 +37,8 @@ class NewPost extends Component {
         });
     };
 
+    
+
     handleFormSubmit = (e) => {
         e.preventDefault();
         if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.state) {
@@ -43,12 +49,14 @@ class NewPost extends Component {
             formData.append("description", this.state.description);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
             formData.append("state", this.state.state);
-            console.log(formData);
             API.savePost(formData)
-                .then(res => console.log(res.data))
+                .then((res) => {
+                    let path = `/`;
+                    this.props.history.push(path);
+                })
                 .catch(err => console.log(err));
         } else {
-            alert("Please complete all elements before posting")
+            alert("Please complete all elements before posting");
         };
     };
 
@@ -97,6 +105,9 @@ class NewPost extends Component {
                         label="Image: "
                         fileRef={this.fileInput}
                     />
+                    <Link to="/">
+                        <FormBtn >Cancel</FormBtn>
+                    </Link>
                     <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
                 </form>
             </div>
@@ -104,4 +115,4 @@ class NewPost extends Component {
     };
 };
 
-export default NewPost;
+export default withRouter(NewPost);
