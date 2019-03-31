@@ -1,7 +1,8 @@
+require('dotenv').config()
 const express = require("express");
 const path = require("path");
 const bodyParser = require('body-parser');
-const session = require('express-session');
+// const session = require('express-session');
 const cors = require('cors');
 const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
@@ -32,11 +33,12 @@ app.use(cors());
 app.use(require('morgan')('dev'));
 app.use(bodyParser.json());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
+// app.use(session({ secret: 'passport-tutorial', cookie: { maxAge: 60000 }, resave: false, saveUninitialized: false }));
 
 app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 // Serve up static assets (usually on heroku)
+console.log(`Running in ${process.env.NODE_ENV} environment`)
 if (isProduction) {
   // app.use(express.static("client/build"));
   app.use(express.static(path.join(__dirname, 'client/build')));
