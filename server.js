@@ -41,16 +41,8 @@ app.use(express.urlencoded({ extended: true }));
 console.log(`Running in ${process.env.NODE_ENV} environment`)
 if (isProduction) {
   // app.use(express.static("client/build"));
-  app.use(express.static(path.join(__dirname, 'client/build')));
+  // app.use(express.static(path.join(__dirname, 'client/build')));
 }
-// Add routes, both API and view
-
-
-// Define API routes here
-// app.get("/api",(res,req)=>{
-//   res.json({success:true})
-// })
-
 if(!isProduction) {
   app.use(errorHandler());
 }
@@ -93,4 +85,4 @@ app.use(routes);
 // Start the API server
 app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
-});
+}); 

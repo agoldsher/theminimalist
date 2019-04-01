@@ -3,6 +3,10 @@ const path = require("path");
 const router = require("express").Router();
 const apiRoutes = require("./api");
 const preLogin = require("./preLogin")
+const auth = require("./auth")
+
+// require('../models/Users');
+// require('../config/passport');
 
 
 // router.route("/")
@@ -12,7 +16,7 @@ const preLogin = require("./preLogin")
 //     })
 
 // API Routes
-router.use('/',preLogin)
+router.use('/login',preLogin)
 router.use("/api", apiRoutes);
 
 if(process.env.NODE_ENV === "production") {
@@ -21,9 +25,9 @@ if(process.env.NODE_ENV === "production") {
 
 
 // If no API routes are hit, send the React app
-// router.get("*",function (req, res) {
-//   console.log("React route hit.")
-//   res.sendFile(path.join(__dirname, "../client/build/index.html"));
-// });
+router.get("*",auth.required,function (req, res) {
+  console.log("React route hit.")
+  res.sendFile(path.join(__dirname, "../client/build/index.html"));
+});
 
 module.exports = router;
