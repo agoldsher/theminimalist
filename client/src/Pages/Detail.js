@@ -8,7 +8,10 @@ class Detail extends Component {
   };
   componentDidMount() {
     API.getPost(this.props.match.params.id)
-      .then(res => this.setState({ card: res.data }))
+      .then(res => {
+        this.setState({ card: res.data });
+        console.log(this.state.card);
+      })
       .catch(err => console.log(err));
   }
 
@@ -16,7 +19,7 @@ class Detail extends Component {
   render() {
     return (
       <div>
-        {/* <h1>User Rating: {this.state.card.user.rating}/5</h1> */}
+        {/* <h1>User Rating: {this.state.card.user.userName}</h1> */}
         <div className="img-container">
           <img alt={this.state.card.title} src={this.state.card.image} />
         </div>
