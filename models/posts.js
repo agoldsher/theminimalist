@@ -2,10 +2,6 @@ const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
 const postSchema = new Schema({
-    // user: {
-    //     type: String,
-    //     required: true
-    // },
     title: {
         type: String,
         required: true
@@ -40,6 +36,10 @@ const postSchema = new Schema({
     state: {
         type: String,
         required: true
+    },
+    user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
     }
 });
 
