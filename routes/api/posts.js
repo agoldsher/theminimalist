@@ -34,7 +34,6 @@ router.route("/")
     .get(postsController.findAll)
     .post(upload.single('image'), uploadCDNY, postsController.create);
 
-
 // Matches with "api/posts/category"
 router.route("/category/:category")
 .get(postsController.findByCategory);
@@ -42,6 +41,14 @@ router.route("/category/:category")
 // Matches with "api/posts/popularity"
 router.route("/popularity")
 .get(postsController.findByPopularity);
+
+// Matches with "api/posts/city"
+router.route("/city")
+.get(postsController.findByCity);
+
+// Matches with "api/posts/state"
+router.route("/state")
+.get(postsController.findByState);
 
 router.route("/view/:id")
 .put(postsController.updateViews);
