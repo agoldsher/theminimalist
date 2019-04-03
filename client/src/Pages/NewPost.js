@@ -34,7 +34,7 @@ class NewPost extends Component {
                 })
                 .catch(err => console.log(err));
         };
-        
+
     };
 
     handleInputChange = event => {
@@ -124,8 +124,12 @@ class NewPost extends Component {
                         label="Zip Code: "
                     />
                     <FormBtn onClick={this.handleZipCode}>Check</FormBtn>
-                    <TextDisplay>{this.state.city}, </TextDisplay>
-                    <TextDisplay> {this.state.state}</TextDisplay>                    
+                    <TextDisplay
+                        label={this.state.city}
+                    />
+                    <TextDisplay
+                        label={this.state.state}
+                    />
                     <ImgUpload
                         value={this.state.Image}
                         name="image"
@@ -133,7 +137,7 @@ class NewPost extends Component {
                         fileRef={this.fileInput}
                     />
                     <Link to="/">
-                        <FormBtn >Cancel</FormBtn>
+                        <FormBtn>Cancel</FormBtn>
                     </Link>
                     <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
                 </form>
