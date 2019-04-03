@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, DropDown, TextArea, ImgUpload, FormBtn } from "../Components/AddForm";
+import { Input, DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../Components/AddForm";
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -13,14 +13,29 @@ class NewPost extends Component {
         price: "",
         description: "",
         image: "",
-        state: ""
+        city: "city",
+        state: "state",
+        zipcode: ""
     };
     constructor(props) {
         super(props)
         this.fileInput = React.createRef();
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+    };
 
-    }
+    handleZipCode = () => {
+        if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
+            API.getZipCode(this.state.zipcode)
+                .then((res) => {
+                    this.setState({
+                        city: res.data.city,
+                        state: res.data.state
+                    })
+                })
+                .catch(err => console.log(err));
+        };
+
+    };
 
     handleInputChange = event => {
         const { name, value } = event.target;
@@ -37,22 +52,21 @@ class NewPost extends Component {
         });
     };
 
-    
-
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.state) {
+        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.state && this.state.zipcode) {
             let formData = new FormData();
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);
             formData.append("description", this.state.description);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
+            formData.append("city", this.state.city);
             formData.append("state", this.state.state);
+            formData.append("zipcode", this.state.zipcode);
             API.savePost(formData)
                 .then((res) => {
-                    let path = `/`;
-                    this.props.history.push(path);
+                    this.props.history.push("/");
                 })
                 .catch(err => console.log(err));
         } else {
@@ -75,17 +89,17 @@ class NewPost extends Component {
                         value={this.state.category}
                         onChange={this.handleSelectChange}
                         name="category"
-                        categories={[ 
-                        "Category",   
-                        "Electronics",
-                        "Appliances",
-                        "Clothing",
-                        "Household",
-                        "Sports",
-                        "Movies and Games",
-                        "Machinary",
-                        "Tools",
-                        "Space"]}
+                        categories={[
+                            "Category",
+                            "Electronics",
+                            "Appliances",
+                            "Clothing",
+                            "Household",
+                            "Sports",
+                            "Movies and Games",
+                            "Machinary",
+                            "Tools",
+                            "Space"]}
                         label="Category: "
                     />
                     <Input
@@ -102,12 +116,19 @@ class NewPost extends Component {
                         placeholder="Enter Description (required)"
                         label="Description: "
                     />
-                    <DropDown
-                        value={this.state.state}
-                        onChange={this.handleSelectChange}
-                        name="state"
-                        categories={['State', 'AL', 'AK', 'AZ', 'AR', 'CA', 'CO', 'CT', 'DE', 'DC', 'FL', 'GA', 'HI', 'ID', 'IL', 'IN', 'IA', 'KS', 'KY', 'LA', 'ME', 'MD', 'MA', 'MI', 'MN', 'MS', 'MO', 'MT', 'NE', 'NV', 'NH', 'NJ', 'NM', 'NY', 'NC', 'ND', 'OH', 'OK', 'OR', 'PA', 'RI', 'SC', 'SD', 'TN', 'TX', 'UT', 'VT', 'VA', 'WA', 'WV', 'WI', 'WY']}
-                        label="Select State: "
+                    <Input
+                        value={this.state.zipcode}
+                        onChange={this.handleInputChange}
+                        name="zipcode"
+                        placeholder="Enter Zip Code (required)"
+                        label="Zip Code: "
+                    />
+                    <FormBtn onClick={this.handleZipCode}>Check</FormBtn>
+                    <TextDisplay
+                        label={this.state.city}
+                    />
+                    <TextDisplay
+                        label={this.state.state}
                     />
                     <ImgUpload
                         value={this.state.Image}
@@ -116,7 +137,7 @@ class NewPost extends Component {
                         fileRef={this.fileInput}
                     />
                     <Link to="/">
-                        <FormBtn >Cancel</FormBtn>
+                        <FormBtn>Cancel</FormBtn>
                     </Link>
                     <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
                 </form>

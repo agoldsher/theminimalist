@@ -48,3 +48,9 @@ export function FormBtn(props) {
         <Button {...props} className="form-button mr-3"></Button>
     );
 };
+
+export function TextDisplay(props) {
+    return (
+        <div className="form-group display">{props.label}</div>
+    )
+}
