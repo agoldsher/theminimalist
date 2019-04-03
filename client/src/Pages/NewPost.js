@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Input, DropDown, TextArea, ImgUpload, FormBtn, textDisplay } from "../Components/AddForm";
+import { Input, DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../Components/AddForm";
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -124,8 +124,8 @@ class NewPost extends Component {
                         label="Zip Code: "
                     />
                     <FormBtn onClick={this.handleZipCode}>Check</FormBtn>
-                    <textDisplay>{this.state.city}, </textDisplay>
-                    <textDisplay> {this.state.state}</textDisplay>                    
+                    <TextDisplay>{this.state.city}, </TextDisplay>
+                    <TextDisplay> {this.state.state}</TextDisplay>                    
                     <ImgUpload
                         value={this.state.Image}
                         name="image"

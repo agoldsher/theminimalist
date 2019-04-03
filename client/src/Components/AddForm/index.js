@@ -49,8 +49,8 @@ export function FormBtn(props) {
     );
 };
 
-export function textDisplay() {
+export function TextDisplay() {
     return (
-        <div classname="form-group display"></div>
+        <div className="form-group display"></div>
     )
 }
