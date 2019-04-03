@@ -94,13 +94,13 @@ class App extends React.Component {
               {/* <Route exact path="/" component={Main} cards={this.state.cards} /> */}
               {/* <Route exact path="/land" component={Landing} /> */}
               <PrivateRoute exact path="/dash" component={Dashboard} />
-              <Route exact path="/newpost" component={NewPost} />
+              <PrivateRoute exact path="/newpost" component={NewPost} />
               <Route exact path="/register" component={Register} />
               <Route exact path="/login" component={Login} />
               {/* <Route exact path="/category/:category" component={Category} />
             <Route exact path="/search/:search" component={Search} /> */}
-              <Route exact path="/:id" component={Detail} />
-              <Route component={NoMatch} />
+              <PrivateRoute exact path="/:id" component={Detail} />
+              <PrivateRoute component={NoMatch} />
             </Switch>
           </div>
         </Router>
