@@ -20,6 +20,7 @@ import Login from "./Pages/Auth/Login";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
 import Dashboard from "./Pages/dashboard/Dashboard";
+import LogoutBtn from "./Components/LogoutBtn";
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -89,6 +90,7 @@ class App extends React.Component {
         <Router>
           <div>
             <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} />
+            <LogoutBtn/>
             <Switch>
               <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
               {/* <PrivateRoute exact path="/" component={Main} cards={this.state.cards} /> */}
