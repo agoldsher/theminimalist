@@ -1,3 +1,4 @@
+import "./App.css";
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./Pages/Main";
@@ -19,8 +20,9 @@ import Login from "./Pages/Auth/Login";
 // import Landing from "./Pages/Landing";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
-import Dashboard from "./Pages/dashboard/Dashboard";
+// import Dashboard from "./Pages/dashboard/Dashboard";
 import LogoutBtn from "./Components/LogoutBtn";
+import Jumbotron from "react-bootstrap/Jumbotron"
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -31,7 +33,7 @@ if (localStorage.jwtToken) {
   const decoded = jwt_decode(token);
   // Set user and isAuthenticated
   store.dispatch(setCurrentUser(decoded));
-// Check for expired token
+  // Check for expired token
   const currentTime = Date.now() / 1000; // to get in milliseconds
   if (decoded.exp < currentTime) {
     // Logout user
@@ -45,8 +47,20 @@ class App extends React.Component {
   state = {
     cards: [],
     category: "",
-    search: ""
-  }
+    search: "",
+    categories: [
+      "All",
+      "Electronics",
+      "Appliances",
+      "Clothing",
+      "Household",
+      "Sports",
+      "Movies and Games",
+      "Machinary",
+      "Tools",
+      "Space"]
+  };
+
   loadPopPosts = () => {
     API.getPopPosts()
       .then(res => {
@@ -89,22 +103,46 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <div>
+            <Jumbotron className="jumbotron">
+              <h1>The Minimalist</h1>
+            </Jumbotron>
             <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} />
-            <LogoutBtn/>
-            <Switch>
-              <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
-              {/* <PrivateRoute exact path="/" component={Main} cards={this.state.cards} /> */}
-              {/* <Route exact path="/" component={Main} cards={this.state.cards} /> */}
-              {/* <Route exact path="/land" component={Landing} /> */}
-              <PrivateRoute exact path="/dash" component={Dashboard} />
-              <PrivateRoute exact path="/newpost" component={NewPost} />
-              <Route exact path="/register" component={Register} />
-              <Route exact path="/login" component={Login} />
-              {/* <Route exact path="/category/:category" component={Category} />
+            <div className="main-container">
+              <div className="sidebar">
+                {this.state.categories.map(category => (
+                  // <CategoryWrapper
+                  // key = {category}
+                  // category={category}
+                  // handleCategoryChange= {this.props.handleCategoryChange(category)}
+                  // />
+                  <div className="each-nav-item" onClick={
+                    (e) => {
+                      e.preventDefault()
+                      this.handleCategoryChange(category)
+                    }}>
+                    {category}
+                  </div>
+                ))}
+              </div>
+
+              <div className="main-content">
+                <Switch>
+                  <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
+                  {/* <PrivateRoute exact path="/" component={Main} cards={this.state.cards} /> */}
+                  {/* <Route exact path="/" component={Main} cards={this.state.cards} /> */}
+                  {/* <Route exact path="/land" component={Landing} /> */}
+                  {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
+                  <PrivateRoute exact path="/newpost" component={NewPost} />
+                  <Route exact path="/register" component={Register} />
+                  <Route exact path="/login" component={Login} />
+                  {/* <Route exact path="/category/:category" component={Category} />
             <Route exact path="/search/:search" component={Search} /> */}
-              <PrivateRoute exact path="/:id" component={Detail} />
-              <PrivateRoute component={NoMatch} />
-            </Switch>
+                  <PrivateRoute exact path="/:id" component={Detail} />
+                  <PrivateRoute component={NoMatch} />
+                </Switch>
+              </div>
+            </div>
+            <LogoutBtn />
           </div>
         </Router>
       </Provider>
