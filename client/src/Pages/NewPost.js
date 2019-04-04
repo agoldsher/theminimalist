@@ -43,6 +43,7 @@ class NewPost extends Component {
         e.preventDefault();
         if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.state) {
             let formData = new FormData();
+            console.log(this.state)
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);

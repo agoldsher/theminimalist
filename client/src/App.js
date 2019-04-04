@@ -90,7 +90,8 @@ class App extends React.Component {
           <div>
             <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} />
             <Switch>
-              <Route exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
+              <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
+              {/* <PrivateRoute exact path="/" component={Main} cards={this.state.cards} /> */}
               {/* <Route exact path="/" component={Main} cards={this.state.cards} /> */}
               {/* <Route exact path="/land" component={Landing} /> */}
               <PrivateRoute exact path="/dash" component={Dashboard} />
