@@ -44,6 +44,7 @@ import PrivateRoute from "./Pages/private-route/PrivateRoute";
 // import Dashboard from "./Pages/dashboard/Dashboard";
 import LogoutBtn from "./Components/LogoutBtn";
 import Jumbotron from "react-bootstrap/Jumbotron"
+import authReducers from './reducers/authReducers';
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -125,83 +126,69 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <div>
-            <Drawer
-              modal
-              open={this.state.open}
-              onClose={() => this.setState({ open: false })}
-            >
-              <Button>What up?!</Button>
-            </Drawer>
-            {/* <Jumbotron className="jumbotron">
-              <h1>The Minimalist</h1>
-            </Jumbotron> */}
-            {/* <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} /> */}
-
-            <TopAppBar>
-              <TopAppBarRow>
-                <TopAppBarSection align='start'>
-                  <TopAppBarIcon navIcon tabIndex={0}>
-                    <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
-                  </TopAppBarIcon>
-                  <TopAppBarTitle>TheMinimalist</TopAppBarTitle>
-                </TopAppBarSection>
-                <TopAppBarSection align='end' role='toolbar'>
-                  <TopAppBarIcon actionItem tabIndex={0}>
-                    <MaterialIcon
-                      aria-label="print page"
-                      hasRipple
-                      icon='print'
-                      onClick={() => console.log('print')}
-                    />
-                  </TopAppBarIcon>
-                  <TopAppBarIcon actionItem tabIndex={0}>
+            {store.auth.dispatch('isAuthenticated') === true ? (
+              <div>
+                <Drawer
+                  modal
+                  open={this.state.open}
+                  onClose={() => this.setState({ open: false })}
+                >
+                  <Button>What up?!</Button>
+                  {this.state.categories.map(category => (
+                    // <CategoryWrapper
+                    // key = {category}
+                    // category={category}
+                    // handleCategoryChange= {this.props.handleCategoryChange(category)}
+                    // />
+                    <div className="each-nav-item" onClick={
+                      (e) => {
+                        e.preventDefault()
+                        this.handleCategoryChange(category)
+                      }}>
+                      {category}
+                    </div>
+                  ))}
+                </Drawer>
+                <TopAppBar>
+                  <TopAppBarRow>
+                    <TopAppBarSection align='start'>
+                      <TopAppBarIcon navIcon tabIndex={0}>
+                        <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
+                      </TopAppBarIcon>
+                      <TopAppBarTitle>TheMinimalist</TopAppBarTitle>
+                    </TopAppBarSection>
+                    <TopAppBarSection align='end' role='toolbar'>
+                      <TopAppBarIcon actionItem tabIndex={0}>
+                        <MaterialIcon
+                          aria-label="print page"
+                          hasRipple
+                          icon='print'
+                          onClick={() => console.log('print')}
+                        />
+                      </TopAppBarIcon>
+                      <TopAppBarIcon actionItem tabIndex={0}>
+                        <LogoutBtn />
+                      </TopAppBarIcon>
+                      {/* <TopAppBarIcon actionItem tabIndex={0}>
                     <MaterialIcon
                       aria-label="Logout"
                       hasRipple
                       icon='logout'
                       onClick={() => console.log('print')}
                     />
-                  </TopAppBarIcon>
-                </TopAppBarSection>
-              </TopAppBarRow>
-            </TopAppBar>
-            <TopAppBarFixedAdjust>
-            </TopAppBarFixedAdjust>
-            {/* <TopAppBar
-              title='TheMinimalist'
-              navigationIcon={<MaterialIcon
-                icon='menu'
-                onClick={() => console.log('click')}
-              />}
-              actionItems={[
-                <MaterialIcon icon='file_download' />,
-                <MaterialIcon icon='print' />,
-                <MaterialIcon icon='bookmark' />,
-              ]}
-            /> */}
-            <Button
-              className='button-alternate'
-              onClick={() => console.log('clicked!')}
-            >
-              Click Me!
-        </Button>
-            <div className="main-container">
-              <div className="sidebar">
-                {this.state.categories.map(category => (
-                  // <CategoryWrapper
-                  // key = {category}
-                  // category={category}
-                  // handleCategoryChange= {this.props.handleCategoryChange(category)}
-                  // />
-                  <div className="each-nav-item" onClick={
-                    (e) => {
-                      e.preventDefault()
-                      this.handleCategoryChange(category)
-                    }}>
-                    {category}
-                  </div>
-                ))}
+                  </TopAppBarIcon> */}
+                    </TopAppBarSection>
+                  </TopAppBarRow>
+                </TopAppBar>
+                <TopAppBarFixedAdjust>
+                </TopAppBarFixedAdjust>
               </div>
+            ) : (<Jumbotron>
+              Hi there
+        </Jumbotron>
+              )
+            }
+            <div className="main-container">
 
               <div className="main-content">
                 <Switch>
@@ -220,7 +207,7 @@ class App extends React.Component {
                 </Switch>
               </div>
             </div>
-            <LogoutBtn />
+            {/* <LogoutBtn /> */}
           </div>
         </Router>
       </Provider>
