@@ -1,10 +1,31 @@
-import "./App.css";
+
+import './App.scss';
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Main from "./Pages/Main";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+import TopAppBar, {
+  TopAppBarFixedAdjust,
+  TopAppBarIcon,
+  TopAppBarRow,
+  TopAppBarSection,
+  TopAppBarTitle,
+} from '@material/react-top-app-bar';
+import '@material/react-top-app-bar/index.scss';
+import '@material/react-material-icon/index.scss';
+// import Drawer, {
+//   DrawerHeader,
+//   DrawerSubtitle,
+//   DrawerTitle,
+//   DrawerContent,
+// } from '@material/react-drawer';
+import Drawer, { DrawerAppContent } from '@material/react-drawer';
+import '@material/react-drawer/index.scss';
+
+import MaterialIcon from '@material/react-material-icon';
+import Button from '@material/react-button';
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -47,6 +68,7 @@ class App extends React.Component {
   state = {
     cards: [],
     category: "",
+    open: false,
     search: "",
     categories: [
       "All",
@@ -103,10 +125,66 @@ class App extends React.Component {
       <Provider store={store}>
         <Router>
           <div>
-            <Jumbotron className="jumbotron">
+            <Drawer
+              modal
+              open={this.state.open}
+              onClose={() => this.setState({ open: false })}
+            >
+              <Button>What up?!</Button>
+            </Drawer>
+            {/* <Jumbotron className="jumbotron">
               <h1>The Minimalist</h1>
-            </Jumbotron>
-            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} />
+            </Jumbotron> */}
+            {/* <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} /> */}
+
+            <TopAppBar>
+              <TopAppBarRow>
+                <TopAppBarSection align='start'>
+                  <TopAppBarIcon navIcon tabIndex={0}>
+                    <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
+                  </TopAppBarIcon>
+                  <TopAppBarTitle>TheMinimalist</TopAppBarTitle>
+                </TopAppBarSection>
+                <TopAppBarSection align='end' role='toolbar'>
+                  <TopAppBarIcon actionItem tabIndex={0}>
+                    <MaterialIcon
+                      aria-label="print page"
+                      hasRipple
+                      icon='print'
+                      onClick={() => console.log('print')}
+                    />
+                  </TopAppBarIcon>
+                  <TopAppBarIcon actionItem tabIndex={0}>
+                    <MaterialIcon
+                      aria-label="Logout"
+                      hasRipple
+                      icon='logout'
+                      onClick={() => console.log('print')}
+                    />
+                  </TopAppBarIcon>
+                </TopAppBarSection>
+              </TopAppBarRow>
+            </TopAppBar>
+            <TopAppBarFixedAdjust>
+            </TopAppBarFixedAdjust>
+            {/* <TopAppBar
+              title='TheMinimalist'
+              navigationIcon={<MaterialIcon
+                icon='menu'
+                onClick={() => console.log('click')}
+              />}
+              actionItems={[
+                <MaterialIcon icon='file_download' />,
+                <MaterialIcon icon='print' />,
+                <MaterialIcon icon='bookmark' />,
+              ]}
+            /> */}
+            <Button
+              className='button-alternate'
+              onClick={() => console.log('clicked!')}
+            >
+              Click Me!
+        </Button>
             <div className="main-container">
               <div className="sidebar">
                 {this.state.categories.map(category => (
