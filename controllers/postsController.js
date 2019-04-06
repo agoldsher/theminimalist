@@ -72,7 +72,9 @@ module.exports = {
                 city: req.body.city,
                 state: req.body.state,
                 zipcode: req.body.zipcode,
-                image: req.file.filename
+                image: req.file.filename,
+                email:req.body.email,
+                userName: req.body.userName
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));

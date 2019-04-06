@@ -54,24 +54,53 @@ class NewPost extends Component {
         });
     };
 
+    // handleFormSubmit = (e) => {
+    //     e.preventDefault();
+    //     if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.zipcode) {
+    //         let formData = new FormData();
+    //         // console.log(this.state)
+    //         formData.append("title", this.state.title);
+    //         formData.append("category", this.state.category);
+    //         formData.append("price", this.state.price);
+    //         formData.append("description", this.state.description);
+    //         formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
+    //         // formData.append("city", this.state.city);
+    //         // formData.append("state", this.state.state);
+    //         formData.append("zipcode", this.state.zipcode);
+    //         // console.log(formData);
+    //         const { user } = this.props.auth;
+    //         formData.append("userName", user.userName);
+    //         console.log(user);
+
+            
+    //         console.log(formData)
+    //         API.savePost(formData)
+    //             .then((res) => {
+    //                 this.props.history.push("/");
+    //             })
+    //             .catch(err => console.log(err));
+    //     } else {
+    //         alert("Please complete all elements before posting");
+    //     };
+    // };
+
+
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.zipcode) {
+        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.state && this.state.zipcode) {
             let formData = new FormData();
-            // console.log(this.state)
+            console.log(this.state)
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);
             formData.append("description", this.state.description);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
-            // formData.append("city", this.state.city);
-            // formData.append("state", this.state.state);
+            formData.append("city", this.state.city);
+            formData.append("state", this.state.state);
             formData.append("zipcode", this.state.zipcode);
-            // console.log(formData);
-            // const { user } = this.props.auth;
-            // formData.append("userName", user.userName);
-            // console.log(user);
-            console.log(formData)
+            const { user } = this.props.auth;
+            formData.append("userName", user.userName);
+            formData.append("email", user.email);
             API.savePost(formData)
                 .then((res) => {
                     this.props.history.push("/");
@@ -83,6 +112,7 @@ class NewPost extends Component {
     };
 
     render() {
+        console.log(this.props)
         return (
             <div className="form-container">
                 <form>
@@ -158,4 +188,4 @@ const mapStateToProps = (state) => {
     return {auth: state.auth}
 };
 // export default withRouter(NewPost);
-export default withRouter(connect(mapStateToProps)(NewPost))
+export default withRouter(connect(mapStateToProps, {})(NewPost))
