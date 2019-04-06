@@ -16,6 +16,11 @@ app.use(
   })
 );
 app.use(bodyParser.json());
+// Send every other request to the React app
+// Define any API routes before this runs
+if (process.env.NODE_ENV === "production") {
+  app.use(express.static("client/build"));
+}
 // app.use(express.urlencoded({ extended: true }));
 // app.use(express.json());
 // Serve up static assets (usually on heroku)
@@ -38,11 +43,6 @@ app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
 
-// Send every other request to the React app
-// Define any API routes before this runs
-if (process.env.NODE_ENV === "production") {
-  app.use(express.static("client/build"));
-}
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
