@@ -1,11 +1,7 @@
 
-import './App.scss';
 import React from "react";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
-import Main from "./Pages/Main";
-import jwt_decode from "jwt-decode";
-import setAuthToken from "./utils/setAuthToken";
-import { setCurrentUser, logoutUser } from "./actions/authActions";
+
 import TopAppBar, {
   TopAppBarFixedAdjust,
   TopAppBarIcon,
@@ -14,17 +10,30 @@ import TopAppBar, {
   TopAppBarTitle,
 } from '@material/react-top-app-bar';
 import '@material/react-top-app-bar/index.scss';
-import '@material/react-material-icon/index.scss';
-// import Drawer, {
-//   DrawerHeader,
-//   DrawerSubtitle,
-//   DrawerTitle,
-//   DrawerContent,
-// } from '@material/react-drawer';
-import Drawer, { DrawerAppContent } from '@material/react-drawer';
-import '@material/react-drawer/index.scss';
 
 import MaterialIcon from '@material/react-material-icon';
+import '@material/react-material-icon/index.scss';
+
+import Drawer, {
+  DrawerHeader,
+  DrawerSubtitle,
+  DrawerTitle,
+  DrawerContent,
+  DrawerAppContent
+} from '@material/react-drawer';
+// import Drawer, { DrawerAppContent } from '@material/react-drawer';
+import '@material/react-drawer/index.scss';
+
+import Main from "./Pages/Main";
+import jwt_decode from "jwt-decode";
+import setAuthToken from "./utils/setAuthToken";
+import { setCurrentUser, logoutUser } from "./actions/authActions";
+
+
+
+import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
+import '@material/react-list/index.scss'
+
 import Button from '@material/react-button';
 
 import { Provider } from "react-redux";
@@ -45,6 +54,9 @@ import PrivateRoute from "./Pages/private-route/PrivateRoute";
 import LogoutBtn from "./Components/LogoutBtn";
 import Jumbotron from "react-bootstrap/Jumbotron"
 import authReducers from './reducers/authReducers';
+
+import './App.scss';
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -79,7 +91,7 @@ class App extends React.Component {
       "Household",
       "Sports",
       "Movies and Games",
-      "Machinary",
+      "Machinery",
       "Tools",
       "Space"]
   };
@@ -125,51 +137,74 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router>
-          <div>
-            {store.auth.dispatch('isAuthenticated') === true ? (
-              <div>
-                <Drawer
-                  modal
-                  open={this.state.open}
-                  onClose={() => this.setState({ open: false })}
-                >
-                  <Button>What up?!</Button>
+          <div className='drawer-container'>
+            <Drawer
+              modal
+              open={this.state.open}
+              onClose={() => this.setState({ open: false })}
+            >
+              <DrawerHeader> {/*defaults to div*/}
+                <DrawerTitle tag='h2'> {/*defaults to h3*/}
+                  Categories
+                  </DrawerTitle>
+                <DrawerSubtitle> {/*defaults to h6*/}
+                  Isn't this cool?
+                  </DrawerSubtitle>
+              </DrawerHeader>
+
+              <DrawerContent tag='main'>  {/*defaults to div*/}
+                {/* <Button>What up?!</Button> */}
+                <List singleSelection selectedIndex={this.state.selectedIndex}>
                   {this.state.categories.map(category => (
                     // <CategoryWrapper
                     // key = {category}
                     // category={category}
                     // handleCategoryChange= {this.props.handleCategoryChange(category)}
                     // />
-                    <div className="each-nav-item" onClick={
+                    <ListItem onClick={
                       (e) => {
                         e.preventDefault()
                         this.handleCategoryChange(category)
                       }}>
-                      {category}
-                    </div>
+                      <ListItemGraphic graphic={<MaterialIcon icon='folder' />} />
+                      <ListItemText primaryText={category} />
+                    </ListItem>
+
                   ))}
-                </Drawer>
-                <TopAppBar>
-                  <TopAppBarRow>
-                    <TopAppBarSection align='start'>
-                      <TopAppBarIcon navIcon tabIndex={0}>
-                        <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
-                      </TopAppBarIcon>
-                      <TopAppBarTitle>TheMinimalist</TopAppBarTitle>
-                    </TopAppBarSection>
-                    <TopAppBarSection align='end' role='toolbar'>
-                      <TopAppBarIcon actionItem tabIndex={0}>
-                        <MaterialIcon
-                          aria-label="print page"
-                          hasRipple
-                          icon='print'
-                          onClick={() => console.log('print')}
-                        />
-                      </TopAppBarIcon>
-                      <TopAppBarIcon actionItem tabIndex={0}>
-                        <LogoutBtn />
-                      </TopAppBarIcon>
-                      {/* <TopAppBarIcon actionItem tabIndex={0}>
+                </List>
+              </DrawerContent>
+
+            </Drawer>
+            <DrawerAppContent>
+              <TopAppBar>
+                <TopAppBarRow>
+                  <TopAppBarSection align='start'>
+                    <TopAppBarIcon navIcon tabIndex={0}>
+                      <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
+                    </TopAppBarIcon>
+                    <TopAppBarTitle>TheMinimalist</TopAppBarTitle>
+                  </TopAppBarSection>
+                  <TopAppBarSection align='end' role='toolbar'>
+                    {/* <TopAppBarIcon actionItem tabIndex={0}>
+                      <MaterialIcon
+                        aria-label="print page"
+                        hasRipple
+                        icon='print'
+                        onClick={() => console.log('print')}
+                      />
+                    </TopAppBarIcon> */}
+                    <TopAppBarIcon actionItem tabIndex={0}>
+                      <MaterialIcon
+                        aria-label="Add Item"
+                        hasRipple
+                        icon='add'
+                        onClick={() => console.log('print')}
+                      />
+                    </TopAppBarIcon>
+                    <TopAppBarIcon actionItem tabIndex={0}>
+                      <LogoutBtn />
+                    </TopAppBarIcon>
+                    {/* <TopAppBarIcon actionItem tabIndex={0}>
                     <MaterialIcon
                       aria-label="Logout"
                       hasRipple
@@ -177,38 +212,32 @@ class App extends React.Component {
                       onClick={() => console.log('print')}
                     />
                   </TopAppBarIcon> */}
-                    </TopAppBarSection>
-                  </TopAppBarRow>
-                </TopAppBar>
-                <TopAppBarFixedAdjust>
-                </TopAppBarFixedAdjust>
-              </div>
-            ) : (<Jumbotron>
-              Hi there
-        </Jumbotron>
-              )
-            }
-            <div className="main-container">
+                  </TopAppBarSection>
+                </TopAppBarRow>
+              </TopAppBar>
+            </DrawerAppContent>
+            <TopAppBarFixedAdjust>
+              <div className="main-container">
 
-              <div className="main-content">
-                <Switch>
-                  <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
-                  {/* <PrivateRoute exact path="/" component={Main} cards={this.state.cards} /> */}
-                  {/* <Route exact path="/" component={Main} cards={this.state.cards} /> */}
-                  {/* <Route exact path="/land" component={Landing} /> */}
-                  {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
-                  <PrivateRoute exact path="/newpost" component={NewPost} />
-                  <Route exact path="/register" component={Register} />
-                  <Route exact path="/login" component={Login} />
-                  {/* <Route exact path="/category/:category" component={Category} />
+                <div className="main-content">
+                  <Switch>
+                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
+                    {/* <Route exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} /> */}
+                    {/* <Route exact path="/land" component={Landing} /> */}
+                    {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
+                    <PrivateRoute exact path="/newpost" component={NewPost} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                    {/* <Route exact path="/category/:category" component={Category} />
             <Route exact path="/search/:search" component={Search} /> */}
-                  <PrivateRoute exact path="/:id" component={Detail} />
-                  <PrivateRoute component={NoMatch} />
-                </Switch>
+                    <PrivateRoute exact path="/:id" component={Detail} />
+                    <PrivateRoute component={NoMatch} />
+                  </Switch>
+                </div>
               </div>
-            </div>
-            {/* <LogoutBtn /> */}
+            </TopAppBarFixedAdjust>
           </div>
+          {/* <LogoutBtn /> */}
         </Router>
       </Provider>
     );
