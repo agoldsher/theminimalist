@@ -3,6 +3,8 @@ import { Input, DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../C
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { connect } from "react-redux";
+// import PropTypes from "prop-types";
 
 
 class NewPost extends Component {
@@ -54,17 +56,22 @@ class NewPost extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.state && this.state.zipcode) {
+        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.zipcode) {
             let formData = new FormData();
-            console.log(this.state)
+            // console.log(this.state)
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);
             formData.append("description", this.state.description);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
-            formData.append("city", this.state.city);
-            formData.append("state", this.state.state);
+            // formData.append("city", this.state.city);
+            // formData.append("state", this.state.state);
             formData.append("zipcode", this.state.zipcode);
+            // console.log(formData);
+            // const { user } = this.props.auth;
+            // formData.append("userName", user.userName);
+            // console.log(user);
+            console.log(formData)
             API.savePost(formData)
                 .then((res) => {
                     this.props.history.push("/");
@@ -147,4 +154,8 @@ class NewPost extends Component {
     };
 };
 
-export default withRouter(NewPost);
+const mapStateToProps = (state) => {
+    return {auth: state.auth}
+};
+// export default withRouter(NewPost);
+export default withRouter(connect(mapStateToProps)(NewPost))

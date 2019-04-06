@@ -45,10 +45,18 @@ const postSchema = new Schema({
         type: Number,
         required: true
     },
-    user: {
-        type: Schema.Types.ObjectId,
-        ref: "User"
-    }
+    userName: {
+        type: String,
+        required: true
+    },
+    email: {
+        type: String,
+        required: true
+    },
+    // user: {
+    //     type: Schema.Types.ObjectId,
+    //     ref: "User"
+    // }
 });
 
 const Post = mongoose.model("Post", postSchema);
