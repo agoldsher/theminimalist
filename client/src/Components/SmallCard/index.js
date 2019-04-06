@@ -9,6 +9,8 @@ import Card, {
 } from "@material/react-card";
 import "@material/react-card/index.scss";
 import Typography,{Body2,Headline6,Subtitle2} from "@material/react-typography";
+import Button from "@material/react-button";
+import "@material/react-button/index.scss"
 import "@material/react-typography/index.scss";
 
 import "./style.css";
@@ -37,12 +39,12 @@ function SmallCard(props) {
             Visit ten places on our planet that are undergoing the biggest changes today.
   </Body2>
         </CardPrimaryContent>
-        {/* <CardActions>
+        <CardActions>
           <CardActionButtons>
             <Button>Read</Button>
             <Button>Bookmark</Button>
           </CardActionButtons>
-          <CardActionIcons>
+          {/* <CardActionIcons>
             <IconButton>
               <MaterialIcon icon='favorite_border' />
             </IconButton>
@@ -52,8 +54,8 @@ function SmallCard(props) {
             <IconButton>
               <MaterialIcon icon='more_vert' />
             </IconButton>
-          </CardActionIcons>
-        </CardActions> */}
+          </CardActionIcons> */}
+        </CardActions>
       </Card>
       {/* <div className="thumbnail">
             <Link to ={'/' + props.id}>
