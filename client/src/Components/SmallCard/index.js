@@ -7,12 +7,8 @@ import Card, {
   CardActionButtons,
   CardActionIcons
 } from "@material/react-card";
-import "@material/react-card/index.scss";
-import Typography,{Body2,Headline6,Subtitle2} from "@material/react-typography";
+import {Body2,Headline6,Subtitle2} from "@material/react-typography";
 import Button from "@material/react-button";
-import "@material/react-button/index.scss"
-import "@material/react-typography/index.scss";
-
 import "./style.css";
 
 function SmallCard(props) {
@@ -27,10 +23,10 @@ function SmallCard(props) {
             contentClassName='demo-card__media-content'
           >
             <div className='demo-card__primary'>
-              <Headline6 className='demo-card__title'>
+              <Headline6 >
                 {props.title}
-    </Headline6>
-              <Subtitle2 className='demo-card__subtitle'>
+              </Headline6>
+              <Subtitle2>
                 by Kurt Wagner
     </Subtitle2>
             </div>

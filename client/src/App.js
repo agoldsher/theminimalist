@@ -9,10 +9,8 @@ import TopAppBar, {
   TopAppBarSection,
   TopAppBarTitle,
 } from '@material/react-top-app-bar';
-import '@material/react-top-app-bar/index.scss';
 
 import MaterialIcon from '@material/react-material-icon';
-import '@material/react-material-icon/index.scss';
 
 import Drawer, {
   DrawerHeader,
@@ -22,7 +20,6 @@ import Drawer, {
   DrawerAppContent
 } from '@material/react-drawer';
 // import Drawer, { DrawerAppContent } from '@material/react-drawer';
-import '@material/react-drawer/index.scss';
 
 import Main from "./Pages/Main";
 import jwt_decode from "jwt-decode";
@@ -32,7 +29,6 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 
 import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
-import '@material/react-list/index.scss'
 
 import Button from '@material/react-button';
 
