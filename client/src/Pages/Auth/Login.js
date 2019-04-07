@@ -4,6 +4,10 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { loginUser } from "../../actions/authActions";
 import classnames from "classnames";
+import Button from "@material/react-button";
+import TextField, { Input } from "@material/react-text-field";
+import Card from '@material/react-card';
+
 class Login extends Component {
   constructor() {
     super();
@@ -60,33 +64,38 @@ class Login extends Component {
             </div>
             <form noValidate onSubmit={this.onSubmit}>
               <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.email}
-                  error={errors.email}
-                  id="email"
-                  type="email"
-                  className={classnames("", {
-                    invalid: errors.email || errors.emailnotfound
-                  })}
-                />
-                <label htmlFor="email">Email</label>
+                <TextField
+                  label="Email" htmlFor="email">
+                  <Input
+                    onChange={this.onChange}
+                    value={this.state.email}
+                    error={errors.email}
+                    id="email"
+                    type="email"
+                    className={classnames("", {
+                      invalid: errors.email || errors.emailnotfound
+                    })}
+                  />
+                </TextField>
                 <span className="red-text">
                   {errors.email}
                   {errors.emailnotfound}
                 </span>
               </div>
               <div className="input-field col s12">
-                <input
-                  onChange={this.onChange}
-                  value={this.state.password}
-                  error={errors.password}
-                  id="password"
-                  type="password"
-                  className={classnames("", {
-                    invalid: errors.password || errors.passwordincorrect
-                  })}
-                />
+                <TextField
+                  label="Password">
+                  <Input
+                    onChange={this.onChange}
+                    value={this.state.password}
+                    error={errors.password}
+                    id="password"
+                    type="password"
+                    className={classnames("", {
+                      invalid: errors.password || errors.passwordincorrect
+                    })}
+                  />
+                </TextField>
                 <label htmlFor="password">Password</label>
                 <span className="red-text">
                   {errors.password}
@@ -94,7 +103,7 @@ class Login extends Component {
                 </span>
               </div>
               <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                <button
+                <Button
                   style={{
                     width: "150px",
                     borderRadius: "3px",
@@ -105,7 +114,7 @@ class Login extends Component {
                   className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                 >
                   Login
-                </button>
+                </Button>
               </div>
             </form>
           </div>

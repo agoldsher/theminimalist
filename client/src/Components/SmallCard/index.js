@@ -10,6 +10,9 @@ import Card, {
 import ItemDetails from '../ItemDetails';
 import { Body2, Headline6, Headline4, Subtitle2 } from "@material/react-typography";
 import Button from "@material/react-button";
+import IconButton from '@material/react-icon-button';
+import MaterialIcon from '@material/react-material-icon';
+
 import "./style.css";
 
 function SmallCard(props) {

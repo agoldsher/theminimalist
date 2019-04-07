@@ -22,17 +22,9 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
-// app.use(express.urlencoded({ extended: true }));
-// app.use(express.json());
-// Serve up static assets (usually on heroku)
 // Add routes, both API and view
 app.use(routes);
 
-
-// Define API routes here
-// app.get("/api",(res,req)=>{
-//   res.json({success:true})
-// })
 
 // Connecting to Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist", { useNewUrlParser: true })

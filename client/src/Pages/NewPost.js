@@ -61,6 +61,8 @@ class NewPost extends Component {
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);
             formData.append("description", this.state.description);
+            console.log("fileInput");
+            console.log(this.fileInput);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
             formData.append("city", this.state.city);
             formData.append("state", this.state.state);
@@ -81,7 +83,7 @@ class NewPost extends Component {
                 <form>
                     <TextField
                         label='Title'
-                        helperText={<HelperText>Help Me!</HelperText>}>
+                        helperText={<HelperText></HelperText>}>
                         <Input
                             value={this.state.title}
                             onChange={this.handleInputChange}
@@ -93,6 +95,7 @@ class NewPost extends Component {
                         onChange={this.handleSelectChange}
                         name="category"
                         categories={[
+                            "",
                             "Category",
                             "Electronics",
                             "Appliances",
@@ -106,8 +109,8 @@ class NewPost extends Component {
                         label="Category"
                     />
                     <TextField
-                        label='Price: $'
-                        helperText={<HelperText>Enter Price per day (required)</HelperText>}>
+                        label='Price'
+                        helperText={<HelperText>Enter Price per day in $ USD (required)</HelperText>}>
                         <Input
                             value={this.state.price}
                             onChange={this.handleInputChange}

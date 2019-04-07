@@ -51,6 +51,8 @@ import LogoutBtn from "./Components/LogoutBtn";
 import Jumbotron from "react-bootstrap/Jumbotron";
 import authReducers from './reducers/authReducers';
 
+
+
 import './App.scss';
 
 
@@ -143,15 +145,15 @@ class App extends React.Component {
                 <DrawerTitle tag='h2'> {/*defaults to h3*/}
                   Categories
                   </DrawerTitle>
-                <DrawerSubtitle> {/*defaults to h6*/}
+                {/* <DrawerSubtitle> 
                   Isn't this cool?
-                  </DrawerSubtitle>
+                  </DrawerSubtitle> */}
               </DrawerHeader>
 
               <DrawerContent tag='main'>  {/*defaults to div*/}
                 {/* <Button>What up?!</Button> */}
                 <List singleSelection selectedIndex={this.state.selectedIndex}>
-                  {this.state.categories.map(category => (
+                  {this.state.categories.map((category,index) => (
                     // <CategoryWrapper
                     // key = {category}
                     // category={category}
@@ -161,7 +163,7 @@ class App extends React.Component {
                       (e) => {
                         e.preventDefault()
                         this.handleCategoryChange(category)
-                      }}>
+                      }} selected>
                       <ListItemGraphic graphic={<MaterialIcon icon='folder' />} />
                       <ListItemText primaryText={category} />
                     </ListItem>
@@ -178,7 +180,7 @@ class App extends React.Component {
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
                     </TopAppBarIcon>
-                    <TopAppBarTitle>TheMinimalist</TopAppBarTitle>
+                    {/* <TopAppBarTitle>TheMinimalist</TopAppBarTitle> */}
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
                     {/* <TopAppBarIcon actionItem tabIndex={0}>
@@ -189,7 +191,12 @@ class App extends React.Component {
                         onClick={() => console.log('print')}
                       />
                     </TopAppBarIcon> */}
-                    <TopAppBarIcon actionItem tabIndex={0}>
+                    <TopAppBarIcon navIcon tabIndex={0}>
+                      <Link to='/'>
+                        <MaterialIcon hasRipple icon='home' />
+                      </Link>
+                    </TopAppBarIcon>
+                    <TopAppBarIcon actionItem tabIndex={1}>
 
                       <Link to='/newpost'>
                         <MaterialIcon
