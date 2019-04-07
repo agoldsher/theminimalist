@@ -39,7 +39,7 @@ router.route("/category/:category")
 .get(postsController.findByCategory);
 
 // Matches with "api/posts/popularity"
-router.route("/popularity")
+router.route("/popularity/:city")
 .get(postsController.findByPopularity);
 
 // Matches with "api/posts/city"

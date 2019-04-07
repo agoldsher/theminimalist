@@ -2,8 +2,8 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getPopPosts: function() {
-    return axios.get("/api/posts/popularity");
+  getPopPosts: function(city) {
+    return axios.get("/api/posts/popularity/"+city);
   },
   getCategoryPosts: function(category) {
     return axios.get("/api/posts/category/"+category);

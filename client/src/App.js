@@ -48,6 +48,7 @@ class App extends React.Component {
     cards: [],
     category: "",
     search: "",
+    city:store.getState().auth.user.city,
     categories: [
       "All",
       "Electronics",
@@ -62,10 +63,9 @@ class App extends React.Component {
   };
 
   loadPopPosts = () => {
-    API.getPopPosts()
+    API.getPopPosts(this.state.city)
       .then(res => {
         this.setState({ cards: res.data });
-        console.log(res.data)
       }
       )
       .catch(err => console.log(err));
@@ -96,6 +96,7 @@ class App extends React.Component {
 
   componentDidMount() {
     this.loadPopPosts();
+    console.log(store.getState().auth.user.city)
   }
 
   render() {
@@ -110,11 +111,7 @@ class App extends React.Component {
             <div className="main-container">
               <div className="sidebar">
                 {this.state.categories.map(category => (
-                  // <CategoryWrapper
                   // key = {category}
-                  // category={category}
-                  // handleCategoryChange= {this.props.handleCategoryChange(category)}
-                  // />
                   <div className="each-nav-item" onClick={
                     (e) => {
                       e.preventDefault()
@@ -124,19 +121,12 @@ class App extends React.Component {
                   </div>
                 ))}
               </div>
-
               <div className="main-content">
                 <Switch>
                   <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
-                  {/* <PrivateRoute exact path="/" component={Main} cards={this.state.cards} /> */}
-                  {/* <Route exact path="/" component={Main} cards={this.state.cards} /> */}
-                  {/* <Route exact path="/land" component={Landing} /> */}
-                  {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
                   <PrivateRoute exact path="/newpost" component={NewPost} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
-                  {/* <Route exact path="/category/:category" component={Category} />
-            <Route exact path="/search/:search" component={Search} /> */}
                   <PrivateRoute exact path="/:id" component={Detail} />
                   <PrivateRoute component={NoMatch} />
                 </Switch>

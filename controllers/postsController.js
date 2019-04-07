@@ -24,8 +24,9 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     findByPopularity: function (req, res) {
+        console.log(req)
         db.Post
-            .find({})
+            .find({city: req.params.city })
             .sort({ viewCount: -1 })
             .limit(10)
             .then(dbModel => res.json(dbModel))

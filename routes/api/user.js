@@ -32,9 +32,11 @@ router.post("/register", (req, res) => {
             return res.status(400).json({ email: "Email already exists" });
         } else {
             const newUser = new User({
-                userName: req.body.name,
+                userName: req.body.userName,
+                name: req.body.name,
                 email: req.body.email,
-                password: req.body.password
+                password: req.body.password,
+                city: req.body.city
             });
 
             // Hash password before saving in database
@@ -84,7 +86,9 @@ router.post("/login", (req, res) => {
                 const payload = {
                     id: user.id,
                     userName: user.userName,
-                    email:user.email
+                    email:user.email,
+                    city: user.city
+
                 };
 
                 // Sign token
