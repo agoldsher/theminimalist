@@ -11,6 +11,9 @@ class Main extends Component {
     // this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
   }
+  state = {
+    sizeIndex:""
+  }
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {

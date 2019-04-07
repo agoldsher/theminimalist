@@ -1,7 +1,11 @@
-import React from "react";
+import React, { Component } from "react";
 import "./style.css";
-import Button from "react-bootstrap/Button";
+// import Button from "react-bootstrap/Button";
+import Button from "@material/react-button";
 import FormLabel from "react-bootstrap/FormLabel";
+import { Body2, Headline6, Headline4, Subtitle2 } from "@material/react-typography";
+import TextField from "@material/react-text-field";
+import Select from "@material/react-select";
 
 export function Input(props) {
     return (
@@ -15,15 +19,35 @@ export function Input(props) {
 export function DropDown(props) {
     return (
         <div className="form-group">
-            <label>{props.label}</label>
-            <select {...props} className="form-control">
+            <Select {...props} className="form-control" label={props.label} onChange={props.onChange}>
                 {props.categories.map((item, key) => {
                     return <option value={item} key={key}>{item}</option>;
                 })}
-            </select>
+            </Select>
         </div>
     );
 };
+
+
+// export class DropDown extends Component (props) {
+//     state={
+
+//     };
+//     constructor(props) {
+//         super(props)
+//         this.fileInput = React.createRef();
+//         this.handleFormSubmit = this.handleFormSubmit.bind(this);
+//     };
+//     render (
+//         <div className="form-group">
+//             <Select {...props} className="form-control" label={props.label} onChange={props.onChange}>
+//                 {props.categories.map((item, key) => {
+//                     return <option value={item} key={key}>{item}</option>;
+//                 })}
+//             </Select>
+//         </div>
+//     );
+// };
 
 export function TextArea(props) {
     return (
@@ -37,8 +61,11 @@ export function TextArea(props) {
 export function ImgUpload(props) {
     return (
         <div className="form-group">
-            <label>{props.label}</label>
-            <input type="file" id="upload" name={props.name} ref={props.fileRef}></input>
+            {/* <label>{props.label}</label>
+            <input type="file" id="upload" name={props.name} ref={props.fileRef}></input> */}
+            <TextField label={props.label}>
+                <Input  type="file" id="upload" name={props.name} ref={props.fileRef}/>
+            </TextField>
         </div>
     );
 };
@@ -51,6 +78,7 @@ export function FormBtn(props) {
 
 export function TextDisplay(props) {
     return (
-        <div className="form-group display">{props.label}</div>
+        // <div className="form-group display">{props.label}</div>
+        <Body2 className="form-group display">{props.label}</Body2>
     )
 }

@@ -1,6 +1,6 @@
 
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
 
 import TopAppBar, {
   TopAppBarFixedAdjust,
@@ -48,7 +48,7 @@ import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
 // import Dashboard from "./Pages/dashboard/Dashboard";
 import LogoutBtn from "./Components/LogoutBtn";
-import Jumbotron from "react-bootstrap/Jumbotron"
+import Jumbotron from "react-bootstrap/Jumbotron";
 import authReducers from './reducers/authReducers';
 
 import './App.scss';
@@ -190,12 +190,15 @@ class App extends React.Component {
                       />
                     </TopAppBarIcon> */}
                     <TopAppBarIcon actionItem tabIndex={0}>
-                      <MaterialIcon
-                        aria-label="Add Item"
-                        hasRipple
-                        icon='add'
-                        onClick={() => console.log('print')}
-                      />
+
+                      <Link to='/newpost'>
+                        <MaterialIcon
+                          aria-label="Add Item"
+                          hasRipple
+                          icon='add'
+                          onClick={() => console.log('print')}
+                        />
+                      </Link>
                     </TopAppBarIcon>
                     <TopAppBarIcon actionItem tabIndex={0}>
                       <LogoutBtn />
