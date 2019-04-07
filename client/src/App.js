@@ -93,7 +93,7 @@ class App extends React.Component {
     }
   }
   handleSearch = (search) => {
-    API.search(search)
+    API.search(search, this.state.city)
       .then(res => {
         this.setState({ cards: res.data, search });
       }
@@ -122,7 +122,7 @@ class App extends React.Component {
             <Jumbotron className="jumbotron">
               <h1>The Minimalist</h1>
             </Jumbotron>
-            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} handleCityChange={this.handleCityChange} city={this.state.city} />
+            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} handleCityChange={this.handleCityChange} />
             <div className="main-container">
               <div className="sidebar">
                 {this.state.categories.map(category => (

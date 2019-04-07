@@ -52,7 +52,7 @@ class Navbar extends Component {
                             <li key={category} onClick={
                                     (e)=>{
                                         e.preventDefault()
-                                        this.props.handleCategoryChange(category, "Tucson")
+                                        this.props.handleCategoryChange(category)
                                     }}> 
                                     {category}
                             </li>

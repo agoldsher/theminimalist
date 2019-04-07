@@ -42,7 +42,7 @@ module.exports = {
     },
     search: function (req, res){
         db.Post
-            .find({title:{ $regex: req.params.search, $options: "i" } })
+            .find({$and:[{city: req.params.city },{title:{ $regex: req.params.search, $options: "i" } }]})
             .then(dbModel=>res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },

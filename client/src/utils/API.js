@@ -22,8 +22,8 @@ export default {
     return axios.get("/api/posts/" + id);
   },
 
-  search: function(search){
-    return axios.get("/api/posts/search/"+search);
+  search: function(search, city){
+    return axios.get("/api/posts/search/"+search+"/"+city);
   },
   getZipCode: function (data) {
     const clientKey = "js-Gv6oLCU2bq6FL7gNIGPgkkHBpbgo3mYFESmQ3IokbdqBN136IMhyQB2hyr1wfres";

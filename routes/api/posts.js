@@ -59,7 +59,7 @@ router.route("/state")
 router.route("/view/:id")
 .put(postsController.updateViews);
 
-router.route("/search/:search")
+router.route("/search/:search/:city")
 .get(postsController.search)
 
 // Matches with "/api/posts/:id"
