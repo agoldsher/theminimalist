@@ -22,6 +22,7 @@ app.use(bodyParser.json());
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 // Add routes, both API and view
 app.use(routes);
 
@@ -35,6 +36,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist",
 app.use(passport.initialize());
 // Passport config
 require("./config/passport")(passport);
+
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });
