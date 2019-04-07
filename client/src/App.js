@@ -82,16 +82,47 @@ class App extends React.Component {
     open: false,
     search: "",
     categories: [
-      "All",
-      "Electronics",
-      "Appliances",
-      "Clothing",
-      "Household",
-      "Sports",
-      "Movies and Games",
-      "Machinery",
-      "Tools",
-      "Space"]
+      {
+        name: "All",
+        icon: "apps"
+      },
+      { 
+        name: "Electronics",
+        icon: "keyboard"
+      },
+      { 
+        name: "Appliances",
+        icon: "kitchen"
+      },
+      { 
+        name: "Clothing",
+        icon: "layers"
+      },
+      { 
+        name: "Household",
+        icon: "weekend"
+      },
+      { 
+        name: "Sports",
+        icon: "directions_run"
+      },
+      { 
+        name: "Movies and Games",
+        icon: "local_movies"
+      },
+      { 
+        name: "Machinery",
+        icon: "power"
+      },
+      { 
+        name: "Tools",
+        icon: "build"
+      },
+      { 
+        name: "Space",
+        icon: "store_mall_directory"
+      }
+    ]
   };
 
   loadPopPosts = () => {
@@ -162,10 +193,10 @@ class App extends React.Component {
                     <ListItem onClick={
                       (e) => {
                         e.preventDefault()
-                        this.handleCategoryChange(category)
-                      }} selected>
-                      <ListItemGraphic graphic={<MaterialIcon icon='folder' />} />
-                      <ListItemText primaryText={category} />
+                        this.handleCategoryChange(category.name)
+                      }}>
+                      <ListItemGraphic graphic={<MaterialIcon icon={category.icon} />} />
+                      <ListItemText primaryText={category.name} />
                     </ListItem>
 
                   ))}
