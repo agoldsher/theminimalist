@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import SmallCard from "../Components/SmallCard";
 // import API from "../utils/API";
+import { Cell, Grid, Row } from '@material/react-layout-grid';
+import '@material/react-layout-grid/index.scss';
 
 class Main extends Component {
   constructor(props) {
@@ -9,21 +11,28 @@ class Main extends Component {
     // this.handleFormSubmit = this.handleFormSubmit.bind(this);
 
   }
+  state = {
+    sizeIndex:""
+  }
 
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
-      <div className="card-container">
-        {this.props.cards.map(card => (
-          <SmallCard
-            key={card._id}
-            id={card._id}
-            title={card.title}
-            image={card.image}
-            price={card.price}
-          />
-        ))}
-      </div>
+      <Grid>
+        <Row>
+          {this.props.cards.map(card => (
+            <Cell columns={4}>
+              <SmallCard
+                key={card._id}
+                id={card._id}
+                title={card.title}
+                image={card.image}
+                price={card.price}
+              />
+            </Cell>
+          ))}
+        </Row>
+      </Grid>
     );
   }
 }

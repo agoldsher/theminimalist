@@ -1,32 +1,30 @@
+// import '../../App.scss';
 import React, { Component } from "react";
 import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { logoutUser } from "../../actions/authActions";
-class Dashboard extends Component {
+import MaterialIcon from "@material/react-material-icon";
+import '@material/react-material-icon/index.scss';
+
+class Logout extends Component {
     onLogoutClick = e => {
         e.preventDefault();
         this.props.logoutUser();
     };
     render() {
         const { user } = this.props.auth;
-        console.log(user)
+        // console.log(user)
         return (
-            <button
-                style={{
-                    width: "150px",
-                    borderRadius: "3px",
-                    letterSpacing: "1.5px",
-                    marginTop: "1rem"
-                }}
+            <MaterialIcon
+                aria-label="Logout"
+                hasRipple
+                icon='logout'
                 onClick={this.onLogoutClick}
-                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-            >
-                Logout
-            </button>
+            />
         );
     }
 }
-Dashboard.propTypes = {
+Logout.propTypes = {
     logoutUser: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired
 };
@@ -36,4 +34,4 @@ const mapStateToProps = state => ({
 export default connect(
     mapStateToProps,
     { logoutUser }
-)(Dashboard);
+)(Logout);
