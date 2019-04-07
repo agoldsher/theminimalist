@@ -12,8 +12,9 @@ export default {
     console.log(`/api/posts/${userID}/${city}`)
     return axios.put(`/api/posts/${userID}/${city}`);
   },
-  getCategoryPosts: function(category) {
-    return axios.get("/api/posts/category/"+category);
+  getCategoryPosts: function(category, city) {
+    console.log("/api/posts/category/"+category+"/"+city)
+    return axios.get("/api/posts/category/"+category+"/"+city);
   },
   // Gets the book with the given id
   getPost: function(id) {

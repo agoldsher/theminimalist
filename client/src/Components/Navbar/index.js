@@ -27,7 +27,6 @@ class Navbar extends Component {
         API.search(input)
         .then(res =>{
           this.setState({ cards: res.data });
-          console.log(res.data)
         }
         )
         .catch(err => console.log(err));
@@ -50,15 +49,10 @@ class Navbar extends Component {
                     <div className="bg-light p-4">
                         <ul className="text-dark h5">
                         {this.state.categories.map(category => (
-                            // <CategoryWrapper
-                            // key = {category}
-                            // category={category}
-                            // handleCategoryChange= {this.props.handleCategoryChange(category)}
-                            // />
                             <li key={category} onClick={
                                     (e)=>{
                                         e.preventDefault()
-                                        this.props.handleCategoryChange(category)
+                                        this.props.handleCategoryChange(category, "Tucson")
                                     }}> 
                                     {category}
                             </li>

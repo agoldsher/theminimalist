@@ -35,7 +35,7 @@ router.route("/")
     .post(upload.single('image'), uploadCDNY, postsController.create);
 
 // Matches with "api/posts/category"
-router.route("/category/:category")
+router.route("/category/:category/:city")
 .get(postsController.findByCategory);
 
 // Matches with "api/posts/popularity"

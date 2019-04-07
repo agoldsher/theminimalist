@@ -18,13 +18,12 @@ module.exports = {
     },
     findByCategory: function (req, res) {
         db.Post
-            .find({ category: req.params.category })
+            .find({$and:[{city: req.params.city },{ category: req.params.category }]})
             .sort({ date: -1 })
             .then(dbModel => {res.json(dbModel)})
             .catch(err => res.status(422).json(err));
     },
     findByPopularity: function (req, res) {
-        console.log(req)
         db.Post
             .find({city: req.params.city })
             .sort({ viewCount: -1 })
@@ -95,7 +94,7 @@ module.exports = {
     updateCity: function (req, res) {
         db.User
             .findOneAndUpdate({_id: req.params.userID }, {city: req.params.city})
-            .then(dbModel=>console.log("updated: "+dbModel))
+            .then(console.log("updated"))
             .catch(err => res.status(422).json(err));
     },
     remove: function (req, res) {

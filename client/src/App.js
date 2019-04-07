@@ -83,10 +83,10 @@ class App extends React.Component {
     if (category === "All") {
       this.loadPopPosts();
     } else {
-      API.getCategoryPosts(category)
+      // console.log(`category: ${category} and city: ${city}`)
+      API.getCategoryPosts(category, this.state.city)
         .then(res => {
-          this.setState({ cards: res.data, category });
-          console.log(res.data)
+          this.setState({ cards: res.data, category});
         }
         )
         .catch(err => console.log(err));
@@ -96,7 +96,6 @@ class App extends React.Component {
     API.search(search)
       .then(res => {
         this.setState({ cards: res.data, search });
-        console.log(res.data)
       }
       )
       .catch(err => console.log(err));
@@ -123,7 +122,7 @@ class App extends React.Component {
             <Jumbotron className="jumbotron">
               <h1>The Minimalist</h1>
             </Jumbotron>
-            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} handleCityChange={this.handleCityChange} />
+            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} handleCityChange={this.handleCityChange} city={this.state.city} />
             <div className="main-container">
               <div className="sidebar">
                 {this.state.categories.map(category => (
