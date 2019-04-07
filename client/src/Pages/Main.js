@@ -13,6 +13,8 @@ class Main extends Component {
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
+      <div>
+      <div><h6>Current City: {this.props.city}</h6></div>
       <div className="card-container">
         {this.props.cards.map(card => (
           <SmallCard
@@ -23,6 +25,7 @@ class Main extends Component {
             price={card.price}
           />
         ))}
+      </div>
       </div>
     );
   }

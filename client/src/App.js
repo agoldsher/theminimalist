@@ -138,7 +138,7 @@ class App extends React.Component {
               </div>
               <div className="main-content">
                 <Switch>
-                  <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
+                  <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city}/>} />
                   <PrivateRoute exact path="/newpost" component={NewPost} />
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
