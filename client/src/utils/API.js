@@ -5,6 +5,13 @@ export default {
   getPopPosts: function(city) {
     return axios.get("/api/posts/popularity/"+city);
   },
+  getUserCity: function (userID){
+    return axios.get("api/posts/"+userID)
+  },
+  saveNewCity:function(userID,city){
+    console.log(`/api/posts/${userID}/${city}`)
+    return axios.put(`/api/posts/${userID}/${city}`);
+  },
   getCategoryPosts: function(category) {
     return axios.get("/api/posts/category/"+category);
   },

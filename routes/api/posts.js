@@ -44,7 +44,13 @@ router.route("/popularity/:city")
 
 // Matches with "api/posts/city"
 router.route("/city")
-.get(postsController.findByCity);
+.get(postsController.findByCity)
+
+router.route("/:userID/:city")
+.put(postsController.updateCity)
+
+router.route("/:userID")
+.get(postsController.getUserCity);
 
 // Matches with "api/posts/state"
 router.route("/state")

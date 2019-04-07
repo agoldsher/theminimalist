@@ -5,11 +5,12 @@ import { Input, FormBtn } from "../AddForm";
 import { Link } from "react-router-dom";
 import API from "../../utils/API";
 import Button from "react-bootstrap/Button";
-
+import { connect } from "react-redux";
 
 class Navbar extends Component {
  state = {
     search:"",
+    city:"",
     categories:[
     "All",
     "Electronics",
@@ -54,7 +55,7 @@ class Navbar extends Component {
                             // category={category}
                             // handleCategoryChange= {this.props.handleCategoryChange(category)}
                             // />
-                            <li onClick={
+                            <li key={category} onClick={
                                     (e)=>{
                                         e.preventDefault()
                                         this.props.handleCategoryChange(category)
@@ -78,6 +79,18 @@ class Navbar extends Component {
                         this.props.handleSearch(this.state.search)
                     }
                 }>Search</FormBtn>
+                <Input
+                    name="city"
+                    placeholder="City..."
+                    onChange={this.handleInputChange}
+                />
+                <FormBtn 
+                onClick={
+                    (e)=>{
+                        e.preventDefault()
+                        this.props.handleCityChange(this.props.auth.user.id,this.state.city)
+                    }
+                }>Update City</FormBtn>
                 <Link to="/newpost">
                     <FormBtn >+</FormBtn>
                 </Link>
@@ -86,5 +99,10 @@ class Navbar extends Component {
         )
     };
 };
+const mapStateToProps = (state) => {
+    return {auth: state.auth}
+};
 
-export default Navbar;
+export default connect(
+    mapStateToProps,
+)(Navbar)

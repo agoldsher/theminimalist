@@ -48,7 +48,7 @@ class App extends React.Component {
     cards: [],
     category: "",
     search: "",
-    city:store.getState().auth.user.city,
+    city:"",
     categories: [
       "All",
       "Electronics",
@@ -61,6 +61,15 @@ class App extends React.Component {
       "Tools",
       "Space"]
   };
+
+  loadCity=(userID)=>{
+    API.getUserCity(userID)
+    .then(res=>{
+      this.setState({city:res.data[0].city})
+      console.log(`Current location: ${this.state.city}`)
+      this.loadPopPosts()
+    })
+  }
 
   loadPopPosts = () => {
     API.getPopPosts(this.state.city)
@@ -93,10 +102,17 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-
+  handleCityChange = (userID, city) => {
+    API.saveNewCity(userID, city)
+      .then(() => {
+        this.loadCity(store.getState().auth.user.id)
+      }
+      )
+      .catch(err => console.log(err));
+  }
   componentDidMount() {
-    this.loadPopPosts();
-    console.log(store.getState().auth.user.city)
+    this.loadCity(store.getState().auth.user.id);
+ 
   }
 
   render() {
@@ -107,12 +123,12 @@ class App extends React.Component {
             <Jumbotron className="jumbotron">
               <h1>The Minimalist</h1>
             </Jumbotron>
-            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} />
+            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} handleCityChange={this.handleCityChange} />
             <div className="main-container">
               <div className="sidebar">
                 {this.state.categories.map(category => (
                   // key = {category}
-                  <div className="each-nav-item" onClick={
+                  <div key={category} className="each-nav-item" onClick={
                     (e) => {
                       e.preventDefault()
                       this.handleCategoryChange(category)
