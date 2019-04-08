@@ -1,7 +1,5 @@
-
 import React from "react";
 import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-
 import TopAppBar, {
   TopAppBarFixedAdjust,
   TopAppBarIcon,
@@ -9,9 +7,7 @@ import TopAppBar, {
   TopAppBarSection,
   TopAppBarTitle,
 } from '@material/react-top-app-bar';
-
 import MaterialIcon from '@material/react-material-icon';
-
 import Drawer, {
   DrawerHeader,
   // DrawerSubtitle,
@@ -19,41 +15,31 @@ import Drawer, {
   DrawerContent,
   DrawerAppContent
 } from '@material/react-drawer';
-// import Drawer, { DrawerAppContent } from '@material/react-drawer';
-
 import Main from "./Pages/Main";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-
-
-
 import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
-
-// import Button from '@material/react-button';
-
 import { Provider } from "react-redux";
 import store from "./store";
-
-// import Category from "./Pages/Category";
-// import Search from "./Pages/Search";
 import NewPost from "./Pages/NewPost";
 import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
-// import Navbar from "./Components/Navbar";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
-// import Landing from "./Pages/Landing";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
-// import Dashboard from "./Pages/dashboard/Dashboard";
 import LogoutBtn from "./Components/LogoutBtn";
+import './App.scss';
 // import Jumbotron from "react-bootstrap/Jumbotron";
 // import authReducers from './reducers/authReducers';
-
-
-
-import './App.scss';
+// import Navbar from "./Components/Navbar";
+// import Category from "./Pages/Category";
+// import Search from "./Pages/Search";
+// import Landing from "./Pages/Landing";
+// import Dashboard from "./Pages/dashboard/Dashboard";
+// import Button from '@material/react-button';
+// import Drawer, { DrawerAppContent } from '@material/react-drawer';
 
 
 // Check for token to keep user logged in
@@ -175,7 +161,7 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.loadCity(store.getState().auth.user.id);
- 
+ console.log(store.getState().auth)
   }
 
   render() {
@@ -201,11 +187,6 @@ class App extends React.Component {
                 {/* <Button>What up?!</Button> */}
                 <List singleSelection selectedIndex={this.state.selectedIndex}>
                   {this.state.categories.map((category,index) => (
-                    // <CategoryWrapper
-                    // key = {category}
-                    // category={category}
-                    // handleCategoryChange= {this.props.handleCategoryChange(category)}
-                    // />
                     <ListItem key = {index} onClick={
                       (e) => {
                         e.preventDefault()
@@ -240,7 +221,7 @@ class App extends React.Component {
                     </TopAppBarIcon> */}
 
 
-                    {/* important!!!! handleSearch={this.handleSearch} handleCityChange={this.handleCityChange}  */}
+                    {/* important!!!! This is for handling the search button and change city button: handleSearch={this.handleSearch} handleCityChange={this.handleCityChange}  */}
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <Link to='/'>
                         <MaterialIcon hasRipple icon='home' />
@@ -278,14 +259,9 @@ class App extends React.Component {
                 <div className="main-content">
                   <Switch>
                     <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city}/>} />
-                    {/* <Route exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} /> */}
-                    {/* <Route exact path="/land" component={Landing} /> */}
-                    {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
                     <PrivateRoute exact path="/newpost" component={NewPost} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
-                    {/* <Route exact path="/category/:category" component={Category} />
-            <Route exact path="/search/:search" component={Search} /> */}
                     <PrivateRoute exact path="/:id" component={Detail} />
                     <PrivateRoute component={NoMatch} />
                   </Switch>
@@ -293,7 +269,6 @@ class App extends React.Component {
               </div>
             </TopAppBarFixedAdjust>
           </div>
-          {/* <LogoutBtn /> */}
         </Router>
       </Provider>
     );

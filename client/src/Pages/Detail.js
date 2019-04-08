@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
+import { connect } from "react-redux";
+// import { Redirect } from 'react-router-dom';
 
 class Detail extends Component {
   // Setting this.state.friends to the friends json array
@@ -15,11 +17,15 @@ class Detail extends Component {
       })
       .catch(err => console.log(err));
   }
-
+  delete=()=>{
+    API.deletePost(this.props.match.params.id)
+    // .then(<Redirect to='/'/>)
+  }
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
       <div>
+        <button style={{ opacity: this.props.auth.user.email===this.state.card.email ? 1 : 0 }} onClick={this.delete}>delete post</button>
         <h1> {this.state.card.userName}</h1>
         <div className="img-container">
           <img alt={this.state.card.title} src={this.state.card.image} />
@@ -35,4 +41,9 @@ class Detail extends Component {
   }
 }
 
-export default Detail;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps
+)(Detail);

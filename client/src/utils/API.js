@@ -31,11 +31,14 @@ export default {
     return axios.get(`https://www.zipcodeapi.com/rest/${clientKey}/info.json/${data}/radians`);
   },
  
-    savePost: function(data) {
-        return axios.post("/api/posts", data, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-    }
+  savePost: function(data) {
+    return axios.post("/api/posts", data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+       }
+    })
+  },
+  deletePost: function(id){
+    axios.delete("/api/posts/"+id)
+  }
 };
