@@ -18,7 +18,7 @@ class Main extends Component {
       <Grid>
         <Row>
           {this.props.cards.map(card => (
-            <Cell key={card._id}columns={4}>
+            <Cell key={card._id} columns={4}>
               <SmallCard
                 key={card._id}
                 id={card._id}
