@@ -46,11 +46,6 @@ router.route("/popularity/:city")
 router.route("/city")
 .get(postsController.findByCity)
 
-router.route("/:userID/:city")
-.put(postsController.updateCity)
-
-router.route("/:userID")
-.get(postsController.getUserCity);
 
 // Matches with "api/posts/state"
 router.route("/state")
@@ -67,6 +62,12 @@ router.route("/:id")
 .get(postsController.findById)
 .put(postsController.update)
 .delete(postsController.remove);
+
+router.route("/city/:userID/:city")
+.put(postsController.updateCity)
+
+router.route("/city/:userID")
+.get(postsController.getUserCity);
 
 
 module.exports = router;

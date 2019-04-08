@@ -6,11 +6,11 @@ export default {
     return axios.get("/api/posts/popularity/"+city);
   },
   getUserCity: function (userID){
-    return axios.get("api/posts/"+userID)
+    return axios.get("api/posts/city/"+userID)
   },
   saveNewCity:function(userID,city){
-    console.log(`/api/posts/${userID}/${city}`)
-    return axios.put(`/api/posts/${userID}/${city}`);
+    console.log(`/api/posts/city/${userID}/${city}`)
+    return axios.put(`/api/posts/city/${userID}/${city}`);
   },
   getCategoryPosts: function(category, city) {
     console.log("/api/posts/category/"+category+"/"+city)
@@ -18,7 +18,8 @@ export default {
   },
   // Gets the book with the given id
   getPost: function(id) {
-    axios.put("/api/posts/view/"+id)
+    console.log(id)
+    // axios.put("/api/posts/view/"+id)
     return axios.get("/api/posts/" + id);
   },
 

@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Input, DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../Components/AddForm";
+import { DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../Components/AddForm";
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { connect } from "react-redux";
 // import PropTypes from "prop-types";
 
+import TextField, { HelperText, Input } from '@material/react-text-field';
 
 class NewPost extends Component {
 
@@ -63,6 +64,8 @@ class NewPost extends Component {
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);
             formData.append("description", this.state.description);
+            console.log("fileInput");
+            console.log(this.fileInput);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
             formData.append("city", this.state.city);
             formData.append("state", this.state.state);
@@ -83,20 +86,23 @@ class NewPost extends Component {
     render() {
         console.log(this.props)
         return (
-            <div className="form-container">
+            <div className="mdc-form-field">
                 <form>
-                    <Input
-                        value={this.state.title}
-                        onChange={this.handleInputChange}
-                        name="title"
-                        placeholder="Enter Title (required)"
-                        label="Title: "
-                    />
+                    <TextField
+                        label='Title'
+                        helperText={<HelperText></HelperText>}>
+                        <Input
+                            value={this.state.title}
+                            onChange={this.handleInputChange}
+                            name="title"
+                        />
+                    </TextField>
                     <DropDown
                         value={this.state.category}
                         onChange={this.handleSelectChange}
                         name="category"
                         categories={[
+                            "",
                             "Category",
                             "Electronics",
                             "Appliances",
@@ -107,29 +113,39 @@ class NewPost extends Component {
                             "Machinary",
                             "Tools",
                             "Space"]}
-                        label="Category: "
+                        label="Category"
                     />
-                    <Input
-                        value={this.state.price}
-                        onChange={this.handleInputChange}
-                        name="price"
-                        placeholder="Enter Price per day (required)"
-                        label="Price: $"
-                    />
-                    <TextArea
-                        value={this.state.Description}
-                        onChange={this.handleInputChange}
-                        name="description"
-                        placeholder="Enter Description (required)"
-                        label="Description: "
-                    />
-                    <Input
-                        value={this.state.zipcode}
-                        onChange={this.handleInputChange}
-                        name="zipcode"
-                        placeholder="Enter Zip Code (required)"
-                        label="Zip Code: "
-                    />
+                    <TextField
+                        label='Price'
+                        helperText={<HelperText>Enter Price per day in $ USD (required)</HelperText>}>
+                        <Input
+                            value={this.state.price}
+                            onChange={this.handleInputChange}
+                            inputType='textarea'
+                            name="price"
+                        />
+                    </TextField>
+                    <TextField
+                        label='Description'
+                        helperText={<HelperText>Enter Description (required)</HelperText>}
+                        textarea={true}
+                    >
+                        <Input
+                            value={this.state.description}
+                            onChange={this.handleInputChange}
+                            name="description"
+                        />
+                    </TextField>
+                    <TextField
+                        label='Zip Code'
+                        helperText={<HelperText>Enter Zip Code (required)</HelperText>}
+                    >
+                        <Input
+                            value={this.state.zipcode}
+                            onChange={this.handleInputChange}
+                            name="zipcode"
+                        />
+                    </TextField>
                     <FormBtn onClick={this.handleZipCode}>Check</FormBtn>
                     <TextDisplay
                         label={this.state.city}

@@ -30,7 +30,6 @@ module.exports = {
             .limit(10)
             .then(dbModel => res.json(dbModel))
             .catch(err => {
-                console.log(err)
                 res.status(422).json(err)
             });
     },

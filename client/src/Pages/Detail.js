@@ -9,6 +9,7 @@ class Detail extends Component {
   componentDidMount() {
     API.getPost(this.props.match.params.id)
       .then(res => {
+        console.log(res)
         this.setState({ card: res.data });
         console.log(this.state.card);
       })
