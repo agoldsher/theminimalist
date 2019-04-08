@@ -5,12 +5,6 @@ import { Cell, Grid, Row } from '@material/react-layout-grid';
 import '@material/react-layout-grid/index.scss';
 
 class Main extends Component {
-  constructor(props) {
-    super(props)
-    // this.fileInput = React.createRef();
-    // this.handleFormSubmit = this.handleFormSubmit.bind(this);
-
-  }
   state = {
     sizeIndex:""
   }
@@ -18,6 +12,9 @@ class Main extends Component {
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
+ 
+      // <div><h6>Current City: {this.props.city}</h6></div>
+     
       <Grid>
         <Row>
           {this.props.cards.map(card => (
@@ -34,7 +31,7 @@ class Main extends Component {
         </Row>
       </Grid>
     );
-  }
+  };
 }
 
 export default Main;

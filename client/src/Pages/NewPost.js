@@ -3,6 +3,9 @@ import { DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../Componen
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { connect } from "react-redux";
+// import PropTypes from "prop-types";
+
 import TextField, { HelperText, Input } from '@material/react-text-field';
 
 class NewPost extends Component {
@@ -67,6 +70,9 @@ class NewPost extends Component {
             formData.append("city", this.state.city);
             formData.append("state", this.state.state);
             formData.append("zipcode", this.state.zipcode);
+            const { user } = this.props.auth;
+            formData.append("userName", user.userName);
+            formData.append("email", user.email);
             API.savePost(formData)
                 .then((res) => {
                     this.props.history.push("/");
@@ -78,6 +84,7 @@ class NewPost extends Component {
     };
 
     render() {
+        console.log(this.props)
         return (
             <div className="mdc-form-field">
                 <form>
@@ -162,4 +169,8 @@ class NewPost extends Component {
     };
 };
 
-export default withRouter(NewPost);
+const mapStateToProps = (state) => {
+    return {auth: state.auth}
+};
+// export default withRouter(NewPost);
+export default withRouter(connect(mapStateToProps, {})(NewPost))
