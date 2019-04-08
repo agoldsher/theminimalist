@@ -14,7 +14,7 @@ import MaterialIcon from '@material/react-material-icon';
 
 import Drawer, {
   DrawerHeader,
-  DrawerSubtitle,
+  // DrawerSubtitle,
   DrawerTitle,
   DrawerContent,
   DrawerAppContent
@@ -30,7 +30,7 @@ import { setCurrentUser, logoutUser } from "./actions/authActions";
 
 import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
 
-import Button from '@material/react-button';
+// import Button from '@material/react-button';
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -40,7 +40,7 @@ import store from "./store";
 import NewPost from "./Pages/NewPost";
 import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
-import Navbar from "./Components/Navbar";
+// import Navbar from "./Components/Navbar";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 // import Landing from "./Pages/Landing";
@@ -48,8 +48,8 @@ import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
 // import Dashboard from "./Pages/dashboard/Dashboard";
 import LogoutBtn from "./Components/LogoutBtn";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import authReducers from './reducers/authReducers';
+// import Jumbotron from "react-bootstrap/Jumbotron";
+// import authReducers from './reducers/authReducers';
 
 
 
@@ -206,7 +206,7 @@ class App extends React.Component {
                     // category={category}
                     // handleCategoryChange= {this.props.handleCategoryChange(category)}
                     // />
-                    <ListItem onClick={
+                    <ListItem key = {index} onClick={
                       (e) => {
                         e.preventDefault()
                         this.handleCategoryChange(category.name)
