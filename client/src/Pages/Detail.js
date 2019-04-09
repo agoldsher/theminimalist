@@ -8,6 +8,10 @@ class Detail extends Component {
   state = {
     card: {}
   };
+  deleteMe(id){
+    this.props.delete(id);
+    this.props.history.push('/')
+  }
   componentDidMount() {
     API.getPost(this.props.match.params.id)
       .then(res => {
@@ -17,15 +21,27 @@ class Detail extends Component {
       })
       .catch(err => console.log(err));
   }
-  delete=()=>{
-    API.deletePost(this.props.match.params.id)
-    // .then(<Redirect to='/'/>)
+  // delete=()=>{
+  //   API.deletePost(this.props.match.params.id)
+  //   .then(()=> {
+  //     this.props.history.push('/')
+  // }
+  //   )
+  // }
+  renderDeleteButton=()=>{
+    if (this.props.auth.user.email===this.state.card.email ){
+      return(
+        <button  onClick={()=>this.deleteMe(this.props.match.params.id)}>delete post</button>
+      )
+    }else{
+      return("")
+    }
   }
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
       <div>
-        <button style={{ opacity: this.props.auth.user.email===this.state.card.email ? 1 : 0 }} onClick={this.delete}>delete post</button>
+       {this.renderDeleteButton()}
         <h1> {this.state.card.userName}</h1>
         <div className="img-container">
           <img alt={this.state.card.title} src={this.state.card.image} />

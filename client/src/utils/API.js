@@ -39,6 +39,6 @@ export default {
     })
   },
   deletePost: function(id){
-    axios.delete("/api/posts/"+id)
+    return axios.delete("/api/posts/"+id)
   }
 };

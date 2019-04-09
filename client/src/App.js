@@ -1,5 +1,6 @@
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+import { Router, Route, Switch, Link } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 import TopAppBar, {
   TopAppBarFixedAdjust,
   TopAppBarIcon,
@@ -41,7 +42,7 @@ import './App.scss';
 // import Button from '@material/react-button';
 // import Drawer, { DrawerAppContent } from '@material/react-drawer';
 
-
+let history = createBrowserHistory();
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -113,12 +114,14 @@ class App extends React.Component {
   };
 
   loadCity=(userID)=>{
+    console.log(userID)
     API.getUserCity(userID)
     .then(res=>{
       this.setState({city:res.data[0].city})
       console.log(`Current location: ${this.state.city}`)
       this.loadPopPosts()
     })
+    .catch(err=>console.log(err))
   }
 
   loadPopPosts = () => {
@@ -159,15 +162,29 @@ class App extends React.Component {
       )
       .catch(err => console.log(err));
   }
+
+  loadCityTriggered = ()=>{
+    if(this.state.city === ""){  
+      this.loadCity(store.getState().auth.user.id)
+    }
+  }
+  delete=(id)=>{
+    API.deletePost(id)
+    .then(()=> {
+      this.loadPopPosts();
+  }
+    )
+  }
+
   componentDidMount() {
     this.loadCity(store.getState().auth.user.id);
- console.log(store.getState().auth)
   }
+
 
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <div className='drawer-container'>
             <Drawer
               modal
@@ -258,11 +275,11 @@ class App extends React.Component {
 
                 <div className="main-content">
                   <Switch>
-                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city}/>} />
+                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city} loadCityTriggered={this.loadCityTriggered}/>} />
                     <PrivateRoute exact path="/newpost" component={NewPost} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
-                    <PrivateRoute exact path="/:id" component={Detail} />
+                    <PrivateRoute exact path="/:id" render={(props) => <Detail {...props} delete={this.delete}/>} />
                     <PrivateRoute component={NoMatch} />
                   </Switch>
                 </div>
