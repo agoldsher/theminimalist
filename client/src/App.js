@@ -54,6 +54,8 @@ import authReducers from './reducers/authReducers';
 
 
 import './App.scss';
+import TextField, { Input } from "@material/react-text-field";
+// import { Input } from "./Components/AddForm";
 
 
 // Check for token to keep user logged in
@@ -81,58 +83,58 @@ class App extends React.Component {
     category: "",
     open: false,
     search: "",
-    city:"",
+    city: "",
     categories: [
       {
         name: "All",
         icon: "apps"
       },
-      { 
+      {
         name: "Electronics",
         icon: "keyboard"
       },
-      { 
+      {
         name: "Appliances",
         icon: "kitchen"
       },
-      { 
+      {
         name: "Clothing",
         icon: "layers"
       },
-      { 
+      {
         name: "Household",
         icon: "weekend"
       },
-      { 
+      {
         name: "Sports",
         icon: "directions_run"
       },
-      { 
+      {
         name: "Movies and Games",
         icon: "local_movies"
       },
-      { 
+      {
         name: "Machinery",
         icon: "power"
       },
-      { 
+      {
         name: "Tools",
         icon: "build"
       },
-      { 
+      {
         name: "Space",
         icon: "store_mall_directory"
       }
     ]
   };
 
-  loadCity=(userID)=>{
+  loadCity = (userID) => {
     API.getUserCity(userID)
-    .then(res=>{
-      this.setState({city:res.data[0].city})
-      console.log(`Current location: ${this.state.city}`)
-      this.loadPopPosts()
-    })
+      .then(res => {
+        this.setState({ city: res.data[0].city })
+        console.log(`Current location: ${this.state.city}`)
+        this.loadPopPosts()
+      })
   }
 
   loadPopPosts = () => {
@@ -150,7 +152,7 @@ class App extends React.Component {
       // console.log(`category: ${category} and city: ${city}`)
       API.getCategoryPosts(category, this.state.city)
         .then(res => {
-          this.setState({ cards: res.data, category});
+          this.setState({ cards: res.data, category });
         }
         )
         .catch(err => console.log(err));
@@ -175,8 +177,11 @@ class App extends React.Component {
   }
   componentDidMount() {
     this.loadCity(store.getState().auth.user.id);
- 
+
   }
+  onChange = e => {
+    this.setState({ [e.target.id]: e.target.value });
+  };
 
   render() {
     return (
@@ -200,7 +205,7 @@ class App extends React.Component {
               <DrawerContent tag='main'>  {/*defaults to div*/}
                 {/* <Button>What up?!</Button> */}
                 <List singleSelection selectedIndex={this.state.selectedIndex}>
-                  {this.state.categories.map((category,index) => (
+                  {this.state.categories.map((category, index) => (
                     // <CategoryWrapper
                     // key = {category}
                     // category={category}
@@ -227,7 +232,15 @@ class App extends React.Component {
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
                     </TopAppBarIcon>
-                    <TopAppBarTitle>{this.state.city}</TopAppBarTitle>
+                    {/* <TopAppBarTitle>
+                    </TopAppBarTitle> */}
+                  </TopAppBarSection>
+                  <TopAppBarSection align='middle' role="toolbar">
+                    <div>
+                      <TextField label="City">
+                        <Input value={this.state.city} id="city" onChange={this.onChange} />
+                      </TextField>
+                    </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
                     {/* <TopAppBarIcon actionItem tabIndex={0}>
@@ -277,7 +290,7 @@ class App extends React.Component {
 
                 <div className="main-content">
                   <Switch>
-                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city}/>} />
+                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city} />} />
                     {/* <Route exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} /> */}
                     {/* <Route exact path="/land" component={Landing} /> */}
                     {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
