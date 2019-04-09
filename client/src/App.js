@@ -1,10 +1,36 @@
-import "./App.css";
+
 import React from "react";
-import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
+
+import TopAppBar, {
+  TopAppBarFixedAdjust,
+  TopAppBarIcon,
+  TopAppBarRow,
+  TopAppBarSection,
+  TopAppBarTitle,
+} from '@material/react-top-app-bar';
+
+import MaterialIcon from '@material/react-material-icon';
+
+import Drawer, {
+  DrawerHeader,
+  DrawerSubtitle,
+  DrawerTitle,
+  DrawerContent,
+  DrawerAppContent
+} from '@material/react-drawer';
+// import Drawer, { DrawerAppContent } from '@material/react-drawer';
+
 import Main from "./Pages/Main";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
+
+
+
+import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
+
+import Button from '@material/react-button';
 
 import { Provider } from "react-redux";
 import store from "./store";
@@ -22,7 +48,13 @@ import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
 // import Dashboard from "./Pages/dashboard/Dashboard";
 import LogoutBtn from "./Components/LogoutBtn";
-import Jumbotron from "react-bootstrap/Jumbotron"
+import Jumbotron from "react-bootstrap/Jumbotron";
+import authReducers from './reducers/authReducers';
+
+
+
+import './App.scss';
+
 
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
@@ -47,25 +79,66 @@ class App extends React.Component {
   state = {
     cards: [],
     category: "",
+    open: false,
     search: "",
+    city:"",
     categories: [
-      "All",
-      "Electronics",
-      "Appliances",
-      "Clothing",
-      "Household",
-      "Sports",
-      "Movies and Games",
-      "Machinary",
-      "Tools",
-      "Space"]
+      {
+        name: "All",
+        icon: "apps"
+      },
+      { 
+        name: "Electronics",
+        icon: "keyboard"
+      },
+      { 
+        name: "Appliances",
+        icon: "kitchen"
+      },
+      { 
+        name: "Clothing",
+        icon: "layers"
+      },
+      { 
+        name: "Household",
+        icon: "weekend"
+      },
+      { 
+        name: "Sports",
+        icon: "directions_run"
+      },
+      { 
+        name: "Movies and Games",
+        icon: "local_movies"
+      },
+      { 
+        name: "Machinery",
+        icon: "power"
+      },
+      { 
+        name: "Tools",
+        icon: "build"
+      },
+      { 
+        name: "Space",
+        icon: "store_mall_directory"
+      }
+    ]
   };
 
+  loadCity=(userID)=>{
+    API.getUserCity(userID)
+    .then(res=>{
+      this.setState({city:res.data[0].city})
+      console.log(`Current location: ${this.state.city}`)
+      this.loadPopPosts()
+    })
+  }
+
   loadPopPosts = () => {
-    API.getPopPosts()
+    API.getPopPosts(this.state.city)
       .then(res => {
         this.setState({ cards: res.data });
-        console.log(res.data)
       }
       )
       .catch(err => console.log(err));
@@ -74,77 +147,153 @@ class App extends React.Component {
     if (category === "All") {
       this.loadPopPosts();
     } else {
-      API.getCategoryPosts(category)
+      // console.log(`category: ${category} and city: ${city}`)
+      API.getCategoryPosts(category, this.state.city)
         .then(res => {
-          this.setState({ cards: res.data, category });
-          console.log(res.data)
+          this.setState({ cards: res.data, category});
         }
         )
         .catch(err => console.log(err));
     }
   }
   handleSearch = (search) => {
-    API.search(search)
+    API.search(search, this.state.city)
       .then(res => {
         this.setState({ cards: res.data, search });
-        console.log(res.data)
       }
       )
       .catch(err => console.log(err));
   }
 
-
+  handleCityChange = (userID, city) => {
+    API.saveNewCity(userID, city)
+      .then(() => {
+        this.loadCity(store.getState().auth.user.id)
+      }
+      )
+      .catch(err => console.log(err));
+  }
   componentDidMount() {
-    this.loadPopPosts();
+    this.loadCity(store.getState().auth.user.id);
+ 
   }
 
   render() {
     return (
       <Provider store={store}>
         <Router>
-          <div>
-            <Jumbotron className="jumbotron">
-              <h1>The Minimalist</h1>
-            </Jumbotron>
-            <Navbar handleCategoryChange={this.handleCategoryChange} handleSearch={this.handleSearch} />
-            <div className="main-container">
-              <div className="sidebar">
-                {this.state.categories.map(category => (
-                  // <CategoryWrapper
-                  // key = {category}
-                  // category={category}
-                  // handleCategoryChange= {this.props.handleCategoryChange(category)}
-                  // />
-                  <div className="each-nav-item" onClick={
-                    (e) => {
-                      e.preventDefault()
-                      this.handleCategoryChange(category)
-                    }}>
-                    {category}
-                  </div>
-                ))}
-              </div>
+          <div className='drawer-container'>
+            <Drawer
+              modal
+              open={this.state.open}
+              onClose={() => this.setState({ open: false })}
+            >
+              <DrawerHeader> {/*defaults to div*/}
+                <DrawerTitle tag='h2'> {/*defaults to h3*/}
+                  Categories
+                  </DrawerTitle>
+                {/* <DrawerSubtitle> 
+                  Isn't this cool?
+                  </DrawerSubtitle> */}
+              </DrawerHeader>
 
-              <div className="main-content">
-                <Switch>
-                  <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
-                  {/* <PrivateRoute exact path="/" component={Main} cards={this.state.cards} /> */}
-                  {/* <Route exact path="/" component={Main} cards={this.state.cards} /> */}
-                  {/* <Route exact path="/land" component={Landing} /> */}
-                  {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
-                  <PrivateRoute exact path="/newpost" component={NewPost} />
-                  {/* <PrivateRoute exact path="/message" component={Message} /> */}
-                  <Route exact path="/register" component={Register} />
-                  <Route exact path="/login" component={Login} />
-                  {/* <Route exact path="/category/:category" component={Category} />
+              <DrawerContent tag='main'>  {/*defaults to div*/}
+                {/* <Button>What up?!</Button> */}
+                <List singleSelection selectedIndex={this.state.selectedIndex}>
+                  {this.state.categories.map((category,index) => (
+                    // <CategoryWrapper
+                    // key = {category}
+                    // category={category}
+                    // handleCategoryChange= {this.props.handleCategoryChange(category)}
+                    // />
+                    <ListItem onClick={
+                      (e) => {
+                        e.preventDefault()
+                        this.handleCategoryChange(category.name)
+                      }}>
+                      <ListItemGraphic graphic={<MaterialIcon icon={category.icon} />} />
+                      <ListItemText primaryText={category.name} />
+                    </ListItem>
+
+                  ))}
+                </List>
+              </DrawerContent>
+
+            </Drawer>
+            <DrawerAppContent>
+              <TopAppBar>
+                <TopAppBarRow>
+                  <TopAppBarSection align='start'>
+                    <TopAppBarIcon navIcon tabIndex={0}>
+                      <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
+                    </TopAppBarIcon>
+                    <TopAppBarTitle>{this.state.city}</TopAppBarTitle>
+                  </TopAppBarSection>
+                  <TopAppBarSection align='end' role='toolbar'>
+                    {/* <TopAppBarIcon actionItem tabIndex={0}>
+                      <MaterialIcon
+                        aria-label="print page"
+                        hasRipple
+                        icon='print'
+                        onClick={() => console.log('print')}
+                      />
+                    </TopAppBarIcon> */}
+
+
+                    {/* important!!!! handleSearch={this.handleSearch} handleCityChange={this.handleCityChange}  */}
+                    <TopAppBarIcon navIcon tabIndex={0}>
+                      <Link to='/'>
+                        <MaterialIcon hasRipple icon='home' />
+                      </Link>
+                    </TopAppBarIcon>
+                    <TopAppBarIcon actionItem tabIndex={1}>
+
+                      <Link to='/newpost'>
+                        <MaterialIcon
+                          aria-label="Add Item"
+                          hasRipple
+                          icon='add'
+                          onClick={() => console.log('print')}
+                        />
+                      </Link>
+                    </TopAppBarIcon>
+                    <TopAppBarIcon actionItem tabIndex={0}>
+                      <LogoutBtn />
+                    </TopAppBarIcon>
+                    {/* <TopAppBarIcon actionItem tabIndex={0}>
+                    <MaterialIcon
+                      aria-label="Logout"
+                      hasRipple
+                      icon='logout'
+                      onClick={() => console.log('print')}
+                    />
+                  </TopAppBarIcon> */}
+                  </TopAppBarSection>
+                </TopAppBarRow>
+              </TopAppBar>
+            </DrawerAppContent>
+            <TopAppBarFixedAdjust>
+              <div className="main-container">
+
+                <div className="main-content">
+                  <Switch>
+                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city}/>} />
+                    {/* <Route exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} /> */}
+                    {/* <Route exact path="/land" component={Landing} /> */}
+                    {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
+                    <PrivateRoute exact path="/newpost" component={NewPost} />
+                    <Route exact path="/register" component={Register} />
+                    <Route exact path="/login" component={Login} />
+                    {/* <Route exact path="/category/:category" component={Category} />
             <Route exact path="/search/:search" component={Search} /> */}
-                  <PrivateRoute exact path="/:id" component={Detail} />
-                  <PrivateRoute component={NoMatch} />
-                </Switch>
+                    <PrivateRoute exact path="/:id" component={Detail} />
+                    <PrivateRoute component={NoMatch} />
+                  </Switch>
+                </div>
               </div>
-            </div>
-            <LogoutBtn />
+            </TopAppBarFixedAdjust>
           </div>
+          {/* <LogoutBtn /> */}
         </Router>
       </Provider>
     );

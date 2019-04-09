@@ -4,14 +4,19 @@ import PropTypes from "prop-types";
 import { connect } from "react-redux";
 import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
+import TextField, { Input } from "@material/react-text-field";
+import Button from "@material/react-button";
+
 class Register extends Component {
     constructor() {
         super();
         this.state = {
             name: "",
+            userName:"",
             email: "",
             password: "",
             password2: "",
+            city:"",
             errors: {}
         };
     }
@@ -35,9 +40,11 @@ class Register extends Component {
         e.preventDefault();
         const newUser = {
             name: this.state.name,
+            userName:this.state.userName,
             email: this.state.email,
             password: this.state.password,
-            password2: this.state.password2
+            password2: this.state.password2,
+            city: this.state.city
         };
         this.props.registerUser(newUser, this.props.history);
     };
@@ -60,64 +67,103 @@ class Register extends Component {
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
-                            <div className="input-field col s12">
-                                <input
+                        <div className="input-field col s12">
+                        <TextField
+                                    label='User Name'
+                                >
+                                <Input
                                     onChange={this.onChange}
-                                    value={this.state.name}
-                                    error={errors.name}
-                                    id="name"
+                                    value={this.state.userName}
+                                    error={errors.userName}
+                                    id="userName"
                                     type="text"
                                     className={classnames("", {
-                                        invalid: errors.name
+                                        invalid: errors.userName
                                     })}
                                 />
-                                <label htmlFor="name">Name</label>
+                                </TextField>
+                                <span className="red-text">{errors.userName}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <TextField
+                                    label='Name'
+                                >
+
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.name}
+                                        error={errors.name}
+                                        id="name"
+                                        type="text"
+                                        className={classnames("", {
+                                            invalid: errors.name
+                                        })}
+                                    />
+                                </TextField>
                                 <span className="red-text">{errors.name}</span>
                             </div>
                             <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email}
-                                    id="email"
-                                    type="email"
-                                    className={classnames("", {
-                                        invalid: errors.email
-                                    })}
-                                />
-                                <label htmlFor="email">Email</label>
+                                <TextField label='Email'>
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.email}
+                                        error={errors.email}
+                                        id="email"
+                                        type="email"
+                                        className={classnames("", {
+                                            invalid: errors.email
+                                        })}
+                                    />
+                                </TextField>
                                 <span className="red-text">{errors.email}</span>
                             </div>
                             <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password}
-                                    id="password"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password
-                                    })}
-                                />
-                                <label htmlFor="password">Password</label>
+                                <TextField label='Password'>
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.password}
+                                        error={errors.password}
+                                        id="password"
+                                        type="password"
+                                        className={classnames("", {
+                                            invalid: errors.password
+                                        })}
+                                    />
+                                </TextField>
                                 <span className="red-text">{errors.password}</span>
                             </div>
                             <div className="input-field col s12">
-                                <input
-                                    onChange={this.onChange}
-                                    value={this.state.password2}
-                                    error={errors.password2}
-                                    id="password2"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password2
-                                    })}
-                                />
-                                <label htmlFor="password2">Confirm Password</label>
+                                <TextField label="Confirm">
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.password2}
+                                        error={errors.password2}
+                                        id="password2"
+                                        type="password"
+                                        className={classnames("", {
+                                            invalid: errors.password2
+                                        })}
+                                    />
+                                </TextField>
                                 <span className="red-text">{errors.password2}</span>
                             </div>
+                            <div className="input-field col s12">
+                            <TextField label="City">
+                                <Input
+                                    onChange={this.onChange}
+                                    value={this.state.city}
+                                    error={errors.city}
+                                    id="city"
+                                    type="city"
+                                    className={classnames("", {
+                                        invalid: errors.city
+                                    })}
+                                />
+                             </TextField>
+                                <span className="red-text">{errors.city}</span>
+                            </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <button
+                                <Button
                                     style={{
                                         width: "150px",
                                         borderRadius: "3px",
@@ -128,7 +174,7 @@ class Register extends Component {
                                     className="btn btn-large waves-effect waves-light hoverable blue accent-3"
                                 >
                                     Sign up
-                </button>
+                </Button>
                             </div>
                         </form>
                     </div>
