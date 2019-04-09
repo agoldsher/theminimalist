@@ -26,7 +26,8 @@ class NewPost extends Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     };
 
-    handleZipCode = () => {
+    handleZipCode = (e) => {
+        e.preventDefault();
         if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
             API.getZipCode(this.state.zipcode)
                 .then((res) => {
