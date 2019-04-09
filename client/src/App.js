@@ -9,7 +9,7 @@ import TopAppBar, {
   TopAppBarSection,
   TopAppBarTitle,
 } from '@material/react-top-app-bar';
-
+import Headline2 from "@material/react-typography";
 import MaterialIcon from '@material/react-material-icon';
 
 import Drawer, {
@@ -181,6 +181,7 @@ class App extends React.Component {
   }
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
+
   };
 
   render() {
@@ -240,6 +241,7 @@ class App extends React.Component {
                       <TextField label="City">
                         <Input value={this.state.city} id="city" onChange={this.onChange} />
                       </TextField>
+                      <Button raised>Change City</Button>
                     </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
