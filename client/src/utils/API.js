@@ -18,8 +18,8 @@ export default {
     return axios.get("/api/posts/search/"+search);
   },
   getZipCode: function (data) {
-    const clientKey = "js-Gv6oLCU2bq6FL7gNIGPgkkHBpbgo3mYFESmQ3IokbdqBN136IMhyQB2hyr1wfres";
-    return axios.get(`https://www.zipcodeapi.com/rest/${clientKey}/info.json/${data}/radians`);
+    let obj = {zipcode: data}
+    return axios.post("/api/zipcode/", obj);
   },
  
     savePost: function(data) {

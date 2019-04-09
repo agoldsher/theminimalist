@@ -133,6 +133,7 @@ class App extends React.Component {
                   {/* <Route exact path="/land" component={Landing} /> */}
                   {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
                   <PrivateRoute exact path="/newpost" component={NewPost} />
+                  {/* <PrivateRoute exact path="/message" component={Message} /> */}
                   <Route exact path="/register" component={Register} />
                   <Route exact path="/login" component={Login} />
                   {/* <Route exact path="/category/:category" component={Category} />
