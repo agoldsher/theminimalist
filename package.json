@@ -20,11 +20,11 @@
     "nodemon": "^1.18.10"
   },
   "dependencies": {
-    "axios": "^0.18.0",
     "@types/classnames": "^2.2.7",
     "@types/node": "^11.13.0",
     "@types/react": "^16.8.12",
     "@types/react-dom": "^16.8.3",
+    "axios": "^0.18.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cloudinary": "^1.14.0",

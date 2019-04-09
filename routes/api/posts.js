@@ -57,17 +57,19 @@ router.route("/view/:id")
 router.route("/search/:search/:city")
 .get(postsController.search)
 
+router.route("/city/:userID/:city")
+.put(postsController.updateCity)
+
+router.route("/city/:userID")
+.get(postsController.getUserCity);
+
 // Matches with "/api/posts/:id"
 router.route("/:id")
 .get(postsController.findById)
 .put(postsController.update)
 .delete(postsController.remove);
 
-router.route("/city/:userID/:city")
-.put(postsController.updateCity)
 
-router.route("/city/:userID")
-.get(postsController.getUserCity);
 
 
 module.exports = router;
