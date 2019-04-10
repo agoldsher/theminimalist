@@ -43,6 +43,7 @@ import Detail from "./Pages/Detail";
 import Navbar from "./Components/Navbar";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
+import Message from "./Pages/Message";
 // import Landing from "./Pages/Landing";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
@@ -282,6 +283,7 @@ class App extends React.Component {
                     {/* <Route exact path="/land" component={Landing} /> */}
                     {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
                     <PrivateRoute exact path="/newpost" component={NewPost} />
+                    <PrivateRoute exact path="/message" component={Message} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     {/* <Route exact path="/category/:category" component={Category} />
