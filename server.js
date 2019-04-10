@@ -48,18 +48,26 @@ server = app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
 });
 
-io = socket(server);
+// Real time private messaging with socket.io
 
-// let allUsers = [];
+io = socket(server);
 
 io.sockets.on('connection', function (socket) {
   // once a client has connected, we expect to get a ping from them saying what room they want to join
   socket.on('room', function (room) {
     socket.join(room);
+      db.Message
+          .find({ room: room })
+          //.sort({ date: -1 })
+          .then((dbModel) => {
+            dbModel.forEach(message => {
+              io.sockets.in(room).emit('message', message.body)
+            })
+          })
+          .catch(err => console.log(err));
   });
   socket.on("server", function (msg) {
-    console.log(msg);
-    room = "abc123";
+    room = msg.room;
     io.sockets.in(room).emit('message', msg.msg)
     db.Message
             .create({
@@ -68,37 +76,10 @@ io.sockets.on('connection', function (socket) {
                 body: msg.msg,
                 room: msg.room,
             })
-            // .then(dbModel => res.json(dbModel))
-            // .catch(err => res.status(422).json(err))
-  })
+            //.then(dbModel => res.json(dbModel))
+            .catch(err => console.log(err))
+  });
+  socket.on("disconnect", function () {
+    console.log("user disconnected");
+  });
 });
-
-// room = "abc123";
-// io.sockets.in(room).emit('message', 'what is going on, party people?');
-  // socket.on("user_join", function (data) {
-  //   socket.join("greg");
-  // });
-  //allUsers.push(socket.id);
-  //socket.emit("users", allUsers);
-  //socket.emit("id", {socketId:socket.id})
-  // io.sockets.on("server", function (msg) {
-  //   console.log(msg);
-    //io.sockets.in(room).emit('message', msg.msg);
-  //   // upload message to db
-  //   // serve the message back to the sender and receiver
-  //   //io.emit(msg.to, msg.msg);
-  //   io.emit(msg.from, msg.msg);
-
-  // });
-
-  // socket.on('disconnect', function() {
-  //   console.log(socket.id, "has disconnected")
-  //   // allUsers = allUsers.filter( a => a !== socket.id)
-  //   // socket.emit("users", allUsers);
-
-  // });
-//   socket.on('send private', function(data){
-//     console.log('sending private', data);
-//     io.in("greg").emit('greg',data);
-// })
-

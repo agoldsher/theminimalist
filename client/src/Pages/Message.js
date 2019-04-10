@@ -1,6 +1,5 @@
 import React from "react";
 import io from "socket.io-client";
-//import API from "../utils/API";
 
 class Message extends React.Component {
     constructor(props) {
@@ -11,8 +10,6 @@ class Message extends React.Component {
             sent: '',
             message: '',
             messages: [],
-            users: [],
-            sId: "",
             roomID: ""
         };
 
@@ -20,44 +17,22 @@ class Message extends React.Component {
     };
 
     componentDidMount() {
-        //this.listenforUsers();
-        //this.listenForSocketId();
-        //this.listenForOtherMsg();
-        //this.listenforOwnMsg();
         this.connect();
         this.receiveMessages();
     };
 
-
-    // listenforUsers =() => {
-    //     this.socket.on("users", (data => {
-    //         console.log(data);
-    //         this.setState({ users: data })
-    //     }))
-    // };
-
-    // listenForSocketId() {
-    //     this.socket.on("id", (Id) => {
-    //         console.log(Id);
-    //         this.setState({ sId: Id.socketId })
-    //     })
-    // }
-
     connect = () => {
-        // the room will be the two peoples user IDs
+        // the room will be the two peoples user IDs or names
         const room = "abc123"
         this.socket.emit("room", room);
-        console.log(room + "entered");
-        this.setState({ roomID: room})
-        // API.getRoomMessages
+        this.setState({ roomID: room});
     };
 
     receiveMessages = () => {
         this.socket.on('message', (data) => {
-            console.log('Incoming message:', data);
             this.setState({ messages: [...this.state.messages, data] })
          });
-    }
+    };
 
     emitMsgToServer = () => {
         const newMsg = {
@@ -66,22 +41,8 @@ class Message extends React.Component {
             to: this.state.sent,
             room: this.state.roomID
         };
-        // Go to #1 to server
         this.socket.emit("server", newMsg)
-    }
-
-    // listenforOwnMsg = () => {
-    //     this.socket.on("greg", (data) => {
-    //         console.log("I'm getting a msg here it is\n" + data)
-    //     })
-    // }
-
-    // listenForOtherMsg() {
-    //     this.socket.on(this.state.username, (data) => {
-    //         console.log("I'm getting a msg here it is\n" + data)
-    //     })
-    // }
-
+    };
 
     render() {
         return (
@@ -90,7 +51,7 @@ class Message extends React.Component {
                     <div className="col-4">
                         <div className="card">
                             <div className="card-body">
-                                <div className="card-title">Global Chat</div>
+                                <div className="card-title">Chat with {this.state.username}</div>
                                 <div className="messages">
                                     {this.state.messages.map(message => {
                                         return (
@@ -126,10 +87,8 @@ class Message extends React.Component {
                 </div>
             </div>
         );
-    }
+    };
 };
-
-
 
 
 export default Message;
