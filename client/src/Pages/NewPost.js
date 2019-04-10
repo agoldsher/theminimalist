@@ -8,8 +8,8 @@ import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
 import { connect } from "react-redux";
-import {Grid, Row, Cell} from "@material/react-layout-grid";
-import {Card} from "@material/react-card";
+// import {Grid, Row, Cell} from "@material/react-layout-grid";
+// import {Card} from "@material/react-card";
 // import PropTypes from "prop-types";
 
 import TextField, { HelperText, Input } from '@material/react-text-field';

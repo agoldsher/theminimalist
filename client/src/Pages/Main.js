@@ -22,7 +22,7 @@ class Main extends Component {
       <Grid>
         <Row>
           {this.props.cards.map(card => (
-            <Cell  desktopColumns={3} phoneColumns={2} tabletColumns={4}>
+            <Cell key={card._id} desktopColumns={3} phoneColumns={2} tabletColumns={4}>
               <SmallCard
                 key={card._id}
                 id={card._id}

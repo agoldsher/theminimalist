@@ -6,9 +6,9 @@ import TopAppBar, {
   TopAppBarIcon,
   TopAppBarRow,
   TopAppBarSection,
-  TopAppBarTitle,
+  // TopAppBarTitle,
 } from '@material/react-top-app-bar';
-import Headline2 from "@material/react-typography";
+// import Headline2 from "@material/react-typography";
 import MaterialIcon from '@material/react-material-icon';
 import Drawer, {
   DrawerHeader,
@@ -172,10 +172,10 @@ class App extends React.Component {
     )
   }
 
-  componentDidMount() {
-    this.loadCity(store.getState().auth.user.id);
+  // componentDidMount() {
+  //   this.loadCity(store.getState().auth.user.id);
 
-  }
+  // }
   onChange = e => {
     this.setState({ [e.target.id]: e.target.value });
 
@@ -210,7 +210,7 @@ class App extends React.Component {
                     // category={category}
                     // handleCategoryChange= {this.props.handleCategoryChange(category)}
                     // />
-                    <ListItem onClick={
+                    <ListItem key ={index}onClick={
                       (e) => {
                         e.preventDefault()
                         this.handleCategoryChange(category.name)
