@@ -31,11 +31,14 @@ export default {
     return axios.post("/api/zipcode/", obj);
   },
  
-    savePost: function(data) {
-        return axios.post("/api/posts", data, {
-          headers: {
-            'Content-Type': 'multipart/form-data'
-          }
-        })
-    }
+  savePost: function(data) {
+    return axios.post("/api/posts", data, {
+      headers: {
+        'Content-Type': 'multipart/form-data'
+       }
+    })
+  },
+  deletePost: function(id){
+    return axios.delete("/api/posts/"+id)
+  }
 };

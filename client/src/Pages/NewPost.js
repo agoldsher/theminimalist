@@ -1,5 +1,9 @@
 import React, { Component } from "react";
-import { DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../Components/AddForm";
+import { DropDown, 
+    // TextArea, 
+    ImgUpload, 
+    FormBtn, 
+    TextDisplay } from "../Components/AddForm";
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';

@@ -10,6 +10,9 @@ class Main extends Component {
     sizeIndex:""
   }
 
+  componentDidMount(){
+    this.props.loadCityTriggered();
+  }
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
