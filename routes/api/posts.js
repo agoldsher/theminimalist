@@ -35,16 +35,17 @@ router.route("/")
     .post(upload.single('image'), uploadCDNY, postsController.create);
 
 // Matches with "api/posts/category"
-router.route("/category/:category")
+router.route("/category/:category/:city")
 .get(postsController.findByCategory);
 
 // Matches with "api/posts/popularity"
-router.route("/popularity")
+router.route("/popularity/:city")
 .get(postsController.findByPopularity);
 
 // Matches with "api/posts/city"
 router.route("/city")
-.get(postsController.findByCity);
+.get(postsController.findByCity)
+
 
 // Matches with "api/posts/state"
 router.route("/state")
@@ -53,14 +54,22 @@ router.route("/state")
 router.route("/view/:id")
 .put(postsController.updateViews);
 
-router.route("/search/:search")
+router.route("/search/:search/:city")
 .get(postsController.search)
+
+router.route("/city/:userID/:city")
+.put(postsController.updateCity)
+
+router.route("/city/:userID")
+.get(postsController.getUserCity);
 
 // Matches with "/api/posts/:id"
 router.route("/:id")
 .get(postsController.findById)
 .put(postsController.update)
 .delete(postsController.remove);
+
+
 
 
 module.exports = router;

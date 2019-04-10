@@ -2,24 +2,33 @@ import axios from "axios";
 
 export default {
   // Gets all books
-  getPopPosts: function() {
-    return axios.get("/api/posts/popularity");
+  getPopPosts: function(city) {
+    return axios.get("/api/posts/popularity/"+city);
   },
-  getCategoryPosts: function(category) {
-    return axios.get("/api/posts/category/"+category);
+  getUserCity: function (userID){
+    return axios.get("api/posts/city/"+userID)
+  },
+  saveNewCity:function(userID,city){
+    console.log(`/api/posts/city/${userID}/${city}`)
+    return axios.put(`/api/posts/city/${userID}/${city}`);
+  },
+  getCategoryPosts: function(category, city) {
+    console.log("/api/posts/category/"+category+"/"+city)
+    return axios.get("/api/posts/category/"+category+"/"+city);
   },
   // Gets the book with the given id
   getPost: function(id) {
-    axios.put("/api/posts/view/"+id)
+    console.log(id)
+    // axios.put("/api/posts/view/"+id)
     return axios.get("/api/posts/" + id);
   },
 
-  search: function(search){
-    return axios.get("/api/posts/search/"+search);
+  search: function(search, city){
+    return axios.get("/api/posts/search/"+search+"/"+city);
   },
   getZipCode: function (data) {
-    const clientKey = "js-Gv6oLCU2bq6FL7gNIGPgkkHBpbgo3mYFESmQ3IokbdqBN136IMhyQB2hyr1wfres";
-    return axios.get(`https://www.zipcodeapi.com/rest/${clientKey}/info.json/${data}/radians`);
+    let obj = {zipcode: data}
+    return axios.post("/api/zipcode/", obj);
   },
  
     savePost: function(data) {

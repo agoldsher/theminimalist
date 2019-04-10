@@ -81,6 +81,7 @@ class App extends React.Component {
     category: "",
     open: false,
     search: "",
+    city:"",
     categories: [
       {
         name: "All",
@@ -125,11 +126,19 @@ class App extends React.Component {
     ]
   };
 
+  loadCity=(userID)=>{
+    API.getUserCity(userID)
+    .then(res=>{
+      this.setState({city:res.data[0].city})
+      console.log(`Current location: ${this.state.city}`)
+      this.loadPopPosts()
+    })
+  }
+
   loadPopPosts = () => {
-    API.getPopPosts()
+    API.getPopPosts(this.state.city)
       .then(res => {
         this.setState({ cards: res.data });
-        console.log(res.data)
       }
       )
       .catch(err => console.log(err));
@@ -138,28 +147,35 @@ class App extends React.Component {
     if (category === "All") {
       this.loadPopPosts();
     } else {
-      API.getCategoryPosts(category)
+      // console.log(`category: ${category} and city: ${city}`)
+      API.getCategoryPosts(category, this.state.city)
         .then(res => {
-          this.setState({ cards: res.data, category });
-          console.log(res.data)
+          this.setState({ cards: res.data, category});
         }
         )
         .catch(err => console.log(err));
     }
   }
   handleSearch = (search) => {
-    API.search(search)
+    API.search(search, this.state.city)
       .then(res => {
         this.setState({ cards: res.data, search });
-        console.log(res.data)
       }
       )
       .catch(err => console.log(err));
   }
 
-
+  handleCityChange = (userID, city) => {
+    API.saveNewCity(userID, city)
+      .then(() => {
+        this.loadCity(store.getState().auth.user.id)
+      }
+      )
+      .catch(err => console.log(err));
+  }
   componentDidMount() {
-    this.loadPopPosts();
+    this.loadCity(store.getState().auth.user.id);
+ 
   }
 
   render() {
@@ -211,7 +227,7 @@ class App extends React.Component {
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
                     </TopAppBarIcon>
-                    {/* <TopAppBarTitle>TheMinimalist</TopAppBarTitle> */}
+                    <TopAppBarTitle>{this.state.city}</TopAppBarTitle>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
                     {/* <TopAppBarIcon actionItem tabIndex={0}>
@@ -222,6 +238,9 @@ class App extends React.Component {
                         onClick={() => console.log('print')}
                       />
                     </TopAppBarIcon> */}
+
+
+                    {/* important!!!! handleSearch={this.handleSearch} handleCityChange={this.handleCityChange}  */}
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <Link to='/'>
                         <MaterialIcon hasRipple icon='home' />
@@ -258,7 +277,7 @@ class App extends React.Component {
 
                 <div className="main-content">
                   <Switch>
-                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} />
+                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city}/>} />
                     {/* <Route exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} /> */}
                     {/* <Route exact path="/land" component={Landing} /> */}
                     {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}

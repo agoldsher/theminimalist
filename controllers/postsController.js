@@ -18,19 +18,18 @@ module.exports = {
     },
     findByCategory: function (req, res) {
         db.Post
-            .find({ category: req.params.category })
+            .find({$and:[{city: req.params.city },{ category: req.params.category }]})
             .sort({ date: -1 })
             .then(dbModel => {res.json(dbModel)})
             .catch(err => res.status(422).json(err));
     },
     findByPopularity: function (req, res) {
         db.Post
-            .find({})
+            .find({city: req.params.city })
             .sort({ viewCount: -1 })
             .limit(10)
             .then(dbModel => res.json(dbModel))
             .catch(err => {
-                console.log(err)
                 res.status(422).json(err)
             });
     },
@@ -42,7 +41,7 @@ module.exports = {
     },
     search: function (req, res){
         db.Post
-            .find({title:{ $regex: req.params.search, $options: "i" } })
+            .find({$and:[{city: req.params.city },{title:{ $regex: req.params.search, $options: "i" } }]})
             .then(dbModel=>res.json(dbModel))
             .catch(err => res.status(422).json(err));
     },
@@ -63,6 +62,7 @@ module.exports = {
             .catch(err => res.status(422).json(err));
     },
     create: function (req, res) {
+        console.log(req.body);
         db.Post
             .create({
                 title: req.body.title,
@@ -72,7 +72,9 @@ module.exports = {
                 city: req.body.city,
                 state: req.body.state,
                 zipcode: req.body.zipcode,
-                image: req.file.filename
+                image: req.file.filename,
+                email:req.body.email,
+                userName: req.body.userName
             })
             .then(dbModel => res.json(dbModel))
             .catch(err => res.status(422).json(err));
@@ -81,6 +83,18 @@ module.exports = {
         db.Post
             .findOneAndUpdate({ _id: req.params.id }, req.body)
             .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    getUserCity:function(req, res){
+        db.User
+            .find({_id:req.params.userID})
+            .then(dbModel => res.json(dbModel))
+            .catch(err => res.status(422).json(err));
+    },
+    updateCity: function (req, res) {
+        db.User
+            .findOneAndUpdate({_id: req.params.userID }, {city: req.params.city})
+            .then(console.log("updated"))
             .catch(err => res.status(422).json(err));
     },
     remove: function (req, res) {

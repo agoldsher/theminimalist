@@ -12,9 +12,11 @@ class Register extends Component {
         super();
         this.state = {
             name: "",
+            userName:"",
             email: "",
             password: "",
             password2: "",
+            city:"",
             errors: {}
         };
     }
@@ -38,9 +40,11 @@ class Register extends Component {
         e.preventDefault();
         const newUser = {
             name: this.state.name,
+            userName:this.state.userName,
             email: this.state.email,
             password: this.state.password,
-            password2: this.state.password2
+            password2: this.state.password2,
+            city: this.state.city
         };
         this.props.registerUser(newUser, this.props.history);
     };
@@ -63,6 +67,23 @@ class Register extends Component {
                             </p>
                         </div>
                         <form noValidate onSubmit={this.onSubmit}>
+                        <div className="input-field col s12">
+                        <TextField
+                                    label='User Name'
+                                >
+                                <Input
+                                    onChange={this.onChange}
+                                    value={this.state.userName}
+                                    error={errors.userName}
+                                    id="userName"
+                                    type="text"
+                                    className={classnames("", {
+                                        invalid: errors.userName
+                                    })}
+                                />
+                                </TextField>
+                                <span className="red-text">{errors.userName}</span>
+                            </div>
                             <div className="input-field col s12">
                                 <TextField
                                     label='Name'
@@ -125,6 +146,21 @@ class Register extends Component {
                                     />
                                 </TextField>
                                 <span className="red-text">{errors.password2}</span>
+                            </div>
+                            <div className="input-field col s12">
+                            <TextField label="City">
+                                <Input
+                                    onChange={this.onChange}
+                                    value={this.state.city}
+                                    error={errors.city}
+                                    id="city"
+                                    type="city"
+                                    className={classnames("", {
+                                        invalid: errors.city
+                                    })}
+                                />
+                             </TextField>
+                                <span className="red-text">{errors.city}</span>
                             </div>
                             <div className="col s12" style={{ paddingLeft: "11.250px" }}>
                                 <Button
