@@ -53,13 +53,9 @@ class Register extends Component {
         return (
             <div className="register-container">
                 <div className="register-form">
-                    <Link to="/" className="btn-flat waves-effect">
-                        <i className="material-icons left">keyboard_backspace</i> Back to
-                        login
-                    </Link>
-                    <div className="header" style={{ paddingLeft: "11.250px" }}>
+                    <div className="header">
                         <h2>
-                            <b>Register</b>
+                            <b>The Minimalist</b>
                         </h2>
                     </div>
                     <form noValidate onSubmit={this.onSubmit}>
@@ -158,7 +154,7 @@ class Register extends Component {
                             </TextField>
                             <span className="red-text">{errors.city}</span>
                         </div>
-                        <div className="register-button" style={{ paddingLeft: "11.250px" }}>
+                        <div className="register-button">
                             <Button
                                 style={{
                                     width: "150px",
@@ -172,6 +168,10 @@ class Register extends Component {
                                 Sign up
                             </Button>
                         </div>
+                        <Link to="/" className="btn-flat waves-effect">
+                        <i className="material-icons left">keyboard_backspace</i> Back to
+                        login
+                        </Link>
                     </form>
                 </div>
             </div>
