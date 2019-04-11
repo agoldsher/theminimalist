@@ -60,11 +60,12 @@
   }
 .mdc-button {
   background-color: #a4f0a1;
-  margin: 0 0 10px 30px;
+  margin: 0 0 10px 180px;
+  align-content: right;
 }
-// .btn-flat{
-//   padding:10px;
-// }
+.btn-flat, .grey-text{
+ margin: 16px 0 16px 0;
+}
 }
 
 // New Post Page
