@@ -42,15 +42,19 @@
     "typescript": "^3.4.1"
   },
   "scripts": {
-    "start": "SASS_PATH=./node_modules react-scripts start",
-    "build": "react-scripts build",
+    "start": "cross-env SASS_PATH=./node_modules react-scripts start",
+    "build": "cross-env SASS_PATH=./node_modules react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "node-sass": "node-sass --output-style compressed -o dist/css src/scss"
   },
   "browserslist": [
     ">0.2%",
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "cross-env": "^5.2.0"
+  }
 }
