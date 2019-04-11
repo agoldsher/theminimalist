@@ -64,7 +64,6 @@ class App extends React.Component {
     open: false,
     search: "",
     city: "",
-    state:"",
     zipcode:"",
     categories: [
       {
@@ -164,9 +163,12 @@ class App extends React.Component {
         API.getZipCode(this.state.zipcode)
             .then((res) => {
                 this.setState({
-                    city: res.data.city,
-                    state: res.data.state
+                    city: `${res.data.city}, ${res.data.state}`
                 })
+                this.setState({
+                  zipcode:""
+              })
+                console.log(this.state.city)
                 this.handleCityChange(this.state.city)
             })
             .catch(err => console.log(err));

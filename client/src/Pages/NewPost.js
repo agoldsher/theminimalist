@@ -23,7 +23,6 @@ class NewPost extends Component {
         description: "",
         image: "",
         city: "city",
-        state: "state",
         zipcode: ""
     };
     constructor(props) {
@@ -38,9 +37,9 @@ class NewPost extends Component {
             API.getZipCode(this.state.zipcode)
                 .then((res) => {
                     this.setState({
-                        city: res.data.city,
-                        state: res.data.state
+                        city: `${res.data.city}, ${res.data.state}`
                     })
+
                 })
                 .catch(err => console.log(err));
         };
@@ -74,7 +73,6 @@ class NewPost extends Component {
             // console.log(this.fileInput);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
             formData.append("city", this.state.city);
-            formData.append("state", this.state.state);
             formData.append("zipcode", this.state.zipcode);
             const { user } = this.props.auth;
             formData.append("userName", user.userName);
@@ -155,9 +153,6 @@ class NewPost extends Component {
                     <FormBtn onClick={this.handleZipCode}>Check</FormBtn>
                     <TextDisplay
                         label={this.state.city}
-                    />
-                    <TextDisplay
-                        label={this.state.state}
                     />
                     <ImgUpload
                         value={this.state.Image}
