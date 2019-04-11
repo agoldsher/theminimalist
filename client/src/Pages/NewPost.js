@@ -93,7 +93,7 @@ class NewPost extends Component {
     render() {
         return (
             <div className="mdc-form-field">
-                <form>
+                <form className="newPost-form">
                     <TextField
                         label='Title'
                         helperText={<HelperText></HelperText>}>

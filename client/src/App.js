@@ -124,6 +124,7 @@ class App extends React.Component {
   loadPopPosts = () => {
     API.getPopPosts(this.state.city)
       .then(res => {
+        console.log(res.data)
         this.setState({ cards: res.data });
       }
       )
