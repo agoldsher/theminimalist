@@ -65,7 +65,7 @@ class App extends React.Component {
     search: "",
     city: "",
     state:"",
-    zipcode:"85719",
+    zipcode:"",
     categories: [
       {
         name: "All",
