@@ -1,10 +1,14 @@
-import React, { Component } from "react";
+import React from "react";
 import "./style.css";
 // import Button from "react-bootstrap/Button";
 import Button from "@material/react-button";
 import FormLabel from "react-bootstrap/FormLabel";
-import { Body2, Headline6, Headline4, Subtitle2 } from "@material/react-typography";
-import TextField from "@material/react-text-field";
+import { Body2, 
+    // Headline6, 
+    // Headline4, 
+    // Subtitle2 
+} from "@material/react-typography";
+// import TextField from "@material/react-text-field";
 import Select from "@material/react-select";
 
 export function Input(props) {

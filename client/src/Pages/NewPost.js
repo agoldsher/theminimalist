@@ -1,8 +1,17 @@
 import React, { Component } from "react";
-import { DropDown, TextArea, ImgUpload, FormBtn, TextDisplay } from "../Components/AddForm";
+import { DropDown, 
+    // TextArea, 
+    ImgUpload, 
+    FormBtn, 
+    TextDisplay } from "../Components/AddForm";
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
+import { connect } from "react-redux";
+// import {Grid, Row, Cell} from "@material/react-layout-grid";
+// import {Card} from "@material/react-card";
+// import PropTypes from "prop-types";
+
 import TextField, { HelperText, Input } from '@material/react-text-field';
 
 class NewPost extends Component {
@@ -23,7 +32,8 @@ class NewPost extends Component {
         this.handleFormSubmit = this.handleFormSubmit.bind(this);
     };
 
-    handleZipCode = () => {
+    handleZipCode = (e) => {
+        e.preventDefault();
         if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
             API.getZipCode(this.state.zipcode)
                 .then((res) => {
@@ -56,19 +66,22 @@ class NewPost extends Component {
         e.preventDefault();
         if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.state && this.state.zipcode) {
             let formData = new FormData();
-            console.log(this.state)
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);
             formData.append("description", this.state.description);
-            console.log("fileInput");
-            console.log(this.fileInput);
+            // console.log("fileInput");
+            // console.log(this.fileInput);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
             formData.append("city", this.state.city);
             formData.append("state", this.state.state);
             formData.append("zipcode", this.state.zipcode);
+            const { user } = this.props.auth;
+            formData.append("userName", user.userName);
+            formData.append("email", user.email);
             API.savePost(formData)
                 .then((res) => {
+                    this.props.loadCity(user.id);
                     this.props.history.push("/");
                 })
                 .catch(err => console.log(err));
@@ -162,4 +175,8 @@ class NewPost extends Component {
     };
 };
 
-export default withRouter(NewPost);
+const mapStateToProps = (state) => {
+    return {auth: state.auth}
+};
+// export default withRouter(NewPost);
+export default withRouter(connect(mapStateToProps, {})(NewPost))
