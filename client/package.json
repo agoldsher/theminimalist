@@ -43,7 +43,7 @@
   },
   "scripts": {
     "start": "cross-env SASS_PATH=./node_modules react-scripts start",
-    "build": "react-scripts build",
+    "build": "cross-env SASS_PATH=./node_modules react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject",
     "node-sass": "node-sass --output-style compressed -o dist/css src/scss"
