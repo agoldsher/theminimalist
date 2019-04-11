@@ -63,6 +63,7 @@ router.route("/city/:userID/:city")
 router.route("/city/:userID")
 .get(postsController.getUserCity);
 
+
 // Matches with "/api/posts/:id"
 router.route("/:id")
 .get(postsController.findById)

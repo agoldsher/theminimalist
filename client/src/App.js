@@ -1,46 +1,32 @@
-
 import React from "react";
-import { BrowserRouter as Router, Route, Switch, Link } from "react-router-dom";
-
+import { Router, Route, Switch, Link } from "react-router-dom";
+import { createBrowserHistory } from 'history';
 import TopAppBar, {
   TopAppBarFixedAdjust,
   TopAppBarIcon,
   TopAppBarRow,
   TopAppBarSection,
-  TopAppBarTitle,
+  // TopAppBarTitle,
 } from '@material/react-top-app-bar';
-
+// import Headline2 from "@material/react-typography";
 import MaterialIcon from '@material/react-material-icon';
-
 import Drawer, {
   DrawerHeader,
-  DrawerSubtitle,
+  // DrawerSubtitle,
   DrawerTitle,
   DrawerContent,
   DrawerAppContent
 } from '@material/react-drawer';
-// import Drawer, { DrawerAppContent } from '@material/react-drawer';
-
 import Main from "./Pages/Main";
 import jwt_decode from "jwt-decode";
 import setAuthToken from "./utils/setAuthToken";
 import { setCurrentUser, logoutUser } from "./actions/authActions";
-
-
-
 import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
-
-import Button from '@material/react-button';
-
 import { Provider } from "react-redux";
 import store from "./store";
-
-// import Category from "./Pages/Category";
-// import Search from "./Pages/Search";
 import NewPost from "./Pages/NewPost";
 import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
-import Navbar from "./Components/Navbar";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import Message from "./Pages/Message";
@@ -48,16 +34,13 @@ import MsgDash from "./Pages/MsgDash";
 // import Landing from "./Pages/Landing";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
-// import Dashboard from "./Pages/dashboard/Dashboard";
 import LogoutBtn from "./Components/LogoutBtn";
-import Jumbotron from "react-bootstrap/Jumbotron";
-import authReducers from './reducers/authReducers';
-
-
-
 import './App.scss';
+import TextField, { Input } from "@material/react-text-field";
+import Button from '@material/react-button';
+// import { Input } from "./Components/AddForm";
 
-
+let history = createBrowserHistory();
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -83,45 +66,47 @@ class App extends React.Component {
     category: "",
     open: false,
     search: "",
-    city:"",
+    city: "",
+    state:"",
+    zipcode:"",
     categories: [
       {
         name: "All",
         icon: "apps"
       },
-      { 
+      {
         name: "Electronics",
         icon: "keyboard"
       },
-      { 
+      {
         name: "Appliances",
         icon: "kitchen"
       },
-      { 
+      {
         name: "Clothing",
         icon: "layers"
       },
-      { 
+      {
         name: "Household",
         icon: "weekend"
       },
-      { 
+      {
         name: "Sports",
         icon: "directions_run"
       },
-      { 
+      {
         name: "Movies and Games",
         icon: "local_movies"
       },
-      { 
+      {
         name: "Machinery",
         icon: "power"
       },
-      { 
+      {
         name: "Tools",
         icon: "build"
       },
-      { 
+      {
         name: "Space",
         icon: "store_mall_directory"
       }
@@ -129,12 +114,14 @@ class App extends React.Component {
   };
 
   loadCity=(userID)=>{
+    console.log(userID)
     API.getUserCity(userID)
     .then(res=>{
       this.setState({city:res.data[0].city})
       console.log(`Current location: ${this.state.city}`)
       this.loadPopPosts()
     })
+    .catch(err=>console.log(err))
   }
 
   loadPopPosts = () => {
@@ -152,7 +139,7 @@ class App extends React.Component {
       // console.log(`category: ${category} and city: ${city}`)
       API.getCategoryPosts(category, this.state.city)
         .then(res => {
-          this.setState({ cards: res.data, category});
+          this.setState({ cards: res.data, category });
         }
         )
         .catch(err => console.log(err));
@@ -167,23 +154,56 @@ class App extends React.Component {
       .catch(err => console.log(err));
   }
 
-  handleCityChange = (userID, city) => {
-    API.saveNewCity(userID, city)
-      .then(() => {
+  handleCityChange = (city) => {
+    API.saveNewCity(store.getState().auth.user.id, city)
+      .then((res,req) => {
         this.loadCity(store.getState().auth.user.id)
       }
       )
       .catch(err => console.log(err));
   }
-  componentDidMount() {
-    this.loadCity(store.getState().auth.user.id);
- 
+  handleZipCode = () => {
+    if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
+        API.getZipCode(this.state.zipcode)
+            .then((res) => {
+                this.setState({
+                    city: res.data.city,
+                    state: res.data.state
+                })
+                this.handleCityChange(this.state.city)
+            })
+            .catch(err => console.log(err));
+    };
+  };
+
+  loadCityTriggered = ()=>{
+    if(this.state.city === ""){  
+      this.loadCity(store.getState().auth.user.id)
+    }
   }
+  delete=(id)=>{
+    API.deletePost(id)
+    .then(()=> {
+      this.loadPopPosts();
+  }
+    )
+  }
+
+  // componentDidMount() {
+  //   this.loadCity(store.getState().auth.user.id);
+
+  // }
+  onChange = e => {
+    // console.log(e.target.value )
+    this.setState({ [e.target.id]: e.target.value });
+    console.log(this.state.zipcode);
+  };
+
 
   render() {
     return (
       <Provider store={store}>
-        <Router>
+        <Router history={history}>
           <div className='drawer-container'>
             <Drawer
               modal
@@ -202,13 +222,13 @@ class App extends React.Component {
               <DrawerContent tag='main'>  {/*defaults to div*/}
                 {/* <Button>What up?!</Button> */}
                 <List singleSelection selectedIndex={this.state.selectedIndex}>
-                  {this.state.categories.map((category,index) => (
+                  {this.state.categories.map((category, index) => (
                     // <CategoryWrapper
                     // key = {category}
                     // category={category}
                     // handleCategoryChange= {this.props.handleCategoryChange(category)}
                     // />
-                    <ListItem onClick={
+                    <ListItem key ={index}onClick={
                       (e) => {
                         e.preventDefault()
                         this.handleCategoryChange(category.name)
@@ -229,7 +249,18 @@ class App extends React.Component {
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <MaterialIcon hasRipple icon='menu' onClick={() => this.setState({ open: !this.state.open })} />
                     </TopAppBarIcon>
-                    <TopAppBarTitle>{this.state.city}</TopAppBarTitle>
+                    {/* <TopAppBarTitle>
+                    </TopAppBarTitle> */}
+                  </TopAppBarSection>
+                  <TopAppBarSection align='middle' role="toolbar">
+                    <div>
+                      <TextField label={this.state.city}>
+                        <Input value={this.state.zipcode} id="zipcode" onChange={this.onChange} />
+                      </TextField>
+                      <Button raised onClick={()=>{
+                        // e.preventDefault();
+                        this.handleZipCode()}}>Change Location</Button>
+                    </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
                     {/* <TopAppBarIcon actionItem tabIndex={0}>
@@ -242,7 +273,7 @@ class App extends React.Component {
                     </TopAppBarIcon> */}
 
 
-                    {/* important!!!! handleSearch={this.handleSearch} handleCityChange={this.handleCityChange}  */}
+                    {/* important!!!! This is for handling the search button and change city button: handleSearch={this.handleSearch}  */}
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <Link to='/'>
                         <MaterialIcon hasRipple icon='home' />
@@ -279,25 +310,19 @@ class App extends React.Component {
 
                 <div className="main-content">
                   <Switch>
-                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city}/>} />
-                    {/* <Route exact path="/" render={(props) => <Main {...props} cards={this.state.cards} />} /> */}
-                    {/* <Route exact path="/land" component={Landing} /> */}
-                    {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
-                    <PrivateRoute exact path="/newpost" component={NewPost} />
+                    <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city} loadCityTriggered={this.loadCityTriggered}/>} />
+                    <PrivateRoute exact path="/newpost" render={(props) => <NewPost {...props} loadCity={this.loadCity}/>}  />
                     <PrivateRoute exact path="/message" component={Message} />
                     <PrivateRoute exact path="/msgdash" component={MsgDash} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
-                    {/* <Route exact path="/category/:category" component={Category} />
-            <Route exact path="/search/:search" component={Search} /> */}
-                    <PrivateRoute exact path="/:id" component={Detail} />
+                    <PrivateRoute exact path="/:id" render={(props) => <Detail {...props} delete={this.delete}/>} />
                     <PrivateRoute component={NoMatch} />
                   </Switch>
                 </div>
               </div>
             </TopAppBarFixedAdjust>
           </div>
-          {/* <LogoutBtn /> */}
         </Router>
       </Provider>
     );
