@@ -63,7 +63,7 @@ class NewPost extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if (this.state.title ) {
+        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.zipcode) {
             let formData = new FormData();
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
@@ -141,7 +141,7 @@ class NewPost extends Component {
                         />
                     </TextField>
                     <TextField
-                        label='zipcode'
+                        label='Zipcode'
                         helperText={<HelperText>Enter Zip Code (required)</HelperText>}
                     >
                         <Input

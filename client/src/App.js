@@ -311,7 +311,7 @@ class App extends React.Component {
                   <Switch>
                     <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city} loadCityTriggered={this.loadCityTriggered}/>} />
                     <PrivateRoute exact path="/newpost" render={(props) => <NewPost {...props} loadCity={this.loadCity}/>}  />
-                    <Route exact path="/register" render={(props) => <Register {...props}/>}  />
+                    <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute exact path="/:id" render={(props) => <Detail {...props} delete={this.delete}/>} />
                     <PrivateRoute component={NoMatch} />
