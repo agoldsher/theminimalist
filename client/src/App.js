@@ -64,6 +64,8 @@ class App extends React.Component {
     open: false,
     search: "",
     city: "",
+    state:"",
+    zipcode:"85719",
     categories: [
       {
         name: "All",
@@ -152,12 +154,24 @@ class App extends React.Component {
   handleCityChange = (city) => {
     API.saveNewCity(store.getState().auth.user.id, city)
       .then((res,req) => {
-        console.log("i'm getting to the city load")
         this.loadCity(store.getState().auth.user.id)
       }
       )
       .catch(err => console.log(err));
   }
+  handleZipCode = () => {
+    if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
+        API.getZipCode(this.state.zipcode)
+            .then((res) => {
+                this.setState({
+                    city: res.data.city,
+                    state: res.data.state
+                })
+                this.handleCityChange(this.state.city)
+            })
+            .catch(err => console.log(err));
+    };
+  };
 
   loadCityTriggered = ()=>{
     if(this.state.city === ""){  
@@ -177,8 +191,9 @@ class App extends React.Component {
 
   // }
   onChange = e => {
+    // console.log(e.target.value )
     this.setState({ [e.target.id]: e.target.value });
-
+    console.log(this.state.zipcode);
   };
 
 
@@ -236,12 +251,12 @@ class App extends React.Component {
                   </TopAppBarSection>
                   <TopAppBarSection align='middle' role="toolbar">
                     <div>
-                      <TextField label="City">
-                        <Input value={this.state.city} id="city" onChange={this.onChange} />
+                      <TextField label={this.state.city}>
+                        <Input value={this.state.zipcode} id="zipcode" onChange={this.onChange} />
                       </TextField>
-                      <Button raised onClick={(e)=>{
-                        e.preventDefault();
-                        this.handleCityChange(this.state.city)}}>Change City</Button>
+                      <Button raised onClick={()=>{
+                        // e.preventDefault();
+                        this.handleZipCode()}}>Change Location</Button>
                     </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
@@ -255,7 +270,7 @@ class App extends React.Component {
                     </TopAppBarIcon> */}
 
 
-                    {/* important!!!! This is for handling the search button and change city button: handleSearch={this.handleSearch} handleCityChange={this.handleCityChange}  */}
+                    {/* important!!!! This is for handling the search button and change city button: handleSearch={this.handleSearch}  */}
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <Link to='/'>
                         <MaterialIcon hasRipple icon='home' />
@@ -293,7 +308,7 @@ class App extends React.Component {
                 <div className="main-content">
                   <Switch>
                     <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city} loadCityTriggered={this.loadCityTriggered}/>} />
-                    <PrivateRoute exact path="/newpost" component={NewPost} />
+                    <PrivateRoute exact path="/newpost" render={(props) => <NewPost {...props} loadCity={this.loadCity}/>}  />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute exact path="/:id" render={(props) => <Detail {...props} delete={this.delete}/>} />

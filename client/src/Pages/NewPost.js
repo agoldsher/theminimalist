@@ -66,13 +66,12 @@ class NewPost extends Component {
         e.preventDefault();
         if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.state && this.state.zipcode) {
             let formData = new FormData();
-            console.log(this.state)
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
             formData.append("price", this.state.price);
             formData.append("description", this.state.description);
-            console.log("fileInput");
-            console.log(this.fileInput);
+            // console.log("fileInput");
+            // console.log(this.fileInput);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
             formData.append("city", this.state.city);
             formData.append("state", this.state.state);
@@ -82,6 +81,7 @@ class NewPost extends Component {
             formData.append("email", user.email);
             API.savePost(formData)
                 .then((res) => {
+                    this.props.loadCity(user.id);
                     this.props.history.push("/");
                 })
                 .catch(err => console.log(err));
@@ -91,7 +91,6 @@ class NewPost extends Component {
     };
 
     render() {
-        console.log(this.props)
         return (
             <div className="mdc-form-field">
                 <form>

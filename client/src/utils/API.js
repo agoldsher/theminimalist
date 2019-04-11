@@ -28,6 +28,7 @@ export default {
   },
   getZipCode: function (data) {
     let obj = {zipcode: data}
+    console.log("the object"+obj)
     return axios.post("/api/zipcode/", obj);
   },
  
