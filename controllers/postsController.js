@@ -94,7 +94,10 @@ module.exports = {
     updateCity: function (req, res) {
         db.User
             .findOneAndUpdate({_id: req.params.userID }, {city: req.params.city})
-            .then(console.log("updated"))
+            .then((dbModel)=>{
+                console.log("updated")
+                res.json(dbModel)
+            })
             .catch(err => res.status(422).json(err));
     },
     remove: function (req, res) {
