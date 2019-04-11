@@ -18,7 +18,7 @@
 .demo-card__primary {
   text-align: left;
 }
-.demo-card__secondary{
+.demo-card__secondary {
     margin: 10px;
     padding-left: 10x;
 }
@@ -26,8 +26,8 @@
   margin: 10px;
 }
 
-// Landing Page: Login Page
-.login-container {
+// Landing Page
+.login-container, .register-container {
   height: 100vh;
   display: flex;
   flex-direction: column;
@@ -35,7 +35,7 @@
   align-items: center;
   justify-content: center;
 }
-.login-form{
+.login-form, .register-form {
   padding: 0;
   border: 1px solid #ccc;
   border-radius: 10px;
@@ -50,7 +50,7 @@
     text-align: center;
   }
 
-  .input-field{
+  .input-field {
     display: flex;
     flex-direction: column;
     align-content: center;
@@ -58,9 +58,12 @@
     justify-content: center;
     padding: 10px;
   }
-.mdc-button{
+.mdc-button {
   background-color: #a4f0a1;
   margin: 0 0 10px 30px;
+}
+.btn-flat{
+  padding:10px;
 }
 }
 
