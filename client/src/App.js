@@ -44,6 +44,7 @@ import Navbar from "./Components/Navbar";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import Message from "./Pages/Message";
+import MsgDash from "./Pages/MsgDash";
 // import Landing from "./Pages/Landing";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
@@ -284,6 +285,7 @@ class App extends React.Component {
                     {/* <PrivateRoute exact path="/dash" component={Dashboard} /> */}
                     <PrivateRoute exact path="/newpost" component={NewPost} />
                     <PrivateRoute exact path="/message" component={Message} />
+                    <PrivateRoute exact path="/msgdash" component={MsgDash} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     {/* <Route exact path="/category/:category" component={Category} />
