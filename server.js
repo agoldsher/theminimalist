@@ -5,7 +5,7 @@ const PORT = process.env.PORT || 3001;
 const mongoose = require("mongoose");
 const bodyParser = require("body-parser");
 const passport = require("passport");
-// const routes = require("./routes")();
+const routes = require("./routes");
 const app = express();
 const http = require("http").Server(app);
 const io = require("socket.io")(http);
@@ -30,6 +30,8 @@ if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
 
+// Add routes, both API and view
+app.use(routes);
 
 
 // Connecting to Mongo DB
@@ -39,18 +41,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist",
 
 // Passport middleware
 app.use(passport.initialize());
-passport.serializeUser(function(user, done) {
-  done(null, user);
-});
-
-passport.deserializeUser(function(user, done) {
-  done(null, user);
-});
 // Passport config
-const routes = require("./routes")(passport);
 require("./config/passport")(passport);
-// Add routes, both API and view
-app.use(routes);
 
 app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
