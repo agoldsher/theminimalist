@@ -23,6 +23,7 @@ class NewPost extends Component {
         description: "",
         image: "",
         city: "city",
+        state:"state",
         zipcode: ""
     };
     constructor(props) {
@@ -63,7 +64,7 @@ class NewPost extends Component {
 
     handleFormSubmit = (e) => {
         e.preventDefault();
-        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.zipcode) {
+        if (this.state.title && this.state.category && this.state.price && this.state.description && this.state.city && this.state.state && this.state.zipcode) {
             let formData = new FormData();
             formData.append("title", this.state.title);
             formData.append("category", this.state.category);
@@ -73,6 +74,7 @@ class NewPost extends Component {
             // console.log(this.fileInput);
             formData.append("image", this.fileInput.current.files[0], this.fileInput.current.files[0].name);
             formData.append("city", this.state.city);
+            formData.append("state", this.state.state);
             formData.append("zipcode", this.state.zipcode);
             const { user } = this.props.auth;
             formData.append("userName", user.userName);
@@ -82,7 +84,7 @@ class NewPost extends Component {
                     this.props.loadCity(user.id);
                     this.props.history.push("/");
                 })
-                .catch(err => console.log(err));
+                .catch(err => console.log(err.response));
         } else {
             alert("Please complete all elements before posting");
         };
