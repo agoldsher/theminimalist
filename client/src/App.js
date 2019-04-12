@@ -66,7 +66,6 @@ class App extends React.Component {
     open: false,
     search: "",
     city: "",
-    state:"",
     zipcode:"",
     categories: [
       {
@@ -161,14 +160,17 @@ class App extends React.Component {
       )
       .catch(err => console.log(err));
   }
-  handleZipCode = () => {
-    if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
-        API.getZipCode(this.state.zipcode)
+  handleZipCode = (zipcode) => {
+    if (zipcode.split("").length === 5 && /^[0-9]+$/.test(zipcode)) {
+        API.getZipCode(zipcode)
             .then((res) => {
                 this.setState({
-                    city: res.data.city,
-                    state: res.data.state
+                    city: `${res.data.city}, ${res.data.state}`
                 })
+                this.setState({
+                  zipcode:""
+              })
+                console.log(this.state.city)
                 this.handleCityChange(this.state.city)
             })
             .catch(err => console.log(err));
@@ -258,7 +260,7 @@ class App extends React.Component {
                       </TextField>
                       <Button raised onClick={()=>{
                         // e.preventDefault();
-                        this.handleZipCode()}}>Change Location</Button>
+                        this.handleZipCode(this.state.zipcode)}}>Change Location</Button>
                     </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
