@@ -30,7 +30,6 @@ import Detail from "./Pages/Detail";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import Message from "./Pages/Message";
-import MsgDash from "./Pages/MsgDash";
 // import Landing from "./Pages/Landing";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
@@ -312,11 +311,10 @@ class App extends React.Component {
                   <Switch>
                     <PrivateRoute exact path="/" render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city} loadCityTriggered={this.loadCityTriggered}/>} />
                     <PrivateRoute exact path="/newpost" render={(props) => <NewPost {...props} loadCity={this.loadCity}/>}  />
-                    <PrivateRoute exact path="/message" component={Message} />
-                    <PrivateRoute exact path="/msgdash" component={MsgDash} />
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute exact path="/:id" render={(props) => <Detail {...props} delete={this.delete}/>} />
+                    <PrivateRoute exact path="/message/:id" render={(props) => <Message {...props} delete={this.delete}/>} />
                     <PrivateRoute component={NoMatch} />
                   </Switch>
                 </div>

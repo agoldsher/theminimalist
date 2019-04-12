@@ -1,44 +1,54 @@
 import React from "react";
 import io from "socket.io-client";
+import API from "../utils/API";
 
 class Message extends React.Component {
     constructor(props) {
         super(props);
 
         this.state = {
-            username: '',
-            sent: '',
             message: '',
             messages: [],
-            roomID: ""
+            roomID: "",
+            postTitle: "",
+            postImage: "",
+            postCity: "",
+            postState: "",
         };
-
         this.socket = io('localhost:3001');
     };
 
     componentDidMount() {
-        this.connect();
+        console.log(this.props);
+        this.createConnection();
         this.receiveMessages();
     };
 
-    connect = () => {
-        // the room will be the two peoples user IDs or names
-        const room = "abc123"
+    createConnection = () => {
+        API.getPost(this.props.match.params.id)
+            .then(res => {
+                this.setState({ 
+                    postTitle: res.data.title,
+                    postImage: res.data.image,
+                    postCity: res.data.city, 
+                    postState: res.data.state 
+                });
+            })
+            .catch(err => console.log(err));
+        const room = this.props.match.params.id
         this.socket.emit("room", room);
-        this.setState({ roomID: room});
+        this.setState({ roomID: room });
     };
 
     receiveMessages = () => {
         this.socket.on('message', (data) => {
             this.setState({ messages: [...this.state.messages, data] })
-         });
+        });
     };
 
     emitMsgToServer = () => {
         const newMsg = {
-            from: this.state.username,
-            msg: this.state.username + ": " + this.state.message,
-            to: this.state.sent,
+            msg: "name" + ": " + this.state.message,
             room: this.state.roomID
         };
         this.socket.emit("server", newMsg)
@@ -47,48 +57,29 @@ class Message extends React.Component {
     render() {
         return (
             <div className="container">
-                <div className="row">
-                    <div className="col-4">
-                        <div className="card">
-                            <div className="card-body">
-                                <div className="card-title">Chat with {this.state.username}</div>
-                                <div className="messages">
-                                    {this.state.messages.map(message => {
-                                        return (
-                                            <div> {message}</div>
-                                        )
-                                    })}
-                                </div>
-                            </div>
-                            <div className="card-footer">
-                                <input type="text"
-                                    placeholder="Username"
-                                    value={this.state.username}
-                                    onChange={ev => this.setState({ username: ev.target.value })}
-                                    className="form-control"
-                                />
-                                <input type="text"
-                                    placeholder="Username2"
-                                    value={this.state.sent}
-                                    onChange={ev => this.setState({ sent: ev.target.value })}
-                                    className="form-control"
-                                />
-                                <input type="text"
-                                    placeholder="Message"
-                                    className="form-control"
-                                    value={this.state.message}
-                                    onChange={ev => this.setState({ message: ev.target.value })}
-                                />
-                                <br />
-                                <button onClick={this.emitMsgToServer} className="btn btn-primary form-control">Send</button>
-                            </div>
-                        </div>
-                    </div>
+            <h1>Forum page for {this.state.postTitle}</h1>
+            <img alt={this.state.postTitle} src={this.state.postImage}></img>
+            <p>{this.state.postCity + ", " + this.state.postState}</p>
+                <div className="messages">
+                    {this.state.messages.map(message => {
+                        return (
+                            <div> {message}</div>
+                        )
+                    })}
+                </div>
+                <div className="card-footer">
+                    <input type="text"
+                        placeholder="Message"
+                        className="form-control"
+                        value={this.state.message}
+                        onChange={ev => this.setState({ message: ev.target.value })}
+                    />
+                    <br />
+                    <button onClick={this.emitMsgToServer} className="btn btn-primary form-control">Send</button>
                 </div>
             </div>
         );
     };
 };
-
 
 export default Message;

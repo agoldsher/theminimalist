@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import API from "../utils/API";
 import { connect } from "react-redux";
+import { Link } from "react-router-dom";
 // import { Redirect } from 'react-router-dom';
 
 class Detail extends Component {
@@ -50,7 +51,12 @@ class Detail extends Component {
           <h2>{this.state.card.title}</h2>
           <h3>${this.state.card.price}/day</h3>
           <h4>Description: <br></br> {this.state.card.description}</h4>
-          <h4>Email me: <br></br> {this.state.card.email}</h4>
+          <form action={"mailto:" + this.state.card.email}>
+          <button type="submit">Email me</button>
+          </form>
+            <Link to={"/message/" + this.props.match.params.id}>
+            <button type="button">Forum</button>
+            </Link>
         </div>
       </div>
     );
