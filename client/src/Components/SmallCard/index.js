@@ -28,9 +28,9 @@ function SmallCard(props) {
               <Headline6 className='demo-card__title'>
                 {props.title}
               </Headline6>
-              <Subtitle2 className='demo-card__subtitle'>
+              {/* <Subtitle2 className='demo-card__subtitle'>
                 by Kurt Wagner
-                </Subtitle2>
+                </Subtitle2> */}
             </div>
             <CardMedia
               wide
@@ -42,7 +42,7 @@ function SmallCard(props) {
             </CardMedia>
             <Body2 className='demo-card__secondary'>
 
-              Visit ten places on our planet that are undergoing the biggest changes today.
+              ${props.price}/day
   </Body2>
           </CardPrimaryContent>
           {/* <CardActions>
