@@ -1,17 +1,24 @@
-@import "@material/react-button/index.scss";
-@import "./react-button-overrides";
-@import '@material/react-material-icon/index.scss';
-@import '@material/react-top-app-bar/index.scss';
-@import '@material/react-drawer/index.scss';
-@import '@material/react-list/index.scss';
-@import "@material/react-button/index.scss";
-@import "@material/react-typography/index.scss";
-@import "@material/react-card/index.scss";
-@import '@material/react-dialog/index.scss';
-@import '@material/react-text-field/index.scss';
-@import '@material/react-select/index.scss';
-@import '@material/react-icon-button/index.scss';
-@import '@material/react-material-icon/index.scss';
+/* @import "../node_modules/@material/react-button/dist/button.min.css"; */
+@import '../node_modules/@material/react-button/dist/button.css';
+/* @import "./react-button-overrides"; */
+/* @import '../node_modules/@material/react-material-icon/dist/material-icon.min.css'; */
+@import '../node_modules/@material/react-material-icon/dist/material-icon.css';
+@import '../node_modules/@material/react-top-app-bar/dist/top-app-bar.css';
+@import "../node_modules/@material/react-drawer/dist/drawer.css";
+@import '../node_modules/@material/react-list/dist/list.css';
+@import '../node_modules/@material/react-button/dist/button.css';
+@import '../node_modules/@material/react-typography/dist/typography.css';
+@import '../node_modules/@material/react-card/dist/card.css';
+@import "../node_modules/@material/react-dialog/dist/dialog.css";
+@import '../node_modules/@material/react-text-field/dist/text-field.css';
+@import '../node_modules/@material/react-select/dist/select.css';
+@import '../node_modules/@material/react-icon-button/dist/icon-button.css';
+/* 
+ .sidebar{
+   background-color: #efefef;
+   height: 100vh;
+   padding: 40px;
+ } */
 
 
 
@@ -96,39 +103,39 @@
 //     grid-gap: 30px;
 //   }
 
-//   .navbar-toggler {
-//     display: block;
-//   }
-// }
+   .navbar-toggler {
+     display: block;
+   }
+ } */
 
-// /* Desktop */
-// @media (min-width: 700px){
-//   .sidebar{
-//     display: block;
-//   } 
-//   .main-container{
-//     display: grid;
-//     grid-template-columns: 2fr 9fr;
-//     grid-gap: 30px;
-//   }
-//   .navbar-toggler {
-//     display: none;
-//   }
-//   .img-container{
-//     width: 20%;
-//     display: grid;
-//     grid-template-columns: 1fr;
-//     margin: 50px;
-//   }
+ /* Desktop */
+ /* @media (min-width: 700px){
+   .sidebar{
+     display: block;
+   } 
+   .main-container{
+     display: grid;
+     grid-template-columns: 2fr 9fr;
+     grid-gap: 30px;
+   }
+   .navbar-toggler {
+     display: none;
+   }
+   .img-container{
+     width: 20%;
+     display: grid;
+     grid-template-columns: 1fr;
+     margin: 50px;
+   }
   
-// }
+ }
 
-// .each-nav-item:hover {
-//   cursor: pointer;
-//   font-weight: bold;
-// }
+ .each-nav-item:hover {
+   cursor: pointer;
+   font-weight: bold;
+ }
 
-// .jumbotron {
-//   text-align: center;
-//   margin: 0;
-// }
+ .jumbotron {
+   text-align: center;
+   margin: 0;
+ } */

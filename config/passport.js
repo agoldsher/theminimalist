@@ -12,8 +12,10 @@ module.exports = passport => {
             User.findById(jwt_payload.id)
                 .then(user => {
                     if (user) {
+                        // console.log("Authorized user.")
                         return done(null, user);
                     }
+                    // console.log("Not logged in.");
                     return done(null, false);
                 })
                 .catch(err => console.log(err));
