@@ -14,6 +14,19 @@
 @import '../node_modules/@material/react-select/dist/select.css';
 @import '../node_modules/@material/react-icon-button/dist/icon-button.css';
 
+
+// Navbar
+.mdc-top-app-bar__section {
+  background-color: rgb(104, 201, 104);
+  .mdc-button{
+    background-color: rgb(104, 161, 96);
+  }
+  // .mdc-card,.demo-card__primary, .demo-card__secondary,.demo-card__title {
+  //   background-color: rgb(20, 131, 38);
+  //   color: #a4f0a1;
+  // }
+}
+
 // Main Page (Cards)
 .demo-card__primary {
   text-align: left;
@@ -21,9 +34,17 @@
 .demo-card__secondary {
     margin: 10px;
     padding-left: 10x;
+    text-align: left;
 }
 .demo-card__title {
   margin: 10px;
+}
+.mdc-card__primary-action {
+  background-color: #d5f0d4;
+// background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2kTwK68DduS92O9n9b5BjPagDUi1VwCvk3ygSiAnZgCWfSJBA");
+// background-position: center;
+// background-size: cover;
+// background-repeat: no-repeat;
 }
 
 // Landing Page
@@ -41,7 +62,6 @@
   border-radius: 10px;
   overflow: hidden;
   width: 30%;
-
   h2{
     padding: 25px;
     margin: 0 0 25px 0;
@@ -49,7 +69,6 @@
     background-color: #a4f0a1;
     text-align: center;
   }
-
   .input-field {
     display: flex;
     flex-direction: column;
@@ -58,23 +77,77 @@
     justify-content: center;
     padding: 10px;
   }
-.mdc-button {
+  .mdc-button {
   background-color: #a4f0a1;
-  margin: 0 0 10px 180px;
+  // margin: 0 0 10px 180px;
   align-content: right;
-}
-.btn-flat, .grey-text{
- margin: 16px 0 16px 0;
+  display: flex;
+  flex-direction: column;
+  align-content: right;
+  align-items: center;
+  justify-content: right;
+  padding: 10px;
 }
 }
 
-// New Post Page
+// NewPost Page
 .newPost-form {
-  display:grid;
-  grid-template-columns: 1fr;
-  margin: 5rem;
-
+  display:flex;
+  // grid-template-columns: 5fr;
+  flex-direction: column;
+  align-content: left;
+  align-items: left;
+  justify-content: left;
+  padding: 40px;
+  background-color: white;
+  // grid-template-columns: 1fr;
+  // margin: 5rem;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  margin: 20px;
+  .mdc-text-field {
+    width: 50%;
+  }
+  .mdc-button {
+    width: 10%;
+    background-color: rgb(86, 167, 86);
+  }
 }
+
+// Details Page
+  @media (min-width: 700px) {
+   .details-content {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      align-content: left;
+      align-items: left;
+      justify-content: left;
+      padding: 0;
+
+      .delete-button{
+        display:flex;
+        align-content: right;
+        align-items: right;
+        justify-content: center;
+      }
+    }
+    .details-container {
+      padding: 50px;
+    }
+}
+
+// body {
+//    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2kTwK68DduS92O9n9b5BjPagDUi1VwCvk3ygSiAnZgCWfSJBA");
+//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNz0kLZCi1qg-8W0UGAzSTjdPmK7E6cLlh4nG6GbMJcKmYB6XBSA");
+//   //  URL("https://wallpapercave.com/wp/BiOMtoB.jpg");
+//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuvxfjjfnGm8YwjAdVq98bv_12LICD5ZzpwXhf9V5hJocFcPh");
+//    background-repeat: no-repeat;
+//    background-position: center;
+//    background-size: cover;
+// }
+
+
 
 
 

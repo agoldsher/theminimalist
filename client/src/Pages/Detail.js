@@ -8,7 +8,7 @@ class Detail extends Component {
   state = {
     card: {}
   };
-  deleteMe(id){
+  deleteMe(id) {
     this.props.delete(id);
     this.props.history.push('/')
   }
@@ -28,29 +28,33 @@ class Detail extends Component {
   // }
   //   )
   // }
-  renderDeleteButton=()=>{
-    if (this.props.auth.user.email===this.state.card.email ){
-      return(
-        <button  onClick={()=>this.deleteMe(this.props.match.params.id)}>delete post</button>
+  renderDeleteButton = () => {
+    if (this.props.auth.user.email === this.state.card.email) {
+      return (
+        <button onClick={() => this.deleteMe(this.props.match.params.id)}>Delete Post</button>
       )
-    }else{
-      return("")
+    } else {
+      return ("")
     }
   }
   // Map over this.state.friends and render a FriendCard component for each friend object
   render() {
     return (
-      <div>
-       {this.renderDeleteButton()}
-        <h1> {this.state.card.userName}</h1>
-        <div className="img-container">
-          <img alt={this.state.card.title} src={this.state.card.image} />
-        </div>
-        <div className="details">
-          <h2>{this.state.card.title}</h2>
-          <h3>${this.state.card.price}/day</h3>
-          <h4>Description: <br></br> {this.state.card.description}</h4>
-          <h4>Email me: <br></br> {this.state.card.email}</h4>
+      <div className="details-container">
+        <div className="details-content">
+          <div className="img-container">
+            <h1> {this.state.card.userName}</h1>
+            <img alt={this.state.card.title} src={this.state.card.image} />
+          </div>
+          <div className="details">
+            <h2>{this.state.card.title}</h2>
+            <h3>${this.state.card.price}/day</h3>
+            <h4>Description: <br></br> {this.state.card.description}</h4>
+            <h4>Email me: <br></br> {this.state.card.email}</h4>
+            <div className="delete-button">
+            {this.renderDeleteButton()}
+          </div>
+          </div>
         </div>
       </div>
     );
