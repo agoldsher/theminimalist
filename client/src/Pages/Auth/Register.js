@@ -13,7 +13,7 @@ class Register extends Component {
         super();
         this.state = {
             name: "",
-            userName:"",
+            userName: "",
             email: "",
             password: "",
             password2: "",
@@ -83,26 +83,18 @@ class Register extends Component {
     render() {
         const { errors } = this.state;
         return (
-            <div className="container">
-                <div className="row">
-                    <div className="col s8 offset-s2">
-                        <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to
-                            home
-            </Link>
-                        <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                            <h4>
-                                <b>Register</b> below
-              </h4>
-                            <p className="grey-text text-darken-1">
-                                Already have an account? <Link to="/login">Log in</Link>
-                            </p>
-                        </div>
-                        <form noValidate onSubmit={this.onSubmit}>
-                        <div className="input-field col s12">
-                        <TextField
-                                    label='User Name'
-                                >
+            <div className="register-container">
+                <div className="register-form">
+                    <div className="header">
+                        <h2>
+                            <b>The Minimalist</b>
+                        </h2>
+                    </div>
+                    <form noValidate onSubmit={this.onSubmit}>
+                        <div className="input-field">
+                            <TextField
+                                label='User Name'
+                            >
                                 <Input
                                     onChange={this.onChange}
                                     value={this.state.userName}
@@ -113,13 +105,13 @@ class Register extends Component {
                                         invalid: errors.userName
                                     })}
                                 />
-                                </TextField>
-                                <span className="red-text">{errors.userName}</span>
-                            </div>
-                            <div className="input-field col s12">
-                                <TextField
-                                    label='Name'
-                                >
+                            </TextField>
+                            <span className="red-text">{errors.userName}</span>
+                        </div>
+                        <div className="input-field">
+                            <TextField
+                                label='Name'
+                            >
 
                                     <Input
                                         onChange={this.onChange}
@@ -191,26 +183,28 @@ class Register extends Component {
                                         invalid: errors.zipcode
                                     })}
                                 />
-                             </TextField>
-                                <span className="red-text">{errors.city}</span>
-                            </div>
-                            <div className="col s12" style={{ paddingLeft: "11.250px" }}>
-                                <Button
-                                    style={{
-                                        width: "150px",
-                                        borderRadius: "3px",
-                                        letterSpacing: "1.5px",
-                                        marginTop: "1rem"
-                                    }}
-                                
-                                    type="submit"
-                                    className="btn btn-large waves-effect waves-light hoverable blue accent-3"
-                                >
-                                    Sign up
-                </Button>
-                            </div>
-                        </form>
-                    </div>
+                            </TextField>
+                            <span className="red-text">{errors.city}</span>
+                        </div>
+                        <div className="register-button">
+                            <Button
+                                style={{
+                                    width: "150px",
+                                    borderRadius: "3px",
+                                    letterSpacing: "1.5px",
+                                    marginTop: "1rem"
+                                }}
+                                type="submit"
+                                className="btn btn-large waves-effect waves-light hoverable blue accent-3"
+                            >
+                                Sign up
+                            </Button>
+                        </div>
+                        <Link to="/" className="btn-flat waves-effect">
+                        <i className="material-icons left">keyboard_backspace</i> Back to
+                        login
+                        </Link>
+                    </form>
                 </div>
             </div>
         );
