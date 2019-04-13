@@ -230,7 +230,7 @@ class App extends React.Component {
                     // category={category}
                     // handleCategoryChange= {this.props.handleCategoryChange(category)}
                     // />
-                    <ListItem key ={index}onClick={
+                    <ListItem key ={index} onClick={
                       (e) => {
                         e.preventDefault()
                         this.handleCategoryChange(category.name)
@@ -262,6 +262,12 @@ class App extends React.Component {
                       <Button raised onClick={()=>{
                         // e.preventDefault();
                         this.handleZipCode(this.state.zipcode)}}>Change Location</Button>
+                      <TextField label="Search">
+                        <Input value={this.state.search} id="search" onChange={this.onChange} />
+                      </TextField>
+                      <Button raised onClick={()=>{
+                        // e.preventDefault();
+                        this.handleSearch(this.state.search)}}>Search</Button>
                     </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
