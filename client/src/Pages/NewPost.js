@@ -22,7 +22,7 @@ class NewPost extends Component {
         price: "",
         description: "",
         image: "",
-        city: "city",
+        city: "",
         state:"state",
         zipcode: ""
     };
@@ -118,7 +118,7 @@ class NewPost extends Component {
                             "Household",
                             "Sports",
                             "Movies and Games",
-                            "Machinary",
+                            "Machinery",
                             "Tools",
                             "Space"]}
                         label="Category"
