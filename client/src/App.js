@@ -29,6 +29,8 @@ import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
+import Message from "./Pages/Message";
+// import Landing from "./Pages/Landing";
 import API from './utils/API'
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
 import LogoutBtn from "./Components/LogoutBtn";
@@ -314,6 +316,7 @@ class App extends React.Component {
                     <Route exact path="/register" component={Register} />
                     <Route exact path="/login" component={Login} />
                     <PrivateRoute exact path="/:id" render={(props) => <Detail {...props} delete={this.delete}/>} />
+                    <PrivateRoute exact path="/message/:id" render={(props) => <Message {...props} delete={this.delete}/>} />
                     <PrivateRoute component={NoMatch} />
                   </Switch>
                 </div>
