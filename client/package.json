@@ -43,11 +43,10 @@
     "typescript": "^3.4.1"
   },
   "scripts": {
-    "start": "cross-env SASS_PATH=./node_modules react-scripts start",
-    "build": "cross-env SASS_PATH=./node_modules react-scripts build",
+    "start": "SASS_PATH=./node_modules react-scripts start",
+    "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject",
-    "node-sass": "node-sass --output-style compressed -o dist/css src/scss"
+    "eject": "react-scripts eject"
   },
   "browserslist": [
     ">0.2%",

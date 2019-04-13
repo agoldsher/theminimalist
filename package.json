@@ -5,12 +5,12 @@
   "main": "server.js",
   "scripts": {
     "start": "if-env NODE_ENV=production && npm run start:prod || npm run start:dev",
-    "start:prod": "cross-env SASS_PATH=./node_modules node server.js",
-    "start:dev": "concurrently \"cross-env SASS_PATH=./node_modules nodemon --ignore 'client/*'\" \"npm run client\"",
+    "start:prod": "SASS_PATH=./node_modules node server.js",
+    "start:dev": "SASS_PATH=./node_modules concurrently \"nodemon --ignore 'client/*'\" \"npm run client\"",
     "client": "cd client && npm run start",
     "install": "cd client && npm install",
     "seed": "node scripts/seedDB.js",
-    "build": "cd client && cross-env SASS_PATH=./node_modules npm run build",
+    "build": "cd client && SASS_PATH=./node_modules npm run build",
     "heroku-postbuild": "npm run build"
   },
   "author": "",

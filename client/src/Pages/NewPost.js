@@ -23,7 +23,7 @@ class NewPost extends Component {
         description: "",
         image: "",
         city: "city",
-        state: "state",
+        state:"state",
         zipcode: ""
     };
     constructor(props) {
@@ -38,9 +38,9 @@ class NewPost extends Component {
             API.getZipCode(this.state.zipcode)
                 .then((res) => {
                     this.setState({
-                        city: res.data.city,
-                        state: res.data.state
+                        city: `${res.data.city}, ${res.data.state}`
                     })
+
                 })
                 .catch(err => console.log(err));
         };
@@ -84,7 +84,7 @@ class NewPost extends Component {
                     this.props.loadCity(user.id);
                     this.props.history.push("/");
                 })
-                .catch(err => console.log(err));
+                .catch(err => console.log(err.response));
         } else {
             alert("Please complete all elements before posting");
         };
@@ -143,7 +143,7 @@ class NewPost extends Component {
                         />
                     </TextField>
                     <TextField
-                        label='Zip Code'
+                        label='Zipcode'
                         helperText={<HelperText>Enter Zip Code (required)</HelperText>}
                     >
                         <Input
@@ -155,9 +155,6 @@ class NewPost extends Component {
                     <FormBtn onClick={this.handleZipCode}>Check</FormBtn>
                     <TextDisplay
                         label={this.state.city}
-                    />
-                    <TextDisplay
-                        label={this.state.state}
                     />
                     <ImgUpload
                         value={this.state.Image}

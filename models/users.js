@@ -26,6 +26,9 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
+    roomChats: {
+        type: Array
+    }
 })
 
 module.exports = mongoose.model("User", userSchema);
