@@ -6,6 +6,7 @@ import { registerUser } from "../../actions/authActions";
 import classnames from "classnames";
 import TextField, { Input } from "@material/react-text-field";
 import Button from "@material/react-button";
+import API from "../../utils/API";
 
 class Register extends Component {
     constructor() {
@@ -16,7 +17,8 @@ class Register extends Component {
             email: "",
             password: "",
             password2: "",
-            city: "",
+            zipcode:"",
+            city:"",
             errors: {}
         };
     }
@@ -33,20 +35,50 @@ class Register extends Component {
             });
         }
     }
+    handleZipCode = (zipcode) => {
+        if (zipcode.split("").length === 5 && /^[0-9]+$/.test(zipcode)) {
+            API.getZipCode(zipcode)
+                .then((res) => {
+                    this.setState({
+                        city: `${res.data.city}, ${res.data.state}`
+                    })
+             
+                })
+                .catch(err => console.log(err));
+        };
+      };
     onChange = e => {
         this.setState({ [e.target.id]: e.target.value });
     };
     onSubmit = e => {
+        let city;
         e.preventDefault();
-        const newUser = {
-            name: this.state.name,
-            userName: this.state.userName,
-            email: this.state.email,
-            password: this.state.password,
-            password2: this.state.password2,
-            city: this.state.city
+        if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
+            API.getZipCode(this.state.zipcode)
+                .then((res) => {
+                    
+                    city = `${res.data.city}, ${res.data.state}`
+                    const newUser = {
+                        name: this.state.name,
+                        userName:this.state.userName,
+                        email: this.state.email,
+                        password: this.state.password,
+                        password2: this.state.password2,
+                        city: city
+                        
+                    };
+
+                    console.log(newUser)
+                    
+                    this.props.registerUser(newUser, this.props.history);
+                })
+                .catch(err => console.log(err));
         };
-        this.props.registerUser(newUser, this.props.history);
+       
+        
+    
+        
+        
     };
     render() {
         const { errors } = this.state;
@@ -81,74 +113,74 @@ class Register extends Component {
                                 label='Name'
                             >
 
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.name}
+                                        error={errors.name}
+                                        id="name"
+                                        type="text"
+                                        className={classnames("", {
+                                            invalid: errors.name
+                                        })}
+                                    />
+                                </TextField>
+                                <span className="red-text">{errors.name}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <TextField label='Email'>
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.email}
+                                        error={errors.email}
+                                        id="email"
+                                        type="email"
+                                        className={classnames("", {
+                                            invalid: errors.email
+                                        })}
+                                    />
+                                </TextField>
+                                <span className="red-text">{errors.email}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <TextField label='Password'>
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.password}
+                                        error={errors.password}
+                                        id="password"
+                                        type="password"
+                                        className={classnames("", {
+                                            invalid: errors.password
+                                        })}
+                                    />
+                                </TextField>
+                                <span className="red-text">{errors.password}</span>
+                            </div>
+                            <div className="input-field col s12">
+                                <TextField label="Confirm">
+                                    <Input
+                                        onChange={this.onChange}
+                                        value={this.state.password2}
+                                        error={errors.password2}
+                                        id="password2"
+                                        type="password"
+                                        className={classnames("", {
+                                            invalid: errors.password2
+                                        })}
+                                    />
+                                </TextField>
+                                <span className="red-text">{errors.password2}</span>
+                            </div>
+                            <div className="input-field col s12">
+                            <TextField label="Zip Code">
                                 <Input
                                     onChange={this.onChange}
-                                    value={this.state.name}
-                                    error={errors.name}
-                                    id="name"
-                                    type="text"
+                                    value={this.state.zipcode}
+                                    error={errors.zipcode}
+                                    id="zipcode"
+                                    type="zipcode"
                                     className={classnames("", {
-                                        invalid: errors.name
-                                    })}
-                                />
-                            </TextField>
-                            <span className="red-text">{errors.name}</span>
-                        </div>
-                        <div className="input-field">
-                            <TextField label='Email'>
-                                <Input
-                                    onChange={this.onChange}
-                                    value={this.state.email}
-                                    error={errors.email}
-                                    id="email"
-                                    type="email"
-                                    className={classnames("", {
-                                        invalid: errors.email
-                                    })}
-                                />
-                            </TextField>
-                            <span className="red-text">{errors.email}</span>
-                        </div>
-                        <div className="input-field">
-                            <TextField label='Password'>
-                                <Input
-                                    onChange={this.onChange}
-                                    value={this.state.password}
-                                    error={errors.password}
-                                    id="password"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password
-                                    })}
-                                />
-                            </TextField>
-                            <span className="red-text">{errors.password}</span>
-                        </div>
-                        <div className="input-field">
-                            <TextField label="Confirm">
-                                <Input
-                                    onChange={this.onChange}
-                                    value={this.state.password2}
-                                    error={errors.password2}
-                                    id="password2"
-                                    type="password"
-                                    className={classnames("", {
-                                        invalid: errors.password2
-                                    })}
-                                />
-                            </TextField>
-                            <span className="red-text">{errors.password2}</span>
-                        </div>
-                        <div className="input-field">
-                            <TextField label="City">
-                                <Input
-                                    onChange={this.onChange}
-                                    value={this.state.city}
-                                    error={errors.city}
-                                    id="city"
-                                    type="city"
-                                    className={classnames("", {
-                                        invalid: errors.city
+                                        invalid: errors.zipcode
                                     })}
                                 />
                             </TextField>

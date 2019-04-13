@@ -7,13 +7,8 @@ const bodyParser = require("body-parser");
 const passport = require("passport");
 const routes = require("./routes");
 const app = express();
-const http = require("http").Server(app);
-const io = require("socket.io")(http);
-
-io.on("connection", (client) => {
-  console.log("a user is connected");
-  client.on("message", handleMessage)
- })
+const socket = require("socket.io");
+const db = require("./models");
 
 // Define middleware here
 // Bodyparser middleware
@@ -33,7 +28,6 @@ if (process.env.NODE_ENV === "production") {
 // Add routes, both API and view
 app.use(routes);
 
-
 // Connecting to Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist", { useNewUrlParser: true })
   .then(() => console.log("MongoDB successfully connected"))
@@ -49,6 +43,53 @@ app.get("*", (req, res) => {
 });
 
 // Start the API server
-app.listen(PORT, function () {
+server = app.listen(PORT, function () {
   console.log(`🌎  ==> API Server now listening on PORT ${PORT}!`);
+});
+
+// Real time forum messaging with socket.io
+io = socket(server);
+
+io.sockets.on('connection', function (socket) {
+  socket.on('room', function (room) {
+    socket.join(room);
+      db.Message
+          .find({ room: room })
+          .then((dbModel) => {
+            dbModel.forEach(message => {
+              io.sockets.in(room).emit('message', message.body)
+            })
+          })
+          .catch(err => console.log(err));
+  });
+  socket.on("server", function (msg) {
+    room = msg.room;
+    io.sockets.in(room).emit('message', msg.msg)
+    db.Message
+            .create({
+                name: msg.name,
+                body: msg.msg,
+                room: msg.room,
+            })
+            //.then(dbModel => res.json(dbModel))
+            .catch(err => console.log(err))
+  });
+  socket.on("delete", function (msg) {
+    room = msg.room
+    db.Message
+      .deleteOne({ body: msg.body})
+      .then(() => {
+        db.Message
+          .find({ room: msg.room })
+          .then((dbModel) => {
+            dbModel.forEach(message => {
+              io.sockets.in(msg.room).emit('message', message.body)
+            })
+          })
+      })
+      .catch(err => console.log(err))
+  });
+  socket.on("disconnect", function () {
+    console.log("user disconnected");
+  });
 });
