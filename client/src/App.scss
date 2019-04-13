@@ -90,20 +90,31 @@
 }
 }
 
+.newPost-Container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 700px;
+  margin: auto;
+}
+
+.spread_btn {
+  display: flex;
+  justify-content: space-between;
+}
+
 // NewPost Page
 .newPost-form {
-  display:flex;
+  // display:flex;
   // grid-template-columns: 5fr;
-  flex-direction: column;
-  align-content: left;
-  align-items: left;
-  justify-content: left;
+  // flex-direction: column;
+  // align-content: left;
+  // align-items: left;
+  // justify-content: left;
   padding: 40px;
   background-color: white;
   // grid-template-columns: 1fr;
   // margin: 5rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
+ 
   overflow: hidden;
   margin: 20px;
   .mdc-text-field {
@@ -125,15 +136,20 @@
       justify-content: left;
       padding: 0;
 
+
       .delete-button{
         display:flex;
-        align-content: right;
-        align-items: right;
+        align-content: start;
+        align-items: start;
         justify-content: center;
       }
     }
     .details-container {
       padding: 50px;
+    }
+
+    .details {
+      margin: 100px;
     }
 }
 

@@ -95,12 +95,14 @@ class NewPost extends Component {
             <div className="newPost-Container">
                 <form className="newPost-form">
                     <TextField
+                    
                         label='Title'
-                        helperText={<HelperText></HelperText>}>
+                        helperText={<HelperText>hello world</HelperText>}>
                         <Input
                             value={this.state.title}
                             onChange={this.handleInputChange}
                             name="title"
+                            style={{width: "100%"}}
                         />
                     </TextField>
                     <DropDown
@@ -122,6 +124,7 @@ class NewPost extends Component {
                         label="Category"
                     />
                     <TextField
+                        style={{marginTop: "10px"}}
                         label='Price'
                         helperText={<HelperText>Enter Price per day in $ USD (required)</HelperText>}>
                         <Input
@@ -133,6 +136,8 @@ class NewPost extends Component {
                     </TextField>
                     <TextField
                         label='Description'
+                        style={{width: "80%"}}
+                        class="myDesc"
                         helperText={<HelperText>Enter Description (required)</HelperText>}
                         textarea={true}
                     >
@@ -143,6 +148,7 @@ class NewPost extends Component {
                         />
                     </TextField>
                     <TextField
+                        style= {{width: "183px"}}
                         label='Zip Code'
                         helperText={<HelperText>Enter Zip Code (required)</HelperText>}
                     >
@@ -165,10 +171,12 @@ class NewPost extends Component {
                         label="Image: "
                         fileRef={this.fileInput}
                     />
-                    <Link to="/">
-                        <FormBtn>Cancel</FormBtn>
-                    </Link>
-                    <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
+                    <div className="spread_btn">
+                        <Link to="/">
+                            <FormBtn>Cancel</FormBtn>
+                        </Link>
+                        <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
+                    </div>
                 </form>
             </div>
         );
