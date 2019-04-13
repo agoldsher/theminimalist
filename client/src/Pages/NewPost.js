@@ -116,7 +116,7 @@ class NewPost extends Component {
                             "Household",
                             "Sports",
                             "Movies and Games",
-                            "Machinary",
+                            "Machinery",
                             "Tools",
                             "Space"]}
                         label="Category"
