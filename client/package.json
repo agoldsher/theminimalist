@@ -6,6 +6,7 @@
   "proxy": "http://localhost:3001/",
   "dependencies": {
     "@material-ui/core": "^3.9.3",
+    "@material-ui/icons": "^3.0.2",
     "@material/react-button": "^0.11.0",
     "@material/react-card": "^0.11.0",
     "@material/react-dialog": "^0.11.0",
@@ -19,6 +20,7 @@
     "@material/react-text-field": "^0.11.0",
     "@material/react-top-app-bar": "^0.11.0",
     "@material/react-typography": "^0.11.0",
+    "@material/ripple": "^1.1.0",
     "@material/top-app-bar": "^1.1.0",
     "@types/classnames": "^2.2.7",
     "@types/node": "^11.13.0",
@@ -42,7 +44,7 @@
     "typescript": "^3.4.1"
   },
   "scripts": {
-    "start": "SASS_PATH=./node_modules react-scripts start",
+    "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"

@@ -77,6 +77,11 @@
     justify-content: center;
     padding: 10px;
   }
+  .buttonContainer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
   .mdc-button {
   background-color: #a4f0a1;
   // margin: 0 0 10px 180px;
@@ -136,16 +141,34 @@
       justify-content: left;
       padding: 0;
 
+      .mdc-button{
+        background-color: rgb(86, 167, 86);
+        margin: 20px;
+        width:150px;
+      }
 
-      .delete-button{
+      .details-button{
         display:flex;
-        align-content: start;
         align-items: start;
-        justify-content: center;
+        justify-content: flex-start;
+        .mdc-button.ml-0{
+          margin-left: 0;
+        }
+        .mdc-button{
+          background-color: rgb(86, 167, 86);
+          margin: 20px;
+          width:150px;
+        }
       }
     }
     .details-container {
       padding: 50px;
+      position: relative;
+      .delete-btn{
+        position: absolute;
+        right: 10px;
+        top:10px;
+      }
     }
 
     .details {
