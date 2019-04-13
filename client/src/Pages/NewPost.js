@@ -22,7 +22,7 @@ class NewPost extends Component {
         price: "",
         description: "",
         image: "",
-        city: "city",
+        city: "",
         state:"state",
         zipcode: ""
     };
