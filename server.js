@@ -67,11 +67,27 @@ io.sockets.on('connection', function (socket) {
     io.sockets.in(room).emit('message', msg.msg)
     db.Message
             .create({
+                name: msg.name,
                 body: msg.msg,
                 room: msg.room,
             })
             //.then(dbModel => res.json(dbModel))
             .catch(err => console.log(err))
+  });
+  socket.on("delete", function (msg) {
+    room = msg.room
+    db.Message
+      .deleteOne({ body: msg.body})
+      .then(() => {
+        db.Message
+          .find({ room: msg.room })
+          .then((dbModel) => {
+            dbModel.forEach(message => {
+              io.sockets.in(msg.room).emit('message', message.body)
+            })
+          })
+      })
+      .catch(err => console.log(err))
   });
   socket.on("disconnect", function () {
     console.log("user disconnected");

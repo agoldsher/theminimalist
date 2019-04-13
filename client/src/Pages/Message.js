@@ -1,6 +1,8 @@
 import React from "react";
 import io from "socket.io-client";
 import API from "../utils/API";
+import { connect } from "react-redux";
+import { withRouter } from "react-router";
 
 class Message extends React.Component {
     constructor(props) {
@@ -14,24 +16,26 @@ class Message extends React.Component {
             postImage: "",
             postCity: "",
             postState: "",
+            loggedInName: ""
         };
         this.socket = io('localhost:3001');
     };
 
     componentDidMount() {
-        console.log(this.props);
         this.createConnection();
         this.receiveMessages();
     };
 
     createConnection = () => {
+        const { user } = this.props.auth;
         API.getPost(this.props.match.params.id)
             .then(res => {
                 this.setState({ 
                     postTitle: res.data.title,
                     postImage: res.data.image,
                     postCity: res.data.city, 
-                    postState: res.data.state 
+                    postState: res.data.state,
+                    loggedInName: user.userName
                 });
             })
             .catch(err => console.log(err));
@@ -48,10 +52,19 @@ class Message extends React.Component {
 
     emitMsgToServer = () => {
         const newMsg = {
-            msg: "name" + ": " + this.state.message,
+            name: this.state.loggedInName,
+            msg: this.state.loggedInName + ": " + this.state.message,
             room: this.state.roomID
         };
         this.socket.emit("server", newMsg)
+    };
+
+    deleteMsg = (msg) => {
+        const message = {};
+        message.room = this.state.roomID;
+        message.body = msg;
+        this.socket.emit("delete", message);
+        this.setState({ messages: [] })
     };
 
     render() {
@@ -62,8 +75,14 @@ class Message extends React.Component {
             <p>{this.state.postCity + ", " + this.state.postState}</p>
                 <div className="messages">
                     {this.state.messages.map(message => {
+                        if (this.state.loggedInName === message.substr(0, message.indexOf(":")))
                         return (
-                            <div> {message}</div>
+                            <div>{message}
+                            <button onClick={()=>this.deleteMsg(message)}>x</button>
+                            </div>
+                        )
+                        return (
+                            <div>{message}</div>
                         )
                     })}
                 </div>
@@ -82,4 +101,7 @@ class Message extends React.Component {
     };
 };
 
-export default Message;
+const mapStateToProps = (state) => {
+    return {auth: state.auth}
+};
+export default withRouter(connect(mapStateToProps, {})(Message));
