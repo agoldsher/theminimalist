@@ -17,7 +17,6 @@
   "license": "ISC",
   "devDependencies": {
     "concurrently": "^4.1.0",
-    "cross-env": "^5.2.0",
     "nodemon": "^1.18.10"
   },
   "dependencies": {
@@ -29,6 +28,7 @@
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.18.3",
     "cloudinary": "^1.14.0",
+    "cross-env": "^5.2.0",
     "dotenv": "^7.0.0",
     "express": "^4.16.4",
     "http": "0.0.0",
