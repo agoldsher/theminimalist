@@ -15,7 +15,6 @@ class Message extends React.Component {
             postTitle: "",
             postImage: "",
             postCity: "",
-            postState: "",
             loggedInName: ""
         };
         this.socket = io('localhost:3001');
@@ -34,7 +33,6 @@ class Message extends React.Component {
                     postTitle: res.data.title,
                     postImage: res.data.image,
                     postCity: res.data.city, 
-                    postState: res.data.state,
                     loggedInName: user.userName
                 });
             })
@@ -72,7 +70,7 @@ class Message extends React.Component {
             <div className="container">
             <h1>Forum page for {this.state.postTitle}</h1>
             <img alt={this.state.postTitle} src={this.state.postImage}></img>
-            <p>{this.state.postCity + ", " + this.state.postState}</p>
+            <p>{this.state.postCity}</p>
                 <div className="messages">
                     {this.state.messages.map(message => {
                         if (this.state.loggedInName === message.substr(0, message.indexOf(":")))
