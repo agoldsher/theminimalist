@@ -111,7 +111,6 @@ class NewPost extends Component {
                         name="category"
                         categories={[
                             "",
-                            "Category",
                             "Electronics",
                             "Appliances",
                             "Clothing",
