@@ -2,9 +2,9 @@ import React, { Component } from "react";
 class Landing extends Component {
   render() {
     return (
-      <div style={{ height: "75vh" }} className="container valign-wrapper">
+      <div style={{ height: "75vh" }} className="container">
         <div className="row">
-          <div className="col s12 center-align">
+          <div className="col">
             <h4>
               <b>Build</b> a login/auth app with the{" "}
               <span style={{ fontFamily: "monospace" }}>MERN</span> stack from

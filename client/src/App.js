@@ -12,6 +12,8 @@ import NoMatch from "./Pages/NoMatch";
 import Detail from "./Pages/Detail";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
+import Message from "./Pages/Message";
+// import Landing from "./Pages/Landing";
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
 import API from './utils/API';
 import './App.scss';
@@ -45,8 +47,7 @@ class App extends React.Component {
     open: false,
     search: "",
     city: "",
-    state: "",
-    zipcode: "",
+    zipcode:"",
     categories: [
       {
         name: "All",
@@ -106,6 +107,7 @@ class App extends React.Component {
   loadPopPosts = () => {
     API.getPopPosts(this.state.city)
       .then(res => {
+        console.log(res.data)
         this.setState({ cards: res.data });
       }
       )
@@ -141,17 +143,20 @@ class App extends React.Component {
       )
       .catch(err => console.log(err));
   }
-  handleZipCode = () => {
-    if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
-      API.getZipCode(this.state.zipcode)
-        .then((res) => {
-          this.setState({
-            city: res.data.city,
-            state: res.data.state
-          })
-          this.handleCityChange(this.state.city)
-        })
-        .catch(err => console.log(err));
+  handleZipCode = (zipcode) => {
+    if (zipcode.split("").length === 5 && /^[0-9]+$/.test(zipcode)) {
+        API.getZipCode(zipcode)
+            .then((res) => {
+                this.setState({
+                    city: `${res.data.city}, ${res.data.state}`
+                })
+                this.setState({
+                  zipcode:""
+              })
+                console.log(this.state.city)
+                this.handleCityChange(this.state.city)
+            })
+            .catch(err => console.log(err));
     };
   };
 
@@ -183,13 +188,13 @@ class App extends React.Component {
     return (
       <Provider store={store}>
         <Router history={history}>
-
           <Switch>
             <PrivateRoute exact path="/" parent={this} render={(props) => <Main {...props} cards={this.state.cards} city={this.state.city} loadCityTriggered={this.loadCityTriggered} />} />
             <PrivateRoute exact path="/newpost" parent={this} render={(props) => <NewPost {...props} loadCity={this.loadCity} />} />
             <Route exact path="/register" component={Register} />
             <Route exact path="/login" component={Login} />
             <PrivateRoute exact path="/:id"  parent={this} render={(props) => <Detail {...props} delete={this.delete} />} />
+            <PrivateRoute exact path="/message/:id" parent={this} render={(props) => <Message {...props} delete={this.delete}/>} />
             <PrivateRoute component={NoMatch} parent={this} />
           </Switch>
         </Router>

@@ -111,7 +111,7 @@ class PrivateRoute extends React.Component {
                       </TextField>
                       <Button raised onClick={() => {
                         // e.preventDefault();
-                        parent.handleZipCode()
+                        parent.handleZipCode(parent.state.zipcode)
                       }}>Change Location</Button>
                     </div>
                   </TopAppBarSection>

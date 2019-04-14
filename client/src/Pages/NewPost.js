@@ -22,8 +22,8 @@ class NewPost extends Component {
         price: "",
         description: "",
         image: "",
-        city: "city",
-        state: "state",
+        city: "",
+        state:"state",
         zipcode: ""
     };
     constructor(props) {
@@ -38,9 +38,9 @@ class NewPost extends Component {
             API.getZipCode(this.state.zipcode)
                 .then((res) => {
                     this.setState({
-                        city: res.data.city,
-                        state: res.data.state
+                        city: `${res.data.city}, ${res.data.state}`
                     })
+
                 })
                 .catch(err => console.log(err));
         };
@@ -84,7 +84,7 @@ class NewPost extends Component {
                     this.props.loadCity(user.id);
                     this.props.history.push("/");
                 })
-                .catch(err => console.log(err));
+                .catch(err => console.log(err.response));
         } else {
             alert("Please complete all elements before posting");
         };
@@ -92,15 +92,17 @@ class NewPost extends Component {
 
     render() {
         return (
-            <div className="mdc-form-field">
-                <form>
+            <div className="newPost-Container">
+                <form className="newPost-form">
                     <TextField
+                    
                         label='Title'
-                        helperText={<HelperText></HelperText>}>
+                        helperText={<HelperText>hello world</HelperText>}>
                         <Input
                             value={this.state.title}
                             onChange={this.handleInputChange}
                             name="title"
+                            style={{width: "100%"}}
                         />
                     </TextField>
                     <DropDown
@@ -109,19 +111,19 @@ class NewPost extends Component {
                         name="category"
                         categories={[
                             "",
-                            "Category",
                             "Electronics",
                             "Appliances",
                             "Clothing",
                             "Household",
                             "Sports",
                             "Movies and Games",
-                            "Machinary",
+                            "Machinery",
                             "Tools",
                             "Space"]}
                         label="Category"
                     />
                     <TextField
+                        style={{marginTop: "10px"}}
                         label='Price'
                         helperText={<HelperText>Enter Price per day in $ USD (required)</HelperText>}>
                         <Input
@@ -133,6 +135,8 @@ class NewPost extends Component {
                     </TextField>
                     <TextField
                         label='Description'
+                        style={{width: "80%"}}
+                        class="myDesc"
                         helperText={<HelperText>Enter Description (required)</HelperText>}
                         textarea={true}
                     >
@@ -143,6 +147,7 @@ class NewPost extends Component {
                         />
                     </TextField>
                     <TextField
+                        style= {{width: "183px"}}
                         label='Zip Code'
                         helperText={<HelperText>Enter Zip Code (required)</HelperText>}
                     >
@@ -156,19 +161,18 @@ class NewPost extends Component {
                     <TextDisplay
                         label={this.state.city}
                     />
-                    <TextDisplay
-                        label={this.state.state}
-                    />
                     <ImgUpload
                         value={this.state.Image}
                         name="image"
                         label="Image: "
                         fileRef={this.fileInput}
                     />
-                    <Link to="/">
-                        <FormBtn>Cancel</FormBtn>
-                    </Link>
-                    <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
+                    <div className="spread_btn">
+                        <Link to="/">
+                            <FormBtn>Cancel</FormBtn>
+                        </Link>
+                        <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
+                    </div>
                 </form>
             </div>
         );

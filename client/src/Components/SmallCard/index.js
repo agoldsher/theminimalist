@@ -8,10 +8,12 @@ import Card, {
   // CardActionIcons
 } from "@material/react-card";
 // import ItemDetails from '../ItemDetails';
-import { Body2,
-   Headline6, 
+import {
+  Body2,
+  Headline6,
   //  Headline4, 
-   Subtitle2 } from "@material/react-typography";
+  Subtitle2
+} from "@material/react-typography";
 // import Button from "@material/react-button";
 // import IconButton from '@material/react-icon-button';
 // import MaterialIcon from '@material/react-material-icon';
@@ -21,16 +23,13 @@ import "./style.css";
 function SmallCard(props) {
   return (
     <div>
-      <Link to={'/' + props.id} style={{ textDecoration: 'none',color:"inherit" }}>
+      <Link to={'/' + props.id} style={{ textDecoration: 'none', color: "inherit" }}>
         <Card className='mdc-card demo-card demo-basic-with-header thumbnail'>
           <CardPrimaryContent className='demo-card__primary-action'>
             <div className='demo-card__primary'>
               <Headline6 className='demo-card__title'>
                 {props.title}
               </Headline6>
-              <Subtitle2 className='demo-card__subtitle'>
-                by Kurt Wagner
-                </Subtitle2>
             </div>
             <CardMedia
               wide
@@ -41,9 +40,8 @@ function SmallCard(props) {
             >
             </CardMedia>
             <Body2 className='demo-card__secondary'>
-
-              Visit ten places on our planet that are undergoing the biggest changes today.
-  </Body2>
+              ${props.price}/day
+            </Body2>
           </CardPrimaryContent>
           {/* <CardActions>
             <CardActionButtons>
