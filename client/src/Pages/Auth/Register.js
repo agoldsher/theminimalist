@@ -186,7 +186,7 @@ class Register extends Component {
                             </TextField>
                             <span className="red-text">{errors.city}</span>
                         </div>
-                        <div className="register-button">
+                        <div className="buttonContainer">
                             <Button
                                 style={{
                                     width: "150px",
@@ -199,11 +199,11 @@ class Register extends Component {
                             >
                                 Sign up
                             </Button>
+                            <Link to="/" className="btn-flat waves-effect">
+                            <i className="material-icons left">keyboard_backspace</i> Back to
+                            login
+                            </Link>
                         </div>
-                        <Link to="/" className="btn-flat waves-effect">
-                        <i className="material-icons left">keyboard_backspace</i> Back to
-                        login
-                        </Link>
                     </form>
                 </div>
             </div>
