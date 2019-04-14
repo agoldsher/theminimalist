@@ -1,6 +1,6 @@
 # TheMinimalist
-Have you ever thought to yourself: "I only use this thing once a year and it takes up so much space!"
-How about this: "I need a tool for my project but don't want to buy it?"
+Have you ever thought to yourself: "I only use this once a year and it takes up so much space!"
+How about this: "I need a tool for my project but don't want to buy it..."
 
 The answer to your problem is: *TheMinimalist*.
 
