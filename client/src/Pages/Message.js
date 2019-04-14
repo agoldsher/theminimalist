@@ -15,7 +15,6 @@ class Message extends React.Component {
             postTitle: "",
             postImage: "",
             postCity: "",
-            postState: "",
             loggedInName: ""
         };
         this.socket = io('localhost:3001');
@@ -34,7 +33,6 @@ class Message extends React.Component {
                     postTitle: res.data.title,
                     postImage: res.data.image,
                     postCity: res.data.city, 
-                    postState: res.data.state,
                     loggedInName: user.userName
                 });
             })
