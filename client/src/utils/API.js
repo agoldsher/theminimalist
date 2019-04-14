@@ -19,7 +19,7 @@ export default {
   // Gets the book with the given id
   getPost: function(id) {
     console.log(id)
-    // axios.put("/api/posts/view/"+id)
+    axios.put("/api/posts/view/"+id)
     return axios.get("/api/posts/" + id);
   },
 

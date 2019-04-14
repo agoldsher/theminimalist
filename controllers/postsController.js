@@ -27,7 +27,7 @@ module.exports = {
         db.Post
             .find({city: req.params.city })
             .sort({ viewCount: -1 })
-            .limit(10)
+            .limit(40)
             .then(dbModel => res.json(dbModel))
             .catch(err => {
                 res.status(422).json(err)

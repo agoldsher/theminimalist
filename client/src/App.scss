@@ -1,103 +1,194 @@
-@import "@material/react-button/index.scss";
-@import "./react-button-overrides";
-@import '@material/react-material-icon/index.scss';
-@import '@material/react-top-app-bar/index.scss';
-@import '@material/react-drawer/index.scss';
-@import '@material/react-list/index.scss';
-@import "@material/react-button/index.scss";
-@import "@material/react-typography/index.scss";
-@import "@material/react-card/index.scss";
-@import '@material/react-dialog/index.scss';
-@import '@material/react-text-field/index.scss';
-@import '@material/react-select/index.scss';
-@import '@material/react-icon-button/index.scss';
-@import '@material/react-material-icon/index.scss';
+/* @import "../node_modules/@material/react-button/dist/button.min.css"; */
+@import '../node_modules/@material/react-button/dist/button.css';
+/* @import "./react-button-overrides"; */
+/* @import '../node_modules/@material/react-material-icon/dist/material-icon.min.css'; */
+@import '../node_modules/@material/react-material-icon/dist/material-icon.css';
+@import '../node_modules/@material/react-top-app-bar/dist/top-app-bar.css';
+@import "../node_modules/@material/react-drawer/dist/drawer.css";
+@import '../node_modules/@material/react-list/dist/list.css';
+@import '../node_modules/@material/react-button/dist/button.css';
+@import '../node_modules/@material/react-typography/dist/typography.css';
+@import '../node_modules/@material/react-card/dist/card.css';
+@import "../node_modules/@material/react-dialog/dist/dialog.css";
+@import '../node_modules/@material/react-text-field/dist/text-field.css';
+@import '../node_modules/@material/react-select/dist/select.css';
+@import '../node_modules/@material/react-icon-button/dist/icon-button.css';
 
-// .demo-card {
-//     width: 350px;
-//     margin: 48px 0;
-//   }
-  
-//   .demo-card__primary {
-//     padding: 1rem;
-//   }
-  
-//   .demo-card__title {
-//     margin: 0;
-//   }
-  
-//   .demo-card__subtitle {
-//     color: rgba(0, 0, 0, 0.54);
-//     /* @alternate */
-//     color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
-//     margin: 0;
-//   }
-  
-//   .demo-card__secondary {
-//     color: rgba(0, 0, 0, 0.54);
-//     /* @alternate */
-//     color: var(--mdc-theme-text-secondary-on-background, rgba(0, 0, 0, 0.54));
-//     padding: 0 1rem 8px 1rem;
-//   }
-  
-//   .demo-card-shaped {
-//     /* @noflip */
-//     border-radius: 24px 8px;
-//   }
-//   [dir=rtl] .demo-card-shaped, .demo-card-shaped[dir=rtl] {
-//     /* @noflip */
-//     border-radius: 8px 24px;
-//   }
-  
-//   .demo-card__media.mdc-card__media--square {
-//     width: 110px;
-//   }
-  
-//   .demo-basic-with-header .demo-card__secondary,
-//   .demo-basic-with-text-over-media .demo-card__secondary {
-//     padding-top: 1rem;
-//   }
-  
-//   .demo-basic-with-text-over-media .demo-card__media-content {
-//     display: -ms-flexbox;
-//     display: flex;
-//     -ms-flex-align: end;
-//         align-items: flex-end;
-//   }
-//   .demo-basic-with-text-over-media .demo-card__media-content .demo-card__title,
-//   .demo-basic-with-text-over-media .demo-card__media-content .demo-card__subtitle {
-//     color: white;
-//   }
-  
-//   .demo-ui-control .demo-card__primary-action {
-//     display: -ms-flexbox;
-//     display: flex;
-//     -ms-flex-direction: row;
-//         flex-direction: row;
-//   }
-  
 
-// .sidebar{
-//   background-color: #efefef;
-//   height: 100vh;
-//   padding: 40px;
+// Navbar
+.mdc-top-app-bar__section {
+  background-color: rgb(104, 201, 104);
+  .mdc-button{
+    background-color: rgb(104, 161, 96);
+  }
+  // .mdc-card,.demo-card__primary, .demo-card__secondary,.demo-card__title {
+  //   background-color: rgb(20, 131, 38);
+  //   color: #a4f0a1;
+  // }
+}
+
+// Main Page (Cards)
+.demo-card__primary {
+  text-align: left;
+}
+.demo-card__secondary {
+    margin: 10px;
+    padding-left: 10x;
+    text-align: left;
+}
+.demo-card__title {
+  margin: 10px;
+}
+.mdc-card__primary-action {
+  background-color: #d5f0d4;
+// background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2kTwK68DduS92O9n9b5BjPagDUi1VwCvk3ygSiAnZgCWfSJBA");
+// background-position: center;
+// background-size: cover;
+// background-repeat: no-repeat;
+}
+
+// Landing Page
+.login-container, .register-container {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+  justify-content: center;
+}
+.login-form, .register-form {
+  padding: 0;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  width: 30%;
+  h2{
+    padding: 25px;
+    margin: 0 0 25px 0;
+    color: #fff;
+    background-color: #a4f0a1;
+    text-align: center;
+  }
+  .input-field {
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+  }
+  .mdc-button {
+  background-color: #a4f0a1;
+  // margin: 0 0 10px 180px;
+  align-content: right;
+  display: flex;
+  flex-direction: column;
+  align-content: right;
+  align-items: center;
+  justify-content: right;
+  padding: 10px;
+}
+}
+
+.newPost-Container {
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  width: 700px;
+  margin: auto;
+}
+
+.spread_btn {
+  display: flex;
+  justify-content: space-between;
+}
+
+// NewPost Page
+.newPost-form {
+  // display:flex;
+  // grid-template-columns: 5fr;
+  // flex-direction: column;
+  // align-content: left;
+  // align-items: left;
+  // justify-content: left;
+  padding: 40px;
+  background-color: white;
+  // grid-template-columns: 1fr;
+  // margin: 5rem;
+ 
+  overflow: hidden;
+  margin: 20px;
+  .mdc-text-field {
+    width: 50%;
+  }
+  .mdc-button {
+    width: 10%;
+    background-color: rgb(86, 167, 86);
+  }
+}
+
+// Details Page
+  @media (min-width: 700px) {
+   .details-content {
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      align-content: left;
+      align-items: left;
+      justify-content: left;
+      padding: 0;
+
+
+      .delete-button{
+        display:flex;
+        align-content: start;
+        align-items: start;
+        justify-content: center;
+      }
+    }
+    .details-container {
+      padding: 50px;
+    }
+
+    .details {
+      margin: 100px;
+    }
+}
+
+// body {
+//    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2kTwK68DduS92O9n9b5BjPagDUi1VwCvk3ygSiAnZgCWfSJBA");
+//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNz0kLZCi1qg-8W0UGAzSTjdPmK7E6cLlh4nG6GbMJcKmYB6XBSA");
+//   //  URL("https://wallpapercave.com/wp/BiOMtoB.jpg");
+//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuvxfjjfnGm8YwjAdVq98bv_12LICD5ZzpwXhf9V5hJocFcPh");
+//    background-repeat: no-repeat;
+//    background-position: center;
+//    background-size: cover;
 // }
 
-// /* Mobile */
-// @media (min-width: 100px){
-//   .sidebar{
-//     display:none;
-//   } 
-//   .main-container{
-//     display: grid;
-//     grid-template-columns: 1fr;
-//     grid-gap: 30px;
-//   }
 
-//   .navbar-toggler {
-//     display: block;
-//   }
-// }
+
+
+
+/* 
+ .sidebar{
+   background-color: #efefef;
+   height: 100vh;
+   padding: 40px;
+ } */
+
+ /* Mobile */
+//  @media (min-width: 100px){
+//    .sidebar{
+//      display:none;
+//    } 
+//    .main-container{
+//      display: grid;
+//      grid-template-columns: 1fr;
+//      grid-gap: 30px;
+//    }
+
+//    .navbar-toggler {
+//      display: block;
+//    }
+//  } 
 
 // /* Desktop */
 // @media (min-width: 700px){
