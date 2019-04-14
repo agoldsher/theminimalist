@@ -13,6 +13,7 @@ import Detail from "./Pages/Detail";
 import Register from "./Pages/Auth/Register";
 import Login from "./Pages/Auth/Login";
 import PrivateRoute from "./Pages/private-route/PrivateRoute";
+import API from './utils/API';
 import './App.scss';
 // import { Input } from "./Components/AddForm";
 
@@ -37,7 +38,147 @@ if (localStorage.jwtToken) {
 }
 
 class App extends React.Component {
-  
+
+  state = {
+    cards: [],
+    category: "",
+    open: false,
+    search: "",
+    city: "",
+    state: "",
+    zipcode: "",
+    categories: [
+      {
+        name: "All",
+        icon: "apps"
+      },
+      {
+        name: "Electronics",
+        icon: "keyboard"
+      },
+      {
+        name: "Appliances",
+        icon: "kitchen"
+      },
+      {
+        name: "Clothing",
+        icon: "layers"
+      },
+      {
+        name: "Household",
+        icon: "weekend"
+      },
+      {
+        name: "Sports",
+        icon: "directions_run"
+      },
+      {
+        name: "Movies and Games",
+        icon: "local_movies"
+      },
+      {
+        name: "Machinery",
+        icon: "power"
+      },
+      {
+        name: "Tools",
+        icon: "build"
+      },
+      {
+        name: "Space",
+        icon: "store_mall_directory"
+      }
+    ]
+  };
+
+
+  loadCity = (userID) => {
+    console.log(userID)
+    API.getUserCity(userID)
+      .then(res => {
+        this.setState({ city: res.data[0].city })
+        console.log(`Current location: ${this.state.city}`)
+        this.loadPopPosts()
+      })
+      .catch(err => console.log(err))
+  }
+
+  loadPopPosts = () => {
+    API.getPopPosts(this.state.city)
+      .then(res => {
+        this.setState({ cards: res.data });
+      }
+      )
+      .catch(err => console.log(err));
+  };
+  handleCategoryChange = (category) => {
+    if (category === "All") {
+      this.loadPopPosts();
+    } else {
+      // console.log(`category: ${category} and city: ${city}`)
+      API.getCategoryPosts(category, this.state.city)
+        .then(res => {
+          this.setState({ cards: res.data, category });
+        }
+        )
+        .catch(err => console.log(err));
+    }
+  }
+  handleSearch = (search) => {
+    API.search(search, this.state.city)
+      .then(res => {
+        this.setState({ cards: res.data, search });
+      }
+      )
+      .catch(err => console.log(err));
+  }
+
+  handleCityChange = (city) => {
+    API.saveNewCity(store.getState().auth.user.id, city)
+      .then((res, req) => {
+        this.loadCity(store.getState().auth.user.id)
+      }
+      )
+      .catch(err => console.log(err));
+  }
+  handleZipCode = () => {
+    if (this.state.zipcode.split("").length === 5 && /^[0-9]+$/.test(this.state.zipcode)) {
+      API.getZipCode(this.state.zipcode)
+        .then((res) => {
+          this.setState({
+            city: res.data.city,
+            state: res.data.state
+          })
+          this.handleCityChange(this.state.city)
+        })
+        .catch(err => console.log(err));
+    };
+  };
+
+  loadCityTriggered = () => {
+    if (this.state.city === "") {
+      this.loadCity(store.getState().auth.user.id)
+    }
+  }
+  delete = (id) => {
+    API.deletePost(id)
+      .then(() => {
+        this.loadPopPosts();
+      }
+      )
+  }
+
+  // componentDidMount() {
+  //   this.loadCity(store.getState().auth.user.id);
+
+  // }
+  onChange = e => {
+    // console.log(e.target.value )
+    this.setState({ [e.target.id]: e.target.value });
+    console.log(this.state.zipcode);
+  };
+
+
   render() {
     return (
       <Provider store={store}>

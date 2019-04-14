@@ -29,23 +29,6 @@ import setAuthToken from "../../utils/setAuthToken";
 import jwt_decode from "jwt-decode";
 import { setCurrentUser, logoutUser } from "../../actions/authActions";
 
-// if (localStorage.jwtToken) {
-//   // Set auth token header auth
-//   const token = localStorage.jwtToken;
-//   setAuthToken(token);
-//   // Decode token and get user info and exp
-//   const decoded = jwt_decode(token);
-//   // Set user and isAuthenticated
-//   store.dispatch(setCurrentUser(decoded));
-//   // Check for expired token
-//   const currentTime = Date.now() / 1000; // to get in milliseconds
-//   if (decoded.exp < currentTime) {
-//     // Logout user
-//     store.dispatch(logoutUser());
-//     // Redirect to login
-//     window.location.href = "./login";
-//   }
-// }
 if (localStorage.jwtToken) {
   // Set auth token header auth
   const token = localStorage.jwtToken;
@@ -272,17 +255,6 @@ class PrivateRoute extends React.Component {
                     </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
-                    {/* <TopAppBarIcon actionItem tabIndex={0}>
-                      <MaterialIcon
-                        aria-label="print page"
-                        hasRipple
-                        icon='print'
-                        onClick={() => console.log('print')}
-                      />
-                    </TopAppBarIcon> */}
-
-
-                    {/* important!!!! This is for handling the search button and change city button: handleSearch={this.handleSearch}  */}
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <Link to='/'>
                         <MaterialIcon hasRipple icon='home' />
@@ -318,7 +290,8 @@ class PrivateRoute extends React.Component {
               <div className="main-container">
 
                 <div className="main-content">
-                  (Component)? <Component {...props} /> : <Render {...props} />
+                  <Render {...props} />
+                  {/* {Component}? <Component {...props} /> : <Render {...props} /> */}
                 </div>
               </div>
             </TopAppBarFixedAdjust>
@@ -338,5 +311,5 @@ PrivateRoute.propTypes = {
 const mapStateToProps = state => ({
   auth: state.auth
 });
-// export default connect(mapStateToProps)(PrivateRoute);
-export default PrivateRoute;
+export default connect(mapStateToProps)(PrivateRoute);
+// export default PrivateRoute;
