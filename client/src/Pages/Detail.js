@@ -59,7 +59,7 @@ class Detail extends Component {
               <form action={"mailto:" + this.state.card.email}>
               <Button className="ml-0" type="submit">Email</Button>
             </form>
-            <Link to={"/message/" + this.props.match.params.id}>
+            <Link className="link" to={"/message/" + this.props.match.params.id}>
               <Button type="button">Forum</Button>
             </Link>
             </div>

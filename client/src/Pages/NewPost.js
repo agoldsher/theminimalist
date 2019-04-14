@@ -1,9 +1,11 @@
 import React, { Component } from "react";
-import { DropDown, 
+import {
+    DropDown,
     // TextArea, 
-    ImgUpload, 
-    FormBtn, 
-    TextDisplay } from "../Components/AddForm";
+    ImgUpload,
+    FormBtn,
+    TextDisplay
+} from "../Components/AddForm";
 import API from "../utils/API";
 import { Link } from 'react-router-dom';
 import { withRouter } from 'react-router';
@@ -23,7 +25,7 @@ class NewPost extends Component {
         description: "",
         image: "",
         city: "",
-        state:"state",
+        state: "state",
         zipcode: ""
     };
     constructor(props) {
@@ -95,14 +97,14 @@ class NewPost extends Component {
             <div className="newPost-Container">
                 <form className="newPost-form">
                     <TextField
-                    
+
                         label='Title'
                         helperText={<HelperText>hello world</HelperText>}>
                         <Input
                             value={this.state.title}
                             onChange={this.handleInputChange}
                             name="title"
-                            style={{width: "100%"}}
+                            style={{ width: "100%" }}
                         />
                     </TextField>
                     <DropDown
@@ -123,7 +125,7 @@ class NewPost extends Component {
                         label="Category"
                     />
                     <TextField
-                        style={{marginTop: "10px"}}
+                        style={{ marginTop: "10px" }}
                         label='Price'
                         helperText={<HelperText>Enter Price per day in $ USD (required)</HelperText>}>
                         <Input
@@ -135,7 +137,7 @@ class NewPost extends Component {
                     </TextField>
                     <TextField
                         label='Description'
-                        style={{width: "80%"}}
+                        style={{ width: "80%" }}
                         class="myDesc"
                         helperText={<HelperText>Enter Description (required)</HelperText>}
                         textarea={true}
@@ -147,7 +149,7 @@ class NewPost extends Component {
                         />
                     </TextField>
                     <TextField
-                        style= {{width: "183px"}}
+                        style={{ width: "183px" }}
                         label='Zip Code'
                         helperText={<HelperText>Enter Zip Code (required)</HelperText>}
                     >
@@ -161,14 +163,16 @@ class NewPost extends Component {
                     <TextDisplay
                         label={this.state.city}
                     />
-                    <ImgUpload
-                        value={this.state.Image}
-                        name="image"
-                        label="Image: "
-                        fileRef={this.fileInput}
-                    />
+                    <div className="image-upload" style={{ margin: "30px 0 30px"}}>
+                        <ImgUpload
+                            value={this.state.Image}
+                            name="image"
+                            label="Image: "
+                            fileRef={this.fileInput}
+                        />
+                    </div>
                     <div className="spread_btn">
-                        <Link to="/">
+                        <Link className="link" to="/">
                             <FormBtn>Cancel</FormBtn>
                         </Link>
                         <FormBtn onClick={this.handleFormSubmit}>Post</FormBtn>
@@ -180,7 +184,7 @@ class NewPost extends Component {
 };
 
 const mapStateToProps = (state) => {
-    return {auth: state.auth}
+    return { auth: state.auth }
 };
 // export default withRouter(NewPost);
 export default withRouter(connect(mapStateToProps, {})(NewPost))

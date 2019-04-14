@@ -20,6 +20,7 @@
   background-color:#54aa54;
   .mdc-button{
     background-color: rgb(104, 161, 96);
+    color: rgb(64, 88, 74);
   }
   // .mdc-card,.demo-card__primary, .demo-card__secondary,.demo-card__title {
   //   background-color: rgb(20, 131, 38);
@@ -35,12 +36,15 @@
     margin: 10px;
     padding-left: 10x;
     text-align: left;
+    font-weight: bold;
 }
 .demo-card__title {
   margin: 10px;
+  font-weight: bold;
 }
 .mdc-card__primary-action {
   background-color: #d5f0d4;
+  color: rgb(64, 88, 74);
 // background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2kTwK68DduS92O9n9b5BjPagDUi1VwCvk3ygSiAnZgCWfSJBA");
 // background-position: center;
 // background-size: cover;
@@ -66,7 +70,7 @@
     padding: 25px;
     margin: 0 0 25px 0;
     color: #fff;
-    background-color: #a4f0a1;
+    background-color:#54aa54;;
     text-align: center;
   }
   .input-field {
@@ -81,6 +85,9 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+  }
+  .form-group{
+    margin: 20px 0 20px;
   }
   .mdc-button {
   background-color: #a4f0a1;
@@ -105,6 +112,9 @@
 .spread_btn {
   display: flex;
   justify-content: space-between;
+  .link {
+    text-decoration: none;;
+  }
 }
 
 // NewPost Page
@@ -127,8 +137,11 @@
   }
   .mdc-button {
     width: 10%;
-    background-color: rgb(86, 167, 86);
+    background-color: #a4f0a1;
+    color: rgb(64, 88, 74);
+
   }
+
 }
 
 // Details Page
@@ -142,9 +155,10 @@
       padding: 0;
 
       .mdc-button{
-        background-color: rgb(86, 167, 86);
+        background-color:#a4f0a1;
         margin: 20px;
         width:150px;
+        color: rgb(64, 88, 74);
       }
 
       .details-button{
@@ -155,9 +169,13 @@
           margin-left: 0;
         }
         .mdc-button{
-          background-color: rgb(86, 167, 86);
+          background-color:#a4f0a1;
           margin: 20px;
           width:150px;
+          color: rgb(64, 88, 74);
+        }
+        .link {
+          text-decoration: none;
         }
       }
     }
@@ -170,22 +188,58 @@
         top:10px;
       }
     }
+    svg {
+      color: rgb(253, 37, 37);
+    }
 
     .details {
       margin: 100px;
     }
 }
 
-// body {
-//    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2kTwK68DduS92O9n9b5BjPagDUi1VwCvk3ygSiAnZgCWfSJBA");
-//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNz0kLZCi1qg-8W0UGAzSTjdPmK7E6cLlh4nG6GbMJcKmYB6XBSA");
-//   //  URL("https://wallpapercave.com/wp/BiOMtoB.jpg");
-//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuvxfjjfnGm8YwjAdVq98bv_12LICD5ZzpwXhf9V5hJocFcPh");
-//    background-repeat: no-repeat;
-//    background-position: center;
-//    background-size: cover;
-// }
+// Message Page
+@media (min-width: 700px) {
+  .message-container {
+    padding: 50px;
+    position: relative;
+    .delete-btn{
+      position: absolute;
+      right: 10px;
+      top:10px;
+    }
+  
+  }
+  svg {
+    color: rgb(253, 37, 37);
+  }
 
+  .forum-content {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    align-content: left;
+    align-items: left;
+    justify-content: left;
+    padding: 0;
+  }
+  .messages {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 20px;
+
+    .form-control {
+      margin: 10px;
+      width: 80%;
+    }
+
+    .btn{
+      background-color:#a4f0a1;
+      margin: 20px;
+      width:150px;
+      color: rgb(64, 88, 74);
+    }
+  }
+ 
+}
 
 
 
