@@ -21,8 +21,10 @@ import Dialog, {
   DialogFooter,
   DialogButton,
 } from '@material/react-dialog';
-import List, {ListItem, ListItemText} from '@material/react-list';
-import Radio, {NativeRadioControl} from '@material/react-radio';
+import List, { ListItem, ListItemText } from '@material/react-list';
+import Radio, { NativeRadioControl } from '@material/react-radio';
+// import API from "../../utils/API";
+import { connect } from "react-redux";
 // import Button from "@material/react-button";
 // import IconButton from '@material/react-icon-button';
 // import MaterialIcon from '@material/react-material-icon';
@@ -45,6 +47,15 @@ class SmallCard extends Component {
 
   isChecked = (i) => i === this.state.selectedIndex;
 
+  renderDeleteButton = () => {
+    if (this.props.auth.user.email === this.props.email) {
+      return (
+        <button onClick={() => this.deleteMe(this.props.id)}>Delete Post</button>
+      )
+    } else {
+      return ("")
+    }
+  }
 
   render() {
     const props = this.props;
@@ -89,10 +100,53 @@ class SmallCard extends Component {
           </CardActions> */}
         </Card>
         <Dialog
+          role="dialog"
           onClose={(action) => this.setState({ isOpen: false, action })}
           open={this.state.isOpen}>
           <DialogTitle>Chose a Phone Ringtone</DialogTitle>
           <DialogContent>
+            <div className="details-container">
+              <div className="details-content">
+                <div className="img-container">
+                  <h1> {props.userName}</h1>
+                  <img alt={props.title} src={props.image} />
+                </div>
+                <div className="details">
+                  <h2>{props.title}</h2>
+                  <h3>${props.price}/day</h3>
+                  <h4>Description: <br></br> {props.description}</h4>
+                  <h4>Email me: <br></br> {props.email}</h4>
+                  <div className="delete-button">
+                    {this.renderDeleteButton()}
+                  </div>
+                  <form action={"mailto:" + props.email}>
+                    <button type="submit">Email me</button>
+                  </form>
+                  <Link to={"/message/" + props.id}>
+                    <button type="button">Forum</button>
+                  </Link>
+
+                  {/* </div>
+          <div>
+            {this.renderDeleteButton()}
+            <h1> {props.userName}</h1>
+            <div className="img-container">
+              <img alt={props.title} src={props.image} />
+            </div>
+            <div className="details">
+              <h2>{props.title}</h2>
+              <h3>${props.price}/day</h3>
+              <h4>Description: <br></br> {props.description}</h4>
+              <form action={"mailto:" + props.email}>
+                <button type="submit">Email me</button>
+              </form>
+              <Link to={"/message/" + this.props.id}>
+                <button type="button">Forum</button>
+              </Link>
+            </div> */}
+                </div>
+              </div>
+            </div>
             <List
               singleSelection
               handleSelect={(selectedIndex) => this.setState({ selectedIndex })}
@@ -142,4 +196,10 @@ class SmallCard extends Component {
   }
 }
 
-export default SmallCard;
+const mapStateToProps = state => ({
+  auth: state.auth
+});
+export default connect(
+  mapStateToProps
+)(SmallCard);
+// export default SmallCard;

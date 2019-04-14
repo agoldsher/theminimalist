@@ -22,13 +22,13 @@ class Detail extends Component {
       })
       .catch(err => console.log(err));
   }
-  // delete=()=>{
-  //   API.deletePost(this.props.match.params.id)
-  //   .then(()=> {
-  //     this.props.history.push('/')
-  // }
-  //   )
-  // }
+  delete=()=>{
+    API.deletePost(this.props.match.params.id)
+    .then(()=> {
+      this.props.history.push('/')
+  }
+    )
+  }
   renderDeleteButton = () => {
     if (this.props.auth.user.email === this.state.card.email) {
       return (
