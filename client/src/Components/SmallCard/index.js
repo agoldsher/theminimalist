@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Card, {
   CardPrimaryContent,
@@ -14,18 +14,44 @@ import {
   //  Headline4, 
   Subtitle2
 } from "@material/react-typography";
-import ItemDetails from '../ItemDetails';
+// import ItemDetails from '../ItemDetails';
+import Dialog, {
+  DialogTitle,
+  DialogContent,
+  DialogFooter,
+  DialogButton,
+} from '@material/react-dialog';
+import List, {ListItem, ListItemText} from '@material/react-list';
+import Radio, {NativeRadioControl} from '@material/react-radio';
 // import Button from "@material/react-button";
 // import IconButton from '@material/react-icon-button';
 // import MaterialIcon from '@material/react-material-icon';
 
 import "./style.css";
+import { render } from "react-dom";
 
-function SmallCard(props) {
-  return (
-    <div>
-      {/* <Link to={'/' + props.id} style={{ textDecoration: 'none', color: "inherit" }}> */}
-        <Card className='mdc-card demo-card demo-basic-with-header thumbnail'>
+class SmallCard extends Component {
+  state = {
+    isOpen: false,
+    action: '',
+    selectedIndex: -1,
+    choices: ['Never gonna give you up', 'Host cross buns', 'None']
+  }
+
+  openDialog = () => {
+    this.setState({ isOpen: true });
+    console.log(this.state.openDialog)
+  }
+
+  isChecked = (i) => i === this.state.selectedIndex;
+
+
+  render() {
+    const props = this.props;
+    return (
+      <div>
+        {/* <Link to={'/' + props.id} style={{ textDecoration: 'none', color: "inherit" }}> */}
+        <Card className='mdc-card demo-card demo-basic-with-header thumbnail' onClick={this.openDialog}>
           <CardPrimaryContent className='demo-card__primary-action'>
             <div className='demo-card__primary'>
               <Headline6 className='demo-card__title'>
@@ -62,11 +88,46 @@ function SmallCard(props) {
           </CardActionIcons>
           </CardActions> */}
         </Card>
-        <ItemDetails {...props} />
-      {/* </Link> */}
-      {/* <ItemDetails /> */}
+        <Dialog
+          onClose={(action) => this.setState({ isOpen: false, action })}
+          open={this.state.isOpen}>
+          <DialogTitle>Chose a Phone Ringtone</DialogTitle>
+          <DialogContent>
+            <List
+              singleSelection
+              handleSelect={(selectedIndex) => this.setState({ selectedIndex })}
+            >{this.state.choices.map((choice, i) => {
+              let cleanChoice = choice.replace(/\s/g, '-');
+              return (
+                <ListItem key={i}>
+                  <span className='mdc-list-item__graphic'>
+                    <Radio>
+                      <NativeRadioControl
+                        name='ringtone'
+                        value={choice}
+                        id={cleanChoice}
+                        checked={this.isChecked(i)}
+                        onChange={() => { }}
+                      />
+                    </Radio>
+                  </span>
+                  <label htmlFor={cleanChoice}>
+                    <ListItemText primaryText={choice} />
+                  </label>
+                </ListItem>
+              );
+            })}
+            </List>
+          </DialogContent>
+          <DialogFooter>
+            <DialogButton action='dismiss'>Cancel</DialogButton>
+            <DialogButton action='confirm' isDefault>Ok</DialogButton>
+          </DialogFooter>
+        </Dialog>
+        {/* </Link> */}
+        {/* <ItemDetails /> */}
 
-      {/* <div className="thumbnail">
+        {/* <div className="thumbnail">
             <Link to ={'/' + props.id}>
               <img src={props.image} alt={props.title} style={{width:"100%"}}/>
               <div className="caption text-center">
@@ -76,8 +137,9 @@ function SmallCard(props) {
               </Link>
    
           </div> */}
-    </div>
-  );
+      </div>
+    );
+  }
 }
 
 export default SmallCard;
