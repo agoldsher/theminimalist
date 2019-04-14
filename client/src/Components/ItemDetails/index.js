@@ -60,3 +60,5 @@ class ItemDetails extends Component {
     );
   }
 }
+
+export default ItemDetails;

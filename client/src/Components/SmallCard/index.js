@@ -14,6 +14,7 @@ import {
   //  Headline4, 
   Subtitle2
 } from "@material/react-typography";
+import ItemDetails from '../ItemDetails';
 // import Button from "@material/react-button";
 // import IconButton from '@material/react-icon-button';
 // import MaterialIcon from '@material/react-material-icon';
@@ -23,7 +24,7 @@ import "./style.css";
 function SmallCard(props) {
   return (
     <div>
-      <Link to={'/' + props.id} style={{ textDecoration: 'none', color: "inherit" }}>
+      {/* <Link to={'/' + props.id} style={{ textDecoration: 'none', color: "inherit" }}> */}
         <Card className='mdc-card demo-card demo-basic-with-header thumbnail'>
           <CardPrimaryContent className='demo-card__primary-action'>
             <div className='demo-card__primary'>
@@ -61,7 +62,8 @@ function SmallCard(props) {
           </CardActionIcons>
           </CardActions> */}
         </Card>
-      </Link>
+        <ItemDetails {...props} />
+      {/* </Link> */}
       {/* <ItemDetails /> */}
 
       {/* <div className="thumbnail">
