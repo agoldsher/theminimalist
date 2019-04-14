@@ -20,6 +20,7 @@ import './App.scss';
 // import { Input } from "./Components/AddForm";
 
 let history = createBrowserHistory();
+console.log(history)
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth

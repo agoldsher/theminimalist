@@ -103,16 +103,16 @@ class SmallCard extends Component {
           role="dialog"
           onClose={(action) => this.setState({ isOpen: false, action })}
           open={this.state.isOpen}>
-          <DialogTitle>Chose a Phone Ringtone</DialogTitle>
+          <DialogTitle>{props.title}</DialogTitle>
           <DialogContent>
             <div className="details-container">
               <div className="details-content">
                 <div className="img-container">
                   <h1> {props.userName}</h1>
-                  <img alt={props.title} src={props.image} />
+                  <img alt={props.title} src={props.image} width="95%"/>
                 </div>
                 <div className="details">
-                  <h2>{props.title}</h2>
+                  {/* <h2>{props.title}</h2> */}
                   <h3>${props.price}/day</h3>
                   <h4>Description: <br></br> {props.description}</h4>
                   <h4>Email me: <br></br> {props.email}</h4>
