@@ -22,7 +22,7 @@ class NewPost extends Component {
         price: "",
         description: "",
         image: "",
-        city: "city",
+        city: "",
         state:"state",
         zipcode: ""
     };
@@ -111,14 +111,13 @@ class NewPost extends Component {
                         name="category"
                         categories={[
                             "",
-                            "Category",
                             "Electronics",
                             "Appliances",
                             "Clothing",
                             "Household",
                             "Sports",
                             "Movies and Games",
-                            "Machinary",
+                            "Machinery",
                             "Tools",
                             "Space"]}
                         label="Category"

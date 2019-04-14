@@ -29,6 +29,7 @@
     "axios": "^0.18.0",
     "bootstrap": "^4.3.1",
     "classnames": "^2.2.6",
+    "cross-env": "^5.2.0",
     "jwt-decode": "^2.2.0",
     "materialize-css": "^1.0.0-rc.2",
     "node-sass": "^4.11.0",
@@ -46,6 +47,8 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
+    "start": "cross-env SASS_PATH=./node_modules react-scripts start",
+    "build": "cross-env SASS_PATH=./node_modules react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   },
