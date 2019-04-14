@@ -48,7 +48,21 @@ if (localStorage.jwtToken) {
 }
 
 
+
+
 class PrivateRoute extends React.Component {
+
+
+  renderParts = () => {
+    const { parent, component: Component, render: Render, auth, ...rest } = this.props;
+    if (window.location.pathname === "/") {
+      return (
+        <div>
+        
+                  </div>
+      )
+    }
+  };
 
   render() {
     const { parent, component: Component, render: Render, auth, ...rest } = this.props;
@@ -97,30 +111,39 @@ class PrivateRoute extends React.Component {
             <DrawerAppContent>
               <TopAppBar>
                 <TopAppBarRow>
-                  <TopAppBarSection align='start'>
-                    <TopAppBarIcon navIcon tabIndex={0}>
-                      <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
-                    </TopAppBarIcon>
-                    {/* <TopAppBarTitle>
-                    </TopAppBarTitle> */}
-                  </TopAppBarSection>
-                  <TopAppBarSection align='middle' role="toolbar">
-                    <div>
-                      <TextField label={parent.state.city}>
-                        <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange} />
-                      </TextField>
-                      <Button raised onClick={() => {
-                        // e.preventDefault();
-                        parent.handleZipCode(parent.state.zipcode)
-                      }}>Change Location</Button>
-                      <TextField label="Search">
-                        <Input value={parent.state.search} id="search" onChange={parent.onChange} />
-                      </TextField>
-                      <Button raised onClick={()=>{
-                        // e.preventDefault();
-                        parent.handleSearch(parent.state.search)}}>Search</Button>
-                    </div>
-                  </TopAppBarSection>
+
+                      {(window.location.pathname === "/") ? 
+                      (<TopAppBarSection align='start'>
+                      <TopAppBarIcon navIcon tabIndex={0}>
+                        <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
+                      </TopAppBarIcon>
+                      
+                    </TopAppBarSection>
+                      ) : ""}
+                      {(window.location.pathname === "/") ? 
+                    (<TopAppBarSection align='middle' role="toolbar">
+                      <div>
+                        <TextField label={parent.state.city}>
+                          <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange} />
+                        </TextField>
+                        <Button raised onClick={() => {
+                          // e.preventDefault();
+                          parent.handleZipCode(parent.state.zipcode)
+                        }}>Change Location</Button>
+                        <TextField label="Search">
+                          <Input value={parent.state.search} id="search" onChange={parent.onChange} />
+                        </TextField>
+                        <Button raised onClick={()=>{
+                          // e.preventDefault();
+                          parent.handleSearch(parent.state.search)}}>Search</Button>
+                      </div>
+                    </TopAppBarSection>
+                      ) : 
+                      // <TopAppBarIcon navIcon tabIndex={0}>
+                      <MaterialIcon className="mdc-top-app-bar__section" hasRipple icon='arrow_back_ios'
+                      onClick={props.history.goBack} />
+                      // </TopAppBarIcon>
+                    }
                   <TopAppBarSection align='end' role='toolbar'>
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <Link to='/'>
