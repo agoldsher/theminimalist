@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import API from "../utils/API";
 import { connect } from "react-redux";
 import { Link } from "react-router-dom";
+import Button from '@material/react-button'
+import DeleteIcon from '@material-ui/icons/Delete'
+
 // import { Redirect } from 'react-router-dom';
 
 class Detail extends Component {
@@ -32,7 +35,7 @@ class Detail extends Component {
   renderDeleteButton = () => {
     if (this.props.auth.user.email === this.state.card.email) {
       return (
-        <button onClick={() => this.deleteMe(this.props.match.params.id)}>Delete Post</button>
+        <Button className="delete-btn" onClick={() => this.deleteMe(this.props.match.params.id)}><DeleteIcon /></Button>
       )
     } else {
       return ("")
@@ -42,6 +45,7 @@ class Detail extends Component {
   render() {
     return (
       <div className="details-container">
+        {this.renderDeleteButton()}
         <div className="details-content">
           <div className="img-container">
             <h1> {this.state.card.userName}</h1>
@@ -51,35 +55,20 @@ class Detail extends Component {
             <h2>{this.state.card.title}</h2>
             <h3>${this.state.card.price}/day</h3>
             <h4>Description: <br></br> {this.state.card.description}</h4>
-            <h4>Email me: <br></br> {this.state.card.email}</h4>
-            <div className="delete-button">
-              {this.renderDeleteButton()}
+            <div className="details-button">
+              <form action={"mailto:" + this.state.card.email}>
+              <Button className="ml-0" type="submit">Email</Button>
+            </form>
+            <Link to={"/message/" + this.props.match.params.id}>
+              <Button type="button">Forum</Button>
+            </Link>
             </div>
-            <form action={"mailto:" + this.state.card.email}>
+            {/* <form action={"mailto:" + this.state.card.email}>
               <button type="submit">Email me</button>
             </form>
             <Link to={"/message/" + this.props.match.params.id}>
               <button type="button">Forum</button>
-            </Link>
-
-            {/* </div>
-          <div>
-            {this.renderDeleteButton()}
-            <h1> {this.state.card.userName}</h1>
-            <div className="img-container">
-              <img alt={this.state.card.title} src={this.state.card.image} />
-            </div>
-            <div className="details">
-              <h2>{this.state.card.title}</h2>
-              <h3>${this.state.card.price}/day</h3>
-              <h4>Description: <br></br> {this.state.card.description}</h4>
-              <form action={"mailto:" + this.state.card.email}>
-                <button type="submit">Email me</button>
-              </form>
-              <Link to={"/message/" + this.props.match.params.id}>
-                <button type="button">Forum</button>
-              </Link>
-            </div> */}
+            </Link> */}
           </div>
         </div>
       </div>
