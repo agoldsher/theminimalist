@@ -70,7 +70,7 @@ class Message extends React.Component {
             <div className="container">
             <h1>Forum page for {this.state.postTitle}</h1>
             <img alt={this.state.postTitle} src={this.state.postImage}></img>
-            <p>{this.state.postCity + ", " + this.state.postState}</p>
+            <p>{this.state.postCity}</p>
                 <div className="messages">
                     {this.state.messages.map(message => {
                         if (this.state.loggedInName === message.substr(0, message.indexOf(":")))
