@@ -59,7 +59,7 @@ router.post("/register", (req, res) => {
 // @access Public
 router.post("/login", (req, res) => {
     // Form validation
-    console.log("/login")
+    // console.log("/login")
     const { errors, isValid } = validateLoginInput(req.body);
 
     // Check validation
@@ -78,7 +78,7 @@ router.post("/login", (req, res) => {
         }
 
         // Check password
-        console.log(user);
+        // console.log(user);
         bcrypt.compare(password, user.password).then(isMatch => {
             if (isMatch) {
                 // User matched
