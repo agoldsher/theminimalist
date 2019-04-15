@@ -20,7 +20,7 @@ import Drawer, {
   DrawerAppContent
 } from '@material/react-drawer';
 import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
-import TextField, { Input } from "@material/react-text-field";
+import TextField, { Input,HelperText } from "@material/react-text-field";
 import Button from '@material/react-button';
 import LogoutBtn from "../../Components/LogoutBtn";
 import API from '../../utils/API';
@@ -49,6 +49,19 @@ if (localStorage.jwtToken) {
 
 
 class PrivateRoute extends React.Component {
+  _handleKeyDownSearch = (e) => {
+    if (e.key === 'Enter') {
+      // console.log('do validate');
+      this.props.parent.handleSearch(this.props.parent.state.search)
+    }
+  }
+  _handleKeyDownCityChange = (e) => {
+    if (e.key === 'Enter') {
+      // console.log('do validate');
+      // this.props.parent.handleSearch(this.props.parent.state.search)
+      this.props.parent.handleZipCode(this.props.parent.state.zipcode)
+    }
+  }
 
   render() {
     const { parent, component: Component, render: Render, auth, ...rest } = this.props;
@@ -63,6 +76,14 @@ class PrivateRoute extends React.Component {
               onClose={() => parent.setState({ open: false })}
             >
               <DrawerHeader> {/*defaults to div*/}
+                <TextField label={parent.state.city}
+                helperText={<HelperText>Enter Zip Code, then click Enter</HelperText>} id="searchTextField">
+                  <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange}  onKeyDown={this._handleKeyDownSearchCityChange} />
+                </TextField>
+                {/* <Button raised onClick={() => {
+                  // e.preventDefault();
+                  parent.handleZipCode(parent.state.zipcode)
+                }}>Change Location</Button> */}
                 <DrawerTitle tag='h2'> {/*defaults to h3*/}
                   Categories
                   </DrawerTitle>
@@ -106,19 +127,15 @@ class PrivateRoute extends React.Component {
                   </TopAppBarSection>
                   <TopAppBarSection align='middle' role="toolbar">
                     <div>
-                      <TextField label={parent.state.city}>
-                        <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange} />
+
+                      <TextField
+                      trailingIcon={<MaterialIcon icon="search"/>}>
+                        <Input value={parent.state.search} id="search" onChange={parent.onChange}  onKeyDown={this._handleKeyDownSearch} />
                       </TextField>
-                      <Button raised onClick={() => {
+                      {/* <Button raised onClick={() => {
                         // e.preventDefault();
-                        parent.handleZipCode(parent.state.zipcode)
-                      }}>Change Location</Button>
-                      <TextField label="Search">
-                        <Input value={parent.state.search} id="search" onChange={parent.onChange} />
-                      </TextField>
-                      <Button raised onClick={()=>{
-                        // e.preventDefault();
-                        parent.handleSearch(parent.state.search)}}>Search</Button>
+                        parent.handleSearch(parent.state.search)
+                      }}>Search</Button> */}
                     </div>
                   </TopAppBarSection>
                   <TopAppBarSection align='end' role='toolbar'>
