@@ -15,23 +15,28 @@ We strive to make the experience of the app match our minimalist philosophy: sim
 
 ## Login
 You probably want less, but no one wants stuff stolen, so we take your security seriously. Every use needs to login. Eventually we will enable login through Facebook, Google, GitHub, and others, as well as two factor authentication. This is at the top of our priority list.
+#
 <img width="340" alt="Screen Shot 2019-04-15 at 11 24 14 AM" src="https://user-images.githubusercontent.com/42223683/56157201-c5727080-5f73-11e9-92d7-d77eeade1cfd.png">
 
 ## Main Layout
 Logging in will drop you on the main page, with recently added items loaded by default.
-<img width="420" alt="Screen Shot 2019-04-15 at 11 19 25 AM" src="https://user-images.githubusercontent.com/42223683/56156941-25b4e280-5f73-11e9-9695-5a6c2d6992bf.png">)
+#
+<img width="420" alt="Screen Shot 2019-04-15 at 11 19 25 AM" src="https://user-images.githubusercontent.com/42223683/56156941-25b4e280-5f73-11e9-9695-5a6c2d6992bf.png">
 
 ## Filter Content
 If you don't to search for something specific, you can filter based on categories by accessing the sidebar. Select the filter category from the sidebar.
+#
 <img width="437" alt="Screen Shot 2019-04-15 at 11 41 27 AM" src="https://user-images.githubusercontent.com/42223683/56157099-87754c80-5f73-11e9-9c16-6a595f1453cc.png">
 
 ## Item Description
 Once you find an item you'd like to know more about or rent, just click it.
+#
 <img width="394" alt="Screen Shot 2019-04-15 at 11 19 52 AM" src="https://user-images.githubusercontent.com/42223683/56157240-d8854080-5f73-11e9-995d-61a4b7d2b375.png">
 
 
 ## The App Layout
 In case you want to see where all the screens are and how they fit together, we got you covered :)
+#
 <img width="532" alt="Screen Shot 2019-04-15 at 12 05 07 PM" src="https://user-images.githubusercontent.com/42223683/56158410-c8229500-5f76-11e9-8802-39fb04cedb71.png">
 
 # Task List and Schedule
