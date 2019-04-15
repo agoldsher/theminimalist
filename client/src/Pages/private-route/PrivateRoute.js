@@ -77,7 +77,7 @@ class PrivateRoute extends React.Component {
             >
               <DrawerHeader> {/*defaults to div*/}
                 <TextField label={parent.state.city}
-                helperText={<HelperText>Enter Zip Code, then click Enter</HelperText>} id="searchTextField">
+                helperText={<HelperText>Enter Zip Code, then click Enter</HelperText>}>
                   <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange}  onKeyDown={this._handleKeyDownSearchCityChange} />
                 </TextField>
                 {/* <Button raised onClick={() => {
