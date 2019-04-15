@@ -197,6 +197,68 @@
     }
 }
 
+#searchTextField {
+  border-radius: 50px;
+}
+
+.demo-text-field-shaped {
+  border-radius: 16px 16px 0 0;
+}
+
+.demo-text-field-outlined-shaped .mdc-notched-outline .mdc-notched-outline__leading {
+  /* @noflip */
+  border-radius: 28px 0 0 28px;
+  width: 28px;
+}
+[dir=rtl] .demo-text-field-outlined-shaped .mdc-notched-outline .mdc-notched-outline__leading, .demo-text-field-outlined-shaped .mdc-notched-outline .mdc-notched-outline__leading[dir=rtl] {
+  /* @noflip */
+  border-radius: 0 28px 28px 0;
+}
+.demo-text-field-outlined-shaped .mdc-notched-outline .mdc-notched-outline__notch {
+  max-width: calc(100% - 28px * 2);
+}
+.demo-text-field-outlined-shaped .mdc-notched-outline .mdc-notched-outline__trailing {
+  /* @noflip */
+  border-radius: 0 28px 28px 0;
+}
+[dir=rtl] .demo-text-field-outlined-shaped .mdc-notched-outline .mdc-notched-outline__trailing, .demo-text-field-outlined-shaped .mdc-notched-outline .mdc-notched-outline__trailing[dir=rtl] {
+  /* @noflip */
+  border-radius: 28px 0 0 28px;
+}
+.demo-text-field-outlined-shaped .mdc-text-field__input {
+  /* @noflip */
+  padding-left: 32px;
+  /* @noflip */
+  padding-right: 0;
+}
+[dir=rtl] .demo-text-field-outlined-shaped .mdc-text-field__input, .demo-text-field-outlined-shaped .mdc-text-field__input[dir=rtl] {
+  /* @noflip */
+  padding-left: 0;
+  /* @noflip */
+  padding-right: 32px;
+}
+.demo-text-field-outlined-shaped + .mdc-text-field-helper-line {
+  /* @noflip */
+  padding-left: 32px;
+  /* @noflip */
+  padding-right: 28px;
+}
+[dir=rtl] .demo-text-field-outlined-shaped + .mdc-text-field-helper-line, .demo-text-field-outlined-shaped + .mdc-text-field-helper-line[dir=rtl] {
+  /* @noflip */
+  padding-left: 28px;
+  /* @noflip */
+  padding-right: 32px;
+}
+
+// body {
+//    background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQ2kTwK68DduS92O9n9b5BjPagDUi1VwCvk3ygSiAnZgCWfSJBA");
+//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQNz0kLZCi1qg-8W0UGAzSTjdPmK7E6cLlh4nG6GbMJcKmYB6XBSA");
+//   //  URL("https://wallpapercave.com/wp/BiOMtoB.jpg");
+//   //  url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTzuvxfjjfnGm8YwjAdVq98bv_12LICD5ZzpwXhf9V5hJocFcPh");
+//    background-repeat: no-repeat;
+//    background-position: center;
+//    background-size: cover;
+// }
 // Message Page
 @media (min-width: 700px) {
   .message-container {

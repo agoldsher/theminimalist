@@ -183,6 +183,12 @@ class App extends React.Component {
     this.setState({ [e.target.id]: e.target.value });
     console.log(this.state.zipcode);
   };
+  clearSearch = e => {
+    this.setState({"search":""})
+    console.log("Clear Search")
+    this.loadPopPosts()
+
+  }
 
 
   render() {
