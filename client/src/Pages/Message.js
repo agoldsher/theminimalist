@@ -19,7 +19,7 @@ class Message extends React.Component {
             postCity: "",
             loggedInName: ""
         };
-        this.socket = io("mongo ds121026.mlab.com:21026/heroku_w8pp3q6n -u <heroku_w8pp3q6n> -p <theminimalist2019!>");
+        this.socket = io("mongodb://<heroku_w8pp3q6n>:<theminimalist2019!>@ds121026.mlab.com:21026/heroku_w8pp3q6n");
     };
 
     componentDidMount() {
