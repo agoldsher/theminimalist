@@ -20,6 +20,7 @@ import './App.scss';
 // import { Input } from "./Components/AddForm";
 
 let history = createBrowserHistory();
+console.log(history);
 // Check for token to keep user logged in
 if (localStorage.jwtToken) {
   // Set auth token header auth
@@ -182,6 +183,12 @@ class App extends React.Component {
     this.setState({ [e.target.id]: e.target.value });
     console.log(this.state.zipcode);
   };
+  clearSearch = e => {
+    this.setState({"search":""})
+    console.log("Clear Search")
+    this.loadPopPosts()
+
+  }
 
 
   render() {

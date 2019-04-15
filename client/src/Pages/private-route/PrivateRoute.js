@@ -48,6 +48,8 @@ if (localStorage.jwtToken) {
 }
 
 
+
+
 class PrivateRoute extends React.Component {
   _handleKeyDownSearch = (e) => {
     if (e.key === 'Enter') {
@@ -58,10 +60,24 @@ class PrivateRoute extends React.Component {
   _handleKeyDownCityChange = (e) => {
     if (e.key === 'Enter') {
       // console.log('do validate');
-      // this.props.parent.handleSearch(this.props.parent.state.search)
       this.props.parent.handleZipCode(this.props.parent.state.zipcode)
     }
   }
+
+  clearSearch = (e) =>{
+    this.props.parent.clearSearch()
+  }
+
+  renderParts = () => {
+    const { parent, component: Component, render: Render, auth, ...rest } = this.props;
+    if (window.location.pathname === "/") {
+      return (
+        <div>
+        
+                  </div>
+      )
+    }
+  };
 
   render() {
     const { parent, component: Component, render: Render, auth, ...rest } = this.props;
@@ -78,7 +94,7 @@ class PrivateRoute extends React.Component {
               <DrawerHeader> {/*defaults to div*/}
                 <TextField label={parent.state.city}
                 helperText={<HelperText>Enter Zip Code, then click Enter</HelperText>}>
-                  <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange}  onKeyDown={this._handleKeyDownSearchCityChange} />
+                  <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange}  onKeyDown={this._handleKeyDownCityChange} />
                 </TextField>
                 {/* <Button raised onClick={() => {
                   // e.preventDefault();
@@ -118,26 +134,30 @@ class PrivateRoute extends React.Component {
             <DrawerAppContent>
               <TopAppBar>
                 <TopAppBarRow>
-                  <TopAppBarSection align='start'>
-                    <TopAppBarIcon navIcon tabIndex={0}>
-                      <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
-                    </TopAppBarIcon>
-                    {/* <TopAppBarTitle>
-                    </TopAppBarTitle> */}
-                  </TopAppBarSection>
-                  <TopAppBarSection align='middle' role="toolbar">
-                    <div>
 
-                      <TextField
-                      trailingIcon={<MaterialIcon icon="search"/>}>
-                        <Input value={parent.state.search} id="search" onChange={parent.onChange}  onKeyDown={this._handleKeyDownSearch} />
-                      </TextField>
-                      {/* <Button raised onClick={() => {
-                        // e.preventDefault();
-                        parent.handleSearch(parent.state.search)
-                      }}>Search</Button> */}
-                    </div>
-                  </TopAppBarSection>
+                      {(window.location.pathname === "/") ? 
+                      (<TopAppBarSection align='start'>
+                      <TopAppBarIcon navIcon tabIndex={0}>
+                        <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
+                      </TopAppBarIcon>
+                      
+                    </TopAppBarSection>
+                      ) : ""}
+                      {(window.location.pathname === "/") ? 
+                    (<TopAppBarSection align='middle' role="toolbar">
+                        <TextField label="Search"
+                        leadingIcon={<MaterialIcon role="icon" icon="search"/>}
+                        // trailingIcon={<MaterialIcon role="icon" icon="clear"/>}
+                        >
+                          <Input value={parent.state.search} id="search" onChange={parent.onChange}  onKeyDown={this._handleKeyDownSearch} onTrailingIconSelect={this.clearSearch} />
+                        </TextField>
+                    </TopAppBarSection>
+                      ) : 
+                      // <TopAppBarIcon navIcon tabIndex={0}>
+                      <MaterialIcon className="mdc-top-app-bar__section" hasRipple icon='arrow_back_ios'
+                      onClick={props.history.goBack} />
+                      // </TopAppBarIcon>
+                    }
                   <TopAppBarSection align='end' role='toolbar'>
                     <TopAppBarIcon navIcon tabIndex={0}>
                       <Link to='/'>
