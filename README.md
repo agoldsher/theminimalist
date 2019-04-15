@@ -41,7 +41,7 @@ In case you want to see where all the screens are and how they fit together, we 
 
 # Task List and Schedule
 <img width="1228" alt="Screen Shot 2019-04-15 at 12 23 37 PM" src="https://user-images.githubusercontent.com/42223683/56159399-66aff580-5f79-11e9-8d2f-72fe429eb02c.png">
-![Schedule](public/schedule.png)
+
 
 # The Team
 ## [Anetta Goldsher](https://github.com/agoldsher)
