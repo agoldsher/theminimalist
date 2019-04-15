@@ -30,7 +30,7 @@ app.use(routes);
 
 // Connecting to Mongo DB
 mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/theminimalist", { useNewUrlParser: true })
-  .then(() => console.log("MongoDB successfully connected"))
+  .then(() => console.log(process.eventNames.MONGODB_URI))
   .catch(err => console.log(err))
 
 // Passport middleware
