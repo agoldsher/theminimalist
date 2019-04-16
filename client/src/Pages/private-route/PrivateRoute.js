@@ -141,6 +141,9 @@ class PrivateRoute extends React.Component {
                       <TopAppBarIcon navIcon tabIndex={0}>
                         <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
                       </TopAppBarIcon>
+                    <TopAppBarIcon>
+                      <img src="/whiteLogo.png" style={{width:"35px"}}/>
+                    </TopAppBarIcon>
                       
                     </TopAppBarSection>
                       ) : ""}
@@ -178,9 +181,6 @@ class PrivateRoute extends React.Component {
                     </TopAppBarIcon>
                     <TopAppBarIcon actionItem tabIndex={0}>
                       <LogoutBtn />
-                    </TopAppBarIcon>
-                    <TopAppBarIcon>
-                      <img src="/whiteLogo.png" style={{width:"35px"}}/>
                     </TopAppBarIcon>
                     {/* <TopAppBarIcon actionItem tabIndex={0}>
                     <MaterialIcon
