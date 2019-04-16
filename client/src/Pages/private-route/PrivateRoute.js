@@ -178,6 +178,9 @@ class PrivateRoute extends React.Component {
                     <TopAppBarIcon actionItem tabIndex={0}>
                       <LogoutBtn />
                     </TopAppBarIcon>
+                    <TopAppBarIcon>
+                      <img src="/whiteLogo.png" style={{width:"35px"}}/>
+                    </TopAppBarIcon>
                     {/* <TopAppBarIcon actionItem tabIndex={0}>
                     <MaterialIcon
                       aria-label="Logout"
