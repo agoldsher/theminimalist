@@ -92,6 +92,7 @@ class PrivateRoute extends React.Component {
               onClose={() => parent.setState({ open: false })}
             >
               <DrawerHeader> {/*defaults to div*/}
+              <img className="header" src="/greenTextLogo.png" alt="The Minimalist" style={{width:"100%"}}></img>
                 <TextField label={parent.state.city}
                 helperText={<HelperText>Enter Zip Code, then click Enter</HelperText>}>
                   <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange}  onKeyDown={this._handleKeyDownCityChange} />
