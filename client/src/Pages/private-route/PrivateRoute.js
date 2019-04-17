@@ -20,7 +20,7 @@ import Drawer, {
   DrawerAppContent
 } from '@material/react-drawer';
 import List, { ListItem, ListItemGraphic, ListItemText } from '@material/react-list';
-import TextField, { Input,HelperText } from "@material/react-text-field";
+import TextField, { Input, HelperText } from "@material/react-text-field";
 import Button from '@material/react-button';
 import LogoutBtn from "../../Components/LogoutBtn";
 import API from '../../utils/API';
@@ -64,7 +64,7 @@ class PrivateRoute extends React.Component {
     }
   }
 
-  clearSearch = (e) =>{
+  clearSearch = (e) => {
     this.props.parent.clearSearch()
   }
 
@@ -73,8 +73,8 @@ class PrivateRoute extends React.Component {
     if (window.location.pathname === "/") {
       return (
         <div>
-        
-                  </div>
+
+        </div>
       )
     }
   };
@@ -92,10 +92,10 @@ class PrivateRoute extends React.Component {
               onClose={() => parent.setState({ open: false })}
             >
               <DrawerHeader> {/*defaults to div*/}
-              <img className="header" src="/greenTextLogo.png" alt="The Minimalist" style={{width:"100%"}}></img>
+                <img className="header" src="/greenTextLogo.png" alt="The Minimalist" style={{ width: "100%" }}></img>
                 <TextField label={parent.state.city}
-                helperText={<HelperText>Enter Zip Code, then click Enter</HelperText>}>
-                  <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange}  onKeyDown={this._handleKeyDownCityChange} />
+                  helperText={<HelperText>Enter Zip Code, then click Enter</HelperText>}>
+                  <Input value={parent.state.zipcode} id="zipcode" onChange={parent.onChange} onKeyDown={this._handleKeyDownCityChange} />
                 </TextField>
                 {/* <Button raised onClick={() => {
                   // e.preventDefault();
@@ -135,53 +135,63 @@ class PrivateRoute extends React.Component {
             <DrawerAppContent>
               <TopAppBar>
                 <TopAppBarRow>
-
-                      {(window.location.pathname === "/") ? 
-                      (<TopAppBarSection align='start'>
-                      <TopAppBarIcon navIcon tabIndex={0}>
-                        <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
+                  <TopAppBarSection align='start'>
+                    {(window.location.pathname === "/") ?
+                      (
+                        <React.Fragment>
+                          <TopAppBarIcon navIcon tabIndex={0}>
+                            <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
+                          </TopAppBarIcon>
+                          <TopAppBarIcon tabIndex={1}>
+                            <img src="/thickWhiteLogo.png" style={{ width: "35px" }} />
+                          </TopAppBarIcon>
+                        </React.Fragment>
+                      ) : <TopAppBarIcon navIcon tabIndex={0}>
+                        <MaterialIcon icon='arrow_back_ios'
+                          onClick={props.history.goBack} />
                       </TopAppBarIcon>
-                    <TopAppBarIcon>
-                      <img src="/whiteLogo.png" style={{width:"35px"}}/>
-                    </TopAppBarIcon>
-                      
-                    </TopAppBarSection>
-                      ) : ""}
-                      {(window.location.pathname === "/") ? 
-                    (<TopAppBarSection align='middle' role="toolbar">
-                        <TextField label="Search"
-                        leadingIcon={<MaterialIcon role="icon" icon="search"/>}
-                        // trailingIcon={<MaterialIcon role="icon" icon="clear"/>}
-                        >
-                          <Input value={parent.state.search} id="search" onChange={parent.onChange}  onKeyDown={this._handleKeyDownSearch} onTrailingIconSelect={this.clearSearch} />
-                        </TextField>
-                    </TopAppBarSection>
-                      ) : 
-                      // <TopAppBarIcon navIcon tabIndex={0}>
-                      <MaterialIcon className="mdc-top-app-bar__section" hasRipple icon='arrow_back_ios'
-                      onClick={props.history.goBack} />
-                      // </TopAppBarIcon>
                     }
-                  <TopAppBarSection align='end' role='toolbar'>
-                    <TopAppBarIcon navIcon tabIndex={0}>
-                      <Link to='/'>
-                        <MaterialIcon hasRipple icon='home' />
-                      </Link>
-                    </TopAppBarIcon>
-                    <TopAppBarIcon actionItem tabIndex={1}>
 
-                      <Link to='/newpost'>
-                        <MaterialIcon
-                          aria-label="Add Item"
-                          hasRipple
-                          icon='add'
-                          onClick={() => console.log('print')}
-                        />
-                      </Link>
-                    </TopAppBarIcon>
-                    <TopAppBarIcon actionItem tabIndex={0}>
-                      <LogoutBtn />
-                    </TopAppBarIcon>
+                  </TopAppBarSection>
+
+                  {(window.location.pathname === "/") ?
+                    (<TopAppBarSection align='middle' role="toolbar">
+                      <TextField label="Search"
+                        leadingIcon={<MaterialIcon role="icon" icon="search" />}
+                      // trailingIcon={<MaterialIcon role="icon" icon="clear"/>}
+                      >
+                        <Input value={parent.state.search} id="search" onChange={parent.onChange} onKeyDown={this._handleKeyDownSearch} onTrailingIconSelect={this.clearSearch} />
+                      </TextField>
+                    </TopAppBarSection>
+                    ) : ""
+                    // <TopAppBarIcon navIcon tabIndex={0}>
+
+                    // </TopAppBarIcon>
+                  }
+                  <TopAppBarSection align='end' role='toolbar'>
+                    <React.Fragment>
+                      <TopAppBarIcon navIcon tabIndex={0}>
+                        <Link to='/'>
+                          <MaterialIcon hasRipple icon='home' />
+                        </Link>
+                      </TopAppBarIcon>
+                      <TopAppBarIcon navIcon tabIndex={1}>
+
+                        <Link to='/newpost'>
+                          <MaterialIcon
+                            aria-label="Add Item"
+                            hasRipple
+                            icon='add'
+                            onClick={() => console.log('print')}
+                          />
+                        </Link>
+                      </TopAppBarIcon>
+                      <TopAppBarIcon navIcon tabIndex={0}>
+                        <Link>
+                        <LogoutBtn />
+                        </Link>
+                      </TopAppBarIcon>
+                    </React.Fragment>
                     {/* <TopAppBarIcon actionItem tabIndex={0}>
                     <MaterialIcon
                       aria-label="Logout"
