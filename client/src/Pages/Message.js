@@ -19,7 +19,7 @@ class Message extends React.Component {
             postCity: "",
             loggedInName: ""
         };
-        this.socket = io('localhost:3001');
+        this.socket = io(process.env.PUBLIC_URL);
     };
 
     componentDidMount() {

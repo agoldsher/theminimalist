@@ -87,7 +87,7 @@ class Register extends Component {
                 <div className="register-form">
                     <div className="header">
                         <h2>
-                            <b>The Minimalist</b>
+          <img className="header" src="/whiteTextLogo.png" alt="The Minimalist" style={{width:"100%"}}></img>
                         </h2>
                     </div>
                     <form noValidate onSubmit={this.onSubmit}>
