@@ -49,9 +49,14 @@ class Login extends Component {
     return (
       <div className="login-container">
         <div className="login-form">
-          <h2 className="header">
+        <h2 className="header">
+          <img className="header" src="/whiteTextLogo.png" alt="The Minimalist" style={{width:"100%"}}></img>
+
+        </h2>
+
+          {/* <h2 className="header">
             The Minimalist
-          </h2>
+          </h2> */}
           <form noValidate onSubmit={this.onSubmit}>
             <div className="input-field">
               <TextField
@@ -91,7 +96,7 @@ class Login extends Component {
                 {errors.passwordincorrect}
               </span>
             </div>
-            <div className="" style={{ paddingLeft: "11.250px" }}>
+            <div className="buttonContainer" >
               <Button
                 style={{
                   width: "150px",
