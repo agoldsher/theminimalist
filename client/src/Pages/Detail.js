@@ -52,8 +52,8 @@ class Detail extends Component {
           </div>
           <div className="details">
             <h2>{this.state.card.title}</h2>
-            <h5>Posted by: {this.state.card.userName}</h5>
             <h3>${this.state.card.price} / day</h3>
+            <h4>Posted by {this.state.card.userName}</h4>
             <h4>Description: <br></br> {this.state.card.description}</h4>
             <div className="details-button">
               <form action={"mailto:" + this.state.card.email}>
