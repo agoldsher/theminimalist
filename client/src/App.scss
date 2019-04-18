@@ -14,6 +14,13 @@
 @import '../node_modules/@material/react-select/dist/select.css';
 @import '../node_modules/@material/react-icon-button/dist/icon-button.css';
 
+.mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label{
+  color:rgb(104, 161, 96);
+}
+
+.mdc-text-field .mdc-line-ripple{
+  background-color: #54aa54
+}
 
 // Navbar
 .mdc-top-app-bar__section {
@@ -26,6 +33,10 @@
   //   background-color: rgb(20, 131, 38);
   //   color: #a4f0a1;
   // }
+}
+
+.mdc-line-ripple {
+
 }
 
 // Main Page (Cards)
