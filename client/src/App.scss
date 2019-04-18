@@ -90,7 +90,8 @@
     margin: 20px 0 20px;
   }
   .mdc-button {
-  background-color: #a4f0a1;
+  background-color: #54aa54;
+  color:white;
   // margin: 0 0 10px 180px;
   align-content: right;
   display: flex;
@@ -136,9 +137,10 @@
     width: 50%;
   }
   .mdc-button {
-    width: 10%;
-    background-color: #a4f0a1;
-    color: rgb(64, 88, 74);
+    background-color:#54aa54;
+    color: white;
+    margin: 20px;
+    width:150px;
 
   }
 
@@ -155,10 +157,10 @@
       padding: 0;
 
       .mdc-button{
-        background-color:#a4f0a1;
+        background-color:#54aa54;
         margin: 20px;
         width:150px;
-        color: rgb(64, 88, 74);
+        color: white;
       }
 
       .details-button{
@@ -169,10 +171,10 @@
           margin-left: 0;
         }
         .mdc-button{
-          background-color:#a4f0a1;
+          background-color:#54aa54;
           margin: 20px;
           width:150px;
-          color: rgb(64, 88, 74);
+          color: white;
         }
         .link {
           text-decoration: none;
@@ -259,6 +261,7 @@
 //    background-position: center;
 //    background-size: cover;
 // }
+
 // Message Page
 @media (min-width: 700px) {
   .message-container {
@@ -294,10 +297,10 @@
     }
 
     .btn{
-      background-color:#a4f0a1;
+      background-color:#54aa54;
       margin: 20px;
       width:150px;
-      color: rgb(64, 88, 74);
+      color: white;
     }
   }
  
