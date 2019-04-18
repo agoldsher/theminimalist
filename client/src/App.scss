@@ -19,8 +19,49 @@
 }
 
 .mdc-text-field .mdc-line-ripple{
-  background-color: #54aa54
+  background-color: #54aa54;
 }
+
+.mdc-list-item--selected,
+.mdc-list-item--activated {
+  color: rgb(104, 161, 96);
+  /* @alternate */
+  color: var(--mdc-theme-primary, rgb(104, 161, 96)); }
+  .mdc-list-item--selected .mdc-list-item__graphic,
+  .mdc-list-item--activated .mdc-list-item__graphic {
+    color: rgb(104, 161, 96);
+    /* @alternate */
+    color: var(--mdc-theme-primary, rgb(104, 161, 96)); }
+
+// :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item {
+
+//   :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--activated::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--activated::after {
+//     background-color: rgb(104, 161, 96); }
+//     @supports not (-ms-ime-align: auto) {
+//       :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--activated::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--activated::after {
+//         /* @alternate */
+//         background-color: var(--mdc-theme-primary, rgb(104, 161, 96)); } }
+//         :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::after {
+//           background-color: rgb(104, 161, 96); }
+//           @supports not (-ms-ime-align: auto) {
+//             :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::after {
+//               /* @alternate */
+//               background-color: var(--mdc-theme-primary, rgb(104, 161, 96)); } }
+// }
+
+:not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::after {
+  background-color: rgb(104, 161, 96); }
+  @supports not (-ms-ime-align: auto) {
+    :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::after {
+      /* @alternate */
+      background-color: var(--mdc-theme-primary, rgb(104, 161, 96)); } }
+
+
+// :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::before, :not(.mdc-list--non-interactive) > :not(.mdc-list-item--disabled).mdc-list-item--selected::after {
+//   ￼    background-color: #54aa54;
+//   }
+
+// :not(.mdc-list--non-interactive) > :not(.mdc-list)
 
 // Navbar
 .mdc-top-app-bar__section {
