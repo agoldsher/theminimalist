@@ -109,8 +109,8 @@ class Login extends Component {
               >
                 Login
               </Button>
-              <p className="grey-text text-darken-1">
-                Don't have an account? <Link to="/register">Register</Link>
+              <p className="grey-text text-darken-1" style={{color:"white"}}>
+                Don't have an account? <Link to="/register" style={{color:"#ccc"}}>Register</Link>
               </p>
             </div>
           </form>

@@ -96,6 +96,7 @@ class NewPost extends Component {
         return (
             <div className="newPost-Container">
                 <form className="newPost-form">
+                    <h1>Post an Item</h1>
                     <TextField
 
                         label='Title'
