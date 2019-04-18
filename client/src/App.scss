@@ -14,6 +14,16 @@
 @import '../node_modules/@material/react-select/dist/select.css';
 @import '../node_modules/@material/react-icon-button/dist/icon-button.css';
 
+.center{
+  margin-right: auto;
+  margin-left: auto;
+}
+
+.logo{
+  margin-left: 15px;
+  margin-right: 15px;
+}
+
 .mdc-text-field--focused:not(.mdc-text-field--disabled) .mdc-floating-label{
   color:rgb(104, 161, 96);
 }

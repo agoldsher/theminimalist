@@ -143,21 +143,28 @@ class PrivateRoute extends React.Component {
                           <TopAppBarIcon navIcon tabIndex={0}>
                             <MaterialIcon hasRipple icon='menu' onClick={() => parent.setState({ open: !parent.state.open })} />
                           </TopAppBarIcon>
-                          <TopAppBarIcon tabIndex={1}>
+                          <TopAppBarIcon tabIndex={1} className="logo">
                             <img src="/thickWhiteLogo.png" style={{ width: "35px" }} />
                           </TopAppBarIcon>
                         </React.Fragment>
-                      ) : <TopAppBarIcon navIcon tabIndex={0}>
-                        <MaterialIcon icon='arrow_back_ios'
-                          onClick={props.history.goBack} />
-                      </TopAppBarIcon>
+                      ) : (
+                        <React.Fragment>
+                          <TopAppBarIcon navIcon tabIndex={0}>
+                            <MaterialIcon icon='arrow_back_ios'
+                              onClick={props.history.goBack} />
+                          </TopAppBarIcon>
+                          <TopAppBarIcon tabIndex={1} className="logo">
+                            <img src="/thickWhiteLogo.png" style={{ width: "35px" }} />
+                          </TopAppBarIcon>
+                        </React.Fragment>
+                      )
                     }
 
                   </TopAppBarSection>
 
                   {(window.location.pathname === "/") ?
                     (<TopAppBarSection align='middle' role="toolbar">
-                      <TextField label="Search"
+                      <TextField label="Search" className="center"
                         leadingIcon={<MaterialIcon role="icon" icon="search" />}
                         onTrailingIconSelect={this.clearSearch}
                         trailingIcon={<MaterialIcon role="icon" icon="clear" />}
@@ -191,7 +198,7 @@ class PrivateRoute extends React.Component {
                       </TopAppBarIcon>
                       <TopAppBarIcon navIcon tabIndex={0}>
                         <Link>
-                        <LogoutBtn />
+                          <LogoutBtn />
                         </Link>
                       </TopAppBarIcon>
                     </React.Fragment>
