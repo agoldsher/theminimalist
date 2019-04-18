@@ -65,6 +65,7 @@ class PrivateRoute extends React.Component {
   }
 
   clearSearch = (e) => {
+    console.log("clear search.")
     this.props.parent.clearSearch()
   }
 
@@ -158,9 +159,11 @@ class PrivateRoute extends React.Component {
                     (<TopAppBarSection align='middle' role="toolbar">
                       <TextField label="Search"
                         leadingIcon={<MaterialIcon role="icon" icon="search" />}
-                      // trailingIcon={<MaterialIcon role="icon" icon="clear"/>}
+                        onTrailingIconSelect={this.clearSearch}
+                        trailingIcon={<MaterialIcon role="icon" icon="clear" />}
+
                       >
-                        <Input value={parent.state.search} id="search" onChange={parent.onChange} onKeyDown={this._handleKeyDownSearch} onTrailingIconSelect={this.clearSearch} />
+                        <Input value={parent.state.search} id="search" onChange={parent.onChange} onKeyDown={this._handleKeyDownSearch} />
                       </TextField>
                     </TopAppBarSection>
                     ) : ""
