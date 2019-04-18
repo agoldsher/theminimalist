@@ -199,8 +199,8 @@ class Register extends Component {
                             >
                                 Sign up
                             </Button>
-                            <Link to="/" className="btn-flat waves-effect">
-                            <i className="material-icons left">keyboard_backspace</i> Back to
+                            <Link to="/" className="btn-flat waves-effect"style={{color:"#ccc"}}>
+                            <i className="material-icons left"style={{color:"white"}}>keyboard_backspace</i> Back to
                             login
                             </Link>
                         </div>

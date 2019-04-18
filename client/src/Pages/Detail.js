@@ -47,13 +47,13 @@ class Detail extends Component {
       <div className="details-container">
         {this.renderDeleteButton()}
         <div className="details-content">
-          <div className="img-container">
-            <h1> {this.state.card.userName}</h1>
-            <img alt={this.state.card.title} src={this.state.card.image} />
+          <div className="detail-img-container" >
+            <img style={{maxWidth:"500px"}}alt={this.state.card.title} src={this.state.card.image} />
           </div>
           <div className="details">
             <h2>{this.state.card.title}</h2>
-            <h3>${this.state.card.price}/day</h3>
+            <h3>${this.state.card.price} / day</h3>
+            <h4>Posted by {this.state.card.userName}</h4>
             <h4>Description: <br></br> {this.state.card.description}</h4>
             <div className="details-button">
               <form action={"mailto:" + this.state.card.email}>
