@@ -49,14 +49,10 @@ class Login extends Component {
     return (
       <div className="login-container">
         <div className="login-form">
-        <h2 className="header">
+        <h2 className="header" style={{fontSize:"20px"}}>
           <img className="header" src="/whiteTextLogo.png" alt="The Minimalist" style={{width:"100%"}}></img>
-
-        </h2>
-
-          {/* <h2 className="header">
-            The Minimalist
-          </h2> */}
+          A Peer-to-Peer Rental Service
+        </h2>          
           <form noValidate onSubmit={this.onSubmit}>
             <div className="input-field">
               <TextField
